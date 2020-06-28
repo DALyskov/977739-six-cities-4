@@ -3,7 +3,7 @@ env:
   browser: true
   commonjs: true
 
-extends: ['htmlacademy/es6', 'plugin:react/recommended']
+extends: ['htmlacademy/es6', 'plugin:react/recommended', 'plugin:prettier/recommended']
 
 parserOptions:
   ecmaFeatures:
@@ -16,3 +16,7 @@ plugins: ['react', 'prettier']
 settings:
   react:
     version: '16'
+
+# rules: {
+#   'prettier/prettier': ['error'],
+# }

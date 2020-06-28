@@ -1,7 +1,22 @@
 import React from 'react';
+import propTypes from 'prop-types';
+
+const APPROVED_NAME = [
+  `Beautiful & luxurious apartment at great location`,
+  `Wood and stone place`,
+];
 
 const createPlaceCardTemplate = (place) => {
-  const {isPremium, image, price, isBookmark, starsValue, name, type} = place;
+  const {
+    id,
+    isPremium = false,
+    image,
+    price,
+    isBookmark = false,
+    starsValue,
+    name,
+    type,
+  } = place;
 
   let bookmarkClass = `place-card__bookmark-button button`;
   let bookmarkStatus = `To bookmarks`;
@@ -14,7 +29,7 @@ const createPlaceCardTemplate = (place) => {
   const starsStyle = `${Math.round(starsValue) * 20}%`;
 
   return (
-    <article className="cities__place-card place-card">
+    <article key={id} className="cities__place-card place-card">
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -60,7 +75,8 @@ const createPlaceCardTemplate = (place) => {
     </article>
   );
 };
-export const Main = (props) => {
+
+const Main = (props) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -172,12 +188,7 @@ export const Main = (props) => {
                 --> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {/* {placeCardsMarkup} */}
-
-                {
-                  // eslint-disable-next-line react/prop-types
-                  props.placeData.map((place) => createPlaceCardTemplate(place))
-                }
+                {props.placeData.map((place) => createPlaceCardTemplate(place))}
               </div>
             </section>
             <div className="cities__right-section">
@@ -189,3 +200,20 @@ export const Main = (props) => {
     </div>
   );
 };
+
+Main.propTypes = {
+  placeData: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      image: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      starsValue: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+export default Main;
