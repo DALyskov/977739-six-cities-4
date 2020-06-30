@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {App} from './components/app/app.jsx';
+import App from './components/app/app.jsx';
 
 const placeData = [
   {
@@ -11,7 +11,7 @@ const placeData = [
     price: 120,
     isBookmark: false,
     starsValue: 4,
-    name: `Beautiful &amp; luxurious apartment at great location`,
+    name: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
   },
   {
