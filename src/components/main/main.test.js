@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 
-import App from './components/app/app.jsx';
+import Main from './main.jsx';
 
-const placeData = [
+const placeDataTest = [
   {
     id: 1,
     isPremium: true,
@@ -36,4 +36,22 @@ const placeData = [
   },
 ];
 
-ReactDOM.render(<App placeData={placeData} />, document.querySelector(`#root`));
+describe(`Main snapchots`, () => {
+  it(`with data`, () => {
+    const tree = renderer
+      .create(
+        <Main placeData={placeDataTest} onPlaceCardNameClick={() => {}} />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`without data`, () => {
+    const tree = renderer
+      .create(<Main placeData={[]} onPlaceCardNameClick={() => {}} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+export {placeDataTest};
