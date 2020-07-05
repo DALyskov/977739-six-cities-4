@@ -6,7 +6,7 @@ const APPROVED_NAME = [
   `Wood and stone place`,
 ];
 
-const createPlaceCardTemplate = (place) => {
+const createPlaceCardTemplate = (place, onPlaceCardNameClick) => {
   const {
     id,
     isPremium = false,
@@ -67,7 +67,7 @@ const createPlaceCardTemplate = (place) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2 className="place-card__name" onClick={onPlaceCardNameClick}>
           <a href="#">{name}</a>
         </h2>
         <p className="place-card__type">{type}</p>
@@ -77,6 +77,9 @@ const createPlaceCardTemplate = (place) => {
 };
 
 const Main = (props) => {
+  const {placeData, onPlaceCardNameClick} = props;
+  const placesCount = placeData.length;
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -153,7 +156,9 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">
+                {placesCount} places to stay in Amsterdam
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -188,7 +193,12 @@ const Main = (props) => {
                 --> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {props.placeData.map((place) => createPlaceCardTemplate(place))}
+                {
+                  /* {props.placeData.map((place) => createPlaceCardTemplate(place))} */
+                  placeData.map((place) =>
+                    createPlaceCardTemplate(place, onPlaceCardNameClick)
+                  )
+                }
               </div>
             </section>
             <div className="cities__right-section">
@@ -214,6 +224,7 @@ Main.propTypes = {
       type: propTypes.string.isRequired,
     })
   ).isRequired,
+  onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Main;
