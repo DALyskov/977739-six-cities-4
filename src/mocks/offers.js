@@ -1,10 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import offers from './mocks/offers.js';
-import App from './components/app/app.jsx';
-
-const placeData = [
+export default [
   {
     id: 1,
     isPremium: true,
@@ -32,9 +26,17 @@ const placeData = [
     price: 132,
     isBookmark: false,
     starsValue: 4,
-    name: `Wood and stone place`,
+    name: `Canal View Prinsengracht`,
+    type: `Apartment`,
+  },
+  {
+    id: 4,
+    isPremium: true,
+    image: `img/apartment-03.jpg`,
+    price: 180,
+    isBookmark: false,
+    starsValue: 5,
+    name: `Nice, cozy, warm big bed apartment`,
     type: `Apartment`,
   },
 ];
-
-ReactDOM.render(<App offers={offers} />, document.querySelector(`#root`));
