@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import App from './app.jsx';
 
-const placeDataTest = [
+const offers = [
   {
     id: 1,
     isPremium: true,
@@ -36,14 +36,30 @@ const placeDataTest = [
   },
 ];
 
-describe(`App snapchots`, () => {
+const incompleteOffers = [
+  {
+    id: 1,
+    image: `img/apartment-01.jpg`,
+    price: 120,
+    starsValue: 4,
+    name: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  },
+];
+
+describe(`App_snapchots`, () => {
   it(`with data`, () => {
-    const tree = renderer.create(<App placeData={placeDataTest} />).toJSON();
+    const tree = renderer.create(<App offers={offers} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`without data`, () => {
-    const tree = renderer.create(<App placeData={[]} />).toJSON();
+    const tree = renderer.create(<App offers={[]} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`incomplete data`, () => {
+    const tree = renderer.create(<App offers={incompleteOffers} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

@@ -121,9 +121,7 @@ const Main = (props) => {
                 </select>
                 --> */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {<PlaceList offers={offers} />}
-              </div>
+              {<PlaceList offers={offers} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
