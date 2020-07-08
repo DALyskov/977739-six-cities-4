@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Main from './main.jsx';
+import PlaceList from './places-list.jsx';
 
 const offers = [
   {
@@ -47,19 +47,21 @@ const incompleteOffers = [
   },
 ];
 
-describe(`Main snapchots`, () => {
+describe(`PlaceList_snapchots`, () => {
   it(`with data`, () => {
-    const tree = renderer.create(<Main offers={offers} />).toJSON();
+    const tree = renderer.create(<PlaceList offers={offers} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`without data`, () => {
-    const tree = renderer.create(<Main offers={[]} />).toJSON();
+    const tree = renderer.create(<PlaceList offers={[]} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`incomplete data`, () => {
-    const tree = renderer.create(<Main offers={incompleteOffers} />).toJSON();
+    const tree = renderer
+      .create(<PlaceList offers={incompleteOffers} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

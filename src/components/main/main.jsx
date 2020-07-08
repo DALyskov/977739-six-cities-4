@@ -1,84 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const APPROVED_NAME = [
-  `Beautiful & luxurious apartment at great location`,
-  `Wood and stone place`,
-];
+import {APPROVED_NAME} from '../../const.js';
 
-const createPlaceCardTemplate = (place, onPlaceCardNameClick) => {
-  const {
-    id,
-    isPremium = false,
-    image,
-    price,
-    isBookmark = false,
-    starsValue,
-    name,
-    type,
-  } = place;
-
-  let bookmarkClass = `place-card__bookmark-button button`;
-  let bookmarkStatus = `To bookmarks`;
-
-  if (isBookmark) {
-    bookmarkClass += ` place-card__bookmark-button--active`;
-    bookmarkStatus = `In bookmarks`;
-  }
-
-  const starsStyle = `${Math.round(starsValue) * 20}%`;
-
-  return (
-    <article key={id} className="cities__place-card place-card">
-      {isPremium ? (
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      ) : (
-        ``
-      )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img
-            className="place-card__image"
-            src={image}
-            width="260"
-            height="200"
-            alt="Place image"
-          />
-        </a>
-      </div>
-      <div className="place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
-          </div>
-          <button className={bookmarkClass} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{bookmarkStatus}</span>
-          </button>
-        </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: starsStyle}}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
-        <h2 className="place-card__name" onClick={onPlaceCardNameClick}>
-          <a href="#">{name}</a>
-        </h2>
-        <p className="place-card__type">{type}</p>
-      </div>
-    </article>
-  );
-};
+import PlaceList from '../places-list/places-list.jsx';
 
 const Main = (props) => {
-  const {placeData, onPlaceCardNameClick} = props;
-  const placesCount = placeData.length;
+  const {offers} = props;
+  const placesCount = offers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -192,14 +121,7 @@ const Main = (props) => {
                 </select>
                 --> */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {
-                  /* {props.placeData.map((place) => createPlaceCardTemplate(place))} */
-                  placeData.map((place) =>
-                    createPlaceCardTemplate(place, onPlaceCardNameClick)
-                  )
-                }
-              </div>
+              {<PlaceList offers={offers} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -212,7 +134,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  placeData: propTypes.arrayOf(
+  offers: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -224,7 +146,6 @@ Main.propTypes = {
       type: propTypes.string.isRequired,
     })
   ).isRequired,
-  onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Main;

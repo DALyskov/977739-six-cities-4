@@ -1,14 +1,4 @@
-import React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-import Main from './main.jsx';
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
-
-const offers = [
+export default [
   {
     id: 1,
     isPremium: true,
@@ -39,14 +29,14 @@ const offers = [
     name: `Canal View Prinsengracht`,
     type: `Apartment`,
   },
+  {
+    id: 4,
+    isPremium: true,
+    image: `img/apartment-03.jpg`,
+    price: 180,
+    isBookmark: false,
+    starsValue: 5,
+    name: `Nice, cozy, warm big bed apartment`,
+    type: `Apartment`,
+  },
 ];
-
-describe(`Main_ee`, () => {
-  it(`Should placeCardName be pressed`, () => {
-    // const onPlaceCardNameClick = jest.fn();
-    // const preventDefault = jest.fn();
-    const main = mount(<Main offers={offers} />);
-
-    expect(main);
-  });
-});

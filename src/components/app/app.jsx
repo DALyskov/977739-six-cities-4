@@ -1,19 +1,27 @@
 import React from 'react';
+import propTypes from 'prop-types';
+
+import {APPROVED_NAME} from '../../const.js';
 
 import Main from '../main/main.jsx';
 
-const onPlaceCardNameClick = (evt) => {
-  evt.preventDefault();
+const App = (props) => {
+  return <Main offers={props.offers} />;
 };
 
-const App = (props) => {
-  return (
-    <Main
-      // eslint-disable-next-line react/prop-types
-      placeData={props.placeData}
-      onPlaceCardNameClick={onPlaceCardNameClick}
-    />
-  );
+App.propTypes = {
+  offers: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      image: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      starsValue: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default App;
