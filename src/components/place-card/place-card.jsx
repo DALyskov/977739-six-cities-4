@@ -26,14 +26,12 @@ const PlaceCard = (props) => {
 
   const starsStyle = `${Math.round(starsValue) * 20}%`;
 
-  const onMouseEnter = () => {
-    onPlaceCardHover(placeData);
-  };
-
   return (
     <article
       className="cities__place-card place-card"
-      onMouseEnter={onMouseEnter}>
+      onMouseEnter={() => {
+        onPlaceCardHover(placeData);
+      }}>
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
