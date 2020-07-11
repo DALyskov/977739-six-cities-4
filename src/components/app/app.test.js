@@ -1,64 +1,26 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import {offers as offersData, incompletePlace} from '../../mocks/mocks-test.js';
+
 import App from './app.jsx';
 
-const offers = [
-  {
-    id: 1,
-    isPremium: true,
-    image: `img/apartment-01.jpg`,
-    price: 120,
-    isBookmark: false,
-    starsValue: 4,
-    name: `Beautiful & luxurious apartment at great location`,
-    type: `Apartment`,
-  },
-  {
-    id: 2,
-    isPremium: false,
-    image: `img/room.jpg`,
-    price: 80,
-    isBookmark: true,
-    starsValue: 4,
-    name: `Wood and stone place`,
-    type: `Private room`,
-  },
-  {
-    id: 3,
-    isPremium: false,
-    image: `img/apartment-02.jpg`,
-    price: 132,
-    isBookmark: false,
-    starsValue: 4,
-    name: `Wood and stone place`,
-    type: `Apartment`,
-  },
-];
+const offers = offersData;
 
-const incompleteOffers = [
-  {
-    id: 1,
-    image: `img/apartment-01.jpg`,
-    price: 120,
-    starsValue: 4,
-    name: `Beautiful & luxurious apartment at great location`,
-    type: `Apartment`,
-  },
-];
+const incompleteOffers = [incompletePlace];
 
 describe(`App_snapchots`, () => {
-  it(`with data`, () => {
+  it(`with_data`, () => {
     const tree = renderer.create(<App offers={offers} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`without data`, () => {
+  it(`without_data`, () => {
     const tree = renderer.create(<App offers={[]} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`incomplete data`, () => {
+  it(`incomplete_data`, () => {
     const tree = renderer.create(<App offers={incompleteOffers} />).toJSON();
     expect(tree).toMatchSnapshot();
   });

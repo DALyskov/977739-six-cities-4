@@ -4,17 +4,19 @@ import propTypes from 'prop-types';
 import {APPROVED_NAME} from '../../const.js';
 
 const PlaceCard = (props) => {
-  const {place: placeData, onPlaceCardNameClick, onPlaceCardHover} = props;
+  const {placeData, onPlaceCardNameClick, onPlaceCardHover} = props;
   const {
     id,
     isPremium = false,
-    image,
+    images,
     price,
     isBookmark = false,
-    starsValue,
+    rating,
     name,
     type,
   } = placeData;
+
+  const image = images[0];
 
   let bookmarkClass = `place-card__bookmark-button button`;
   let bookmarkStatus = `To bookmarks`;
@@ -24,7 +26,7 @@ const PlaceCard = (props) => {
     bookmarkStatus = `In bookmarks`;
   }
 
-  const starsStyle = `${Math.round(starsValue) * 20}%`;
+  const starsStyle = `${Math.round(rating) * 20}%`;
 
   return (
     <article
@@ -69,7 +71,12 @@ const PlaceCard = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onPlaceCardNameClick}>
+        <h2
+          className="place-card__name"
+          onClick={(evt) => {
+            evt.preventDefault();
+            onPlaceCardNameClick(placeData);
+          }}>
           <a href="#" data-id={id}>
             {name}
           </a>
@@ -81,13 +88,13 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: propTypes.shape({
+  placeData: propTypes.shape({
     id: propTypes.number.isRequired,
     isPremium: propTypes.bool,
-    image: propTypes.string.isRequired,
+    images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
     price: propTypes.number.isRequired,
     isBookmark: propTypes.bool,
-    starsValue: propTypes.number.isRequired,
+    rating: propTypes.number.isRequired,
     name: propTypes.oneOf(APPROVED_NAME).isRequired,
     type: propTypes.string.isRequired,
   }).isRequired,

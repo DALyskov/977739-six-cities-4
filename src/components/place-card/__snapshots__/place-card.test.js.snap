@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlaceCard_snapchots incomplete data 1`] = `
+exports[`PlaceCard_snapchots incomplete_data 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
@@ -71,7 +71,7 @@ exports[`PlaceCard_snapchots incomplete data 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "100%",
             }
           }
         />
@@ -102,7 +102,7 @@ exports[`PlaceCard_snapchots incomplete data 1`] = `
 </article>
 `;
 
-exports[`PlaceCard_snapchots with data 1`] = `
+exports[`PlaceCard_snapchots with_data 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}
@@ -179,7 +179,7 @@ exports[`PlaceCard_snapchots with data 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "100%",
             }
           }
         />

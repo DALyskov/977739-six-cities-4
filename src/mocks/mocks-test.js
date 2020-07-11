@@ -1,4 +1,4 @@
-export default [
+export const offers = [
   {
     id: 1,
     isPremium: true,
@@ -71,22 +71,31 @@ export default [
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   },
-  {
-    id: 4,
-    isPremium: true,
-    images: [`img/apartment-03.jpg`],
-    price: 180,
-    isBookmark: false,
-    rating: 5,
-    name: `Nice, cozy, warm big bed apartment`,
-    type: `Apartment`,
-    bedrooms: 1,
-    maxAdults: 4,
-    features: ['Kitchen', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-    hostName: `Angelina`,
-    hostAvatar: `img/avatar-angelina.jpg`,
-    isHostPro: true,
-    description:
-      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-  },
 ];
+
+export const incompletePlace = {
+  id: 1,
+  images: [
+    `img/apartment-01.jpg`,
+    `img/room.jpg`,
+    `img/apartment-02.jpg`,
+    `img/apartment-03.jpg`,
+  ],
+  price: 120,
+  rating: 4.5,
+  name: `Beautiful & luxurious apartment at great location`,
+  type: `Apartment`,
+  bedrooms: 3,
+  maxAdults: 1,
+  features: [
+    'Heating',
+    'Kitchen',
+    'Cable TV',
+    'Washing machine',
+    'Coffee machine',
+  ],
+  hostName: `Dima`,
+  hostAvatar: `img/avatar-angelina.jpg`,
+  description:
+    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+};
