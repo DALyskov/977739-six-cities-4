@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME} from '../../const.js';
+import {APPROVED_NAME, CITY} from '../../const.js';
 
 import PlaceList from '../places-list/places-list.jsx';
+import CityMap from '../city-map/city-map.jsx';
 
 const Main = (props) => {
   const {offers, onPlaceCardNameClick} = props;
@@ -121,16 +122,14 @@ const Main = (props) => {
                 </select>
                 --> */}
               </form>
-              {
-                <PlaceList
-                  offers={offers}
-                  onPlaceCardNameClick={onPlaceCardNameClick}
-                />
-              }
+
+              <PlaceList
+                offers={offers}
+                onPlaceCardNameClick={onPlaceCardNameClick}
+              />
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+
+            <CityMap offers={offers} city={CITY.AMSTERDAM} />
           </div>
         </div>
       </main>
@@ -149,6 +148,19 @@ Main.propTypes = {
       rating: propTypes.number.isRequired,
       name: propTypes.oneOf(APPROVED_NAME).isRequired,
       type: propTypes.string.isRequired,
+      city: propTypes.shape({
+        location: propTypes.shape({
+          latitude: propTypes.number.isRequired,
+          longitude: propTypes.number.isRequired,
+          zoom: propTypes.number.isRequired,
+        }),
+        name: propTypes.string.isRequired,
+      }),
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }),
     })
   ).isRequired,
   onPlaceCardNameClick: propTypes.func.isRequired,

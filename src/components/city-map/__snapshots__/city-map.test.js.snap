@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CityMap_snapchots with_data 1`] = `
+<div
+  className="cities__right-section"
+>
+  <section
+    className="cities__map map"
+  />
+</div>
+`;
+
+exports[`CityMap_snapchots without_data 1`] = `
+<div
+  className="cities__right-section"
+>
+  <section
+    className="cities__map map"
+  />
+</div>
+`;
