@@ -12,14 +12,22 @@ const incompleteOffers = [incompletePlace];
 describe(`Main_snapchots`, () => {
   it(`with_data`, () => {
     const tree = renderer
-      .create(<Main offers={offers} onPlaceCardNameClick={() => {}} />)
+      .create(<Main offers={offers} onPlaceCardNameClick={() => {}} />, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        },
+      })
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`without_data`, () => {
     const tree = renderer
-      .create(<Main offers={[]} onPlaceCardNameClick={() => {}} />)
+      .create(<Main offers={[]} onPlaceCardNameClick={() => {}} />, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        },
+      })
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -27,7 +35,12 @@ describe(`Main_snapchots`, () => {
   it(`incomplete_data`, () => {
     const tree = renderer
       .create(
-        <Main offers={incompleteOffers} onPlaceCardNameClick={() => {}} />
+        <Main offers={incompleteOffers} onPlaceCardNameClick={() => {}} />,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          },
+        }
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

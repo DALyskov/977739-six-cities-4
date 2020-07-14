@@ -27,6 +27,19 @@ export const offers = [
     isHostPro: true,
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
   },
   {
     id: 2,
@@ -52,6 +65,19 @@ export const offers = [
     isHostPro: false,
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
+    location: {
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
   },
   {
     id: 3,
@@ -70,6 +96,19 @@ export const offers = [
     isHostPro: false,
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10,
+      },
+      name: 'Amsterdam',
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
   },
 ];
 
@@ -98,4 +137,17 @@ export const incompletePlace = {
   hostAvatar: `img/avatar-angelina.jpg`,
   description:
     'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+  city: {
+    location: {
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
+    },
+    name: 'Amsterdam',
+  },
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 8,
+  },
 };

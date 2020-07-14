@@ -11,17 +11,35 @@ const incompleteOffers = [incompletePlace];
 
 describe(`App_snapchots`, () => {
   it(`with_data`, () => {
-    const tree = renderer.create(<App offers={offers} />).toJSON();
+    const tree = renderer
+      .create(<App offers={offers} />, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        },
+      })
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`without_data`, () => {
-    const tree = renderer.create(<App offers={[]} />).toJSON();
+    const tree = renderer
+      .create(<App offers={[]} />, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        },
+      })
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it(`incomplete_data`, () => {
-    const tree = renderer.create(<App offers={incompleteOffers} />).toJSON();
+    const tree = renderer
+      .create(<App offers={incompleteOffers} />, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        },
+      })
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
