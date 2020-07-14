@@ -1,34 +1,19 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import {offers, incompletePlace} from '../../mocks/mocks-test.js';
+
 import PlaceCard from './place-card.jsx';
 
-const offer = {
-  id: 1,
-  isPremium: true,
-  image: `img/apartment-01.jpg`,
-  price: 120,
-  isBookmark: false,
-  starsValue: 4,
-  name: `Beautiful & luxurious apartment at great location`,
-  type: `Apartment`,
-};
-
-const incompleteOffer = {
-  id: 1,
-  image: `img/apartment-01.jpg`,
-  price: 120,
-  starsValue: 4,
-  name: `Beautiful & luxurious apartment at great location`,
-  type: `Apartment`,
-};
+const placeData = offers[0];
+const incompletePlaceData = incompletePlace;
 
 describe(`PlaceCard_snapchots`, () => {
-  it(`with data`, () => {
+  it(`with_data`, () => {
     const tree = renderer
       .create(
         <PlaceCard
-          place={offer}
+          placeData={placeData}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />
@@ -37,11 +22,11 @@ describe(`PlaceCard_snapchots`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`incomplete data`, () => {
+  it(`incomplete_data`, () => {
     const tree = renderer
       .create(
         <PlaceCard
-          place={incompleteOffer}
+          placeData={incompletePlaceData}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />

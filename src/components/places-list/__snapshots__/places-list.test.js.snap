@@ -74,7 +74,7 @@ exports[`PlaceList_snapchots incomplete data 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "100%",
               }
             }
           />
@@ -106,7 +106,7 @@ exports[`PlaceList_snapchots incomplete data 1`] = `
 </div>
 `;
 
-exports[`PlaceList_snapchots with data 1`] = `
+exports[`PlaceList_snapchots with_data 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 >
@@ -186,7 +186,7 @@ exports[`PlaceList_snapchots with data 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "100%",
               }
             }
           />
@@ -403,7 +403,7 @@ exports[`PlaceList_snapchots with data 1`] = `
           data-id={3}
           href="#"
         >
-          Wood and stone place
+          Canal View Prinsengracht
         </a>
       </h2>
       <p
@@ -416,7 +416,7 @@ exports[`PlaceList_snapchots with data 1`] = `
 </div>
 `;
 
-exports[`PlaceList_snapchots without data 1`] = `
+exports[`PlaceList_snapchots without_data 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 />

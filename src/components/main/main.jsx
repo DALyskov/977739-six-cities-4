@@ -6,7 +6,7 @@ import {APPROVED_NAME} from '../../const.js';
 import PlaceList from '../places-list/places-list.jsx';
 
 const Main = (props) => {
-  const {offers} = props;
+  const {offers, onPlaceCardNameClick} = props;
   const placesCount = offers.length;
 
   return (
@@ -121,7 +121,12 @@ const Main = (props) => {
                 </select>
                 --> */}
               </form>
-              {<PlaceList offers={offers} />}
+              {
+                <PlaceList
+                  offers={offers}
+                  onPlaceCardNameClick={onPlaceCardNameClick}
+                />
+              }
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -138,14 +143,15 @@ Main.propTypes = {
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
-      image: propTypes.string.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
       price: propTypes.number.isRequired,
       isBookmark: propTypes.bool,
-      starsValue: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
       name: propTypes.oneOf(APPROVED_NAME).isRequired,
       type: propTypes.string.isRequired,
     })
   ).isRequired,
+  onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Main;

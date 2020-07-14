@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main snapchots incomplete data 1`] = `
+exports[`Main_snapchots incomplete_data 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -294,7 +294,7 @@ exports[`Main snapchots incomplete data 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -338,7 +338,7 @@ exports[`Main snapchots incomplete data 1`] = `
 </div>
 `;
 
-exports[`Main snapchots with data 1`] = `
+exports[`Main_snapchots with_data 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -638,7 +638,7 @@ exports[`Main snapchots with data 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -855,7 +855,7 @@ exports[`Main snapchots with data 1`] = `
                     data-id={3}
                     href="#"
                   >
-                    Wood and stone place
+                    Canal View Prinsengracht
                   </a>
                 </h2>
                 <p
@@ -880,7 +880,7 @@ exports[`Main snapchots with data 1`] = `
 </div>
 `;
 
-exports[`Main snapchots without data 1`] = `
+exports[`Main_snapchots without_data 1`] = `
 <div
   className="page page--gray page--main"
 >
