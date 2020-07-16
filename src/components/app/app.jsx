@@ -22,7 +22,7 @@ export default class App extends PureComponent {
   }
 
   _renderMain() {
-    const {offers, reviews} = this.props;
+    const {offers} = this.props;
     const {activPlaceCard} = this.state;
 
     if (activPlaceCard === null) {
@@ -33,17 +33,7 @@ export default class App extends PureComponent {
         />
       );
     } else {
-      return (
-        // DRY
-        // <Property
-        //   placeData={activPlaceCard}
-        //   reviews={reviews}
-        //   offers={offers.slice(0, 3)}
-        //   onPlaceCardNameClick={this.handlePlaceCardNameClick}
-        // />
-
-        this._renderProperty(activPlaceCard)
-      );
+      return this._renderProperty(activPlaceCard);
     }
   }
 
@@ -61,21 +51,6 @@ export default class App extends PureComponent {
     }
     return <h1>no data</h1>;
   }
-
-  // _renderProperty() {
-  //   const {offers, reviews} = this.props;
-  //   if (offers.length > 0) {
-  //     return (
-  //       <Property
-  //         placeData={offers[0]}
-  //         reviews={reviews}
-  //         offers={offers.slice(0, 3)}
-  //         onPlaceCardNameClick={this.handlePlaceCardNameClick}
-  //       />
-  //     );
-  //   }
-  //   return <h1>no data</h1>;
-  // }
 
   render() {
     const {offers} = this.props;

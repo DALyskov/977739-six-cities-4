@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+import {PlacesClassNames} from '../../const.js';
 import {offers} from '../../mocks/mocks-test.js';
 
 import PlaceCard from './place-card.jsx';
@@ -19,6 +20,7 @@ describe(`PlaceCard_ee`, () => {
     const placeCard = mount(
       <PlaceCard
         placeData={placeData}
+        className={PlacesClassNames.MAIN[1]}
         onPlaceCardNameClick={onPlaceCardNameClick}
         onPlaceCardHover={onPlaceCardHover}
       />
@@ -38,6 +40,7 @@ describe(`PlaceCard_ee`, () => {
     const placeCard = mount(
       <PlaceCard
         placeData={placeData}
+        className={PlacesClassNames.MAIN[1]}
         onPlaceCardNameClick={onPlaceCardNameClick}
         onPlaceCardHover={onPlaceCardHover}
       />

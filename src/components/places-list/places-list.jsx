@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME} from '../../const.js';
+import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
 
 import PlaceCard from '../place-card/place-card.jsx';
 
@@ -53,5 +53,8 @@ PlaceList.propTypes = {
       type: propTypes.string.isRequired,
     })
   ).isRequired,
+
+  className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
+
   onPlaceCardNameClick: propTypes.func.isRequired,
 };

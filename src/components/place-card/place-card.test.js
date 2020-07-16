@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import {PlacesClassNames} from '../../const.js';
 import {offers, incompletePlace} from '../../mocks/mocks-test.js';
 
 import PlaceCard from './place-card.jsx';
@@ -14,6 +15,7 @@ describe(`PlaceCard_snapchots`, () => {
       .create(
         <PlaceCard
           placeData={placeData}
+          className={PlacesClassNames.MAIN[1]}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />
@@ -27,6 +29,7 @@ describe(`PlaceCard_snapchots`, () => {
       .create(
         <PlaceCard
           placeData={incompletePlaceData}
+          className={PlacesClassNames.MAIN[1]}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />
