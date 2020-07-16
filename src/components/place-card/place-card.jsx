@@ -2,9 +2,10 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import {APPROVED_NAME} from '../../const.js';
+import {getStyleStars} from '../../utils/common.js';
 
 const PlaceCard = (props) => {
-  const {placeData, onPlaceCardNameClick, onPlaceCardHover} = props;
+  const {placeData, className, onPlaceCardNameClick, onPlaceCardHover} = props;
   const {
     id,
     isPremium = false,
@@ -26,11 +27,11 @@ const PlaceCard = (props) => {
     bookmarkStatus = `In bookmarks`;
   }
 
-  const starsStyle = `${Math.round(rating) * 20}%`;
+  const starsStyle = getStyleStars(rating);
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`${className} place-card`}
       onMouseEnter={() => {
         onPlaceCardHover(placeData);
       }}>

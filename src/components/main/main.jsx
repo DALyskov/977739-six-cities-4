@@ -1,7 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME, CITY} from '../../const.js';
+import {
+  APPROVED_NAME,
+  City,
+  MapClassName,
+  PlacesClassNames,
+} from '../../const.js';
 
 import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
@@ -125,11 +130,17 @@ const Main = (props) => {
 
               <PlaceList
                 offers={offers}
+                className={PlacesClassNames.MAIN}
                 onPlaceCardNameClick={onPlaceCardNameClick}
               />
             </section>
-
-            <CityMap offers={offers} city={CITY.AMSTERDAM} />
+            <div className="cities__right-section">
+              <CityMap
+                offers={offers}
+                city={City.AMSTERDAM}
+                className={MapClassName.MAIN}
+              />
+            </div>
           </div>
         </div>
       </main>

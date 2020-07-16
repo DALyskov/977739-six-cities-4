@@ -23,13 +23,14 @@ export default class PlaceList extends PureComponent {
   }
 
   render() {
-    const {offers, onPlaceCardNameClick} = this.props;
+    const {offers, className, onPlaceCardNameClick} = this.props;
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${className[0]} places__list tabs__content`}>
         {offers.map((placeData) => (
           <PlaceCard
             key={placeData.id}
             placeData={placeData}
+            className={className[1]}
             onPlaceCardNameClick={onPlaceCardNameClick}
             onPlaceCardHover={this.handlePlaceCardHover}
           />

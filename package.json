@@ -24,6 +24,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.0",
     "jest": "26.1.0",
+    "moment-locales-webpack-plugin": "1.2.0",
     "prettier": "2.0.5",
     "react-test-renderer": "16.13.1",
     "webpack": "4.43.0",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "leaflet": "1.6.0",
+    "moment": "2.27.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
