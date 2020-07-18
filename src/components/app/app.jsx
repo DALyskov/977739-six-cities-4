@@ -1,35 +1,46 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {ActionCreater} from '../../reducer.js';
 
 import {APPROVED_NAME} from '../../const.js';
 
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
-export default class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activPlaceCardId: null,
-      activPlaceCard: null,
-    };
-    this.handlePlaceCardNameClick = this.handlePlaceCardNameClick.bind(this);
-  }
+class App extends PureComponent {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     // activPlaceCardId: null,
+  //     activPlaceCard: null,
+  //   };
+  //   this.handlePlaceCardNameClick = this.handlePlaceCardNameClick.bind(this);
+  // }
 
-  handlePlaceCardNameClick(placeData) {
-    this.setState({activPlaceCard: placeData});
-  }
+  // handlePlaceCardNameClick(placeData) {
+  //   this.setState({activPlaceCard: placeData});
+  // }
 
   _renderMain() {
-    const {offers} = this.props;
-    const {activPlaceCard} = this.state;
+    const {
+      offers: offersAll,
+      activPlaceCard,
+      activeCity,
+      onPlaceCardNameClick,
+    } = this.props;
+    // const {activPlaceCard} = this.state;
+
+    const offers = this._getOffersByCity(activeCity);
 
     if (activPlaceCard === null) {
       return (
         <Main
           offers={offers}
-          onPlaceCardNameClick={this.handlePlaceCardNameClick}
+          activeCity={activeCity}
+          // onPlaceCardNameClick={this.handlePlaceCardNameClick}
+          onPlaceCardNameClick={onPlaceCardNameClick}
         />
       );
     } else {
@@ -38,18 +49,25 @@ export default class App extends PureComponent {
   }
 
   _renderProperty(placeData) {
-    const {offers, reviews} = this.props;
+    const {offers, reviews, onPlaceCardNameClick} = this.props;
     if (offers.length > 0) {
       return (
         <Property
           placeData={placeData}
           reviews={reviews}
           offers={offers.slice(0, 3)}
-          onPlaceCardNameClick={this.handlePlaceCardNameClick}
+          // onPlaceCardNameClick={this.handlePlaceCardNameClick}
+          onPlaceCardNameClick={onPlaceCardNameClick}
         />
       );
     }
     return <h1>no data</h1>;
+  }
+
+  _getOffersByCity() {
+    return this.props.offers.filter(
+      (offer) => offer.city.name === this.props.activeCity
+    );
   }
 
   render() {
@@ -100,4 +118,32 @@ App.propTypes = {
       userName: propTypes.string.isRequired,
     })
   ).isRequired,
+
+  // activPlaceCard: propTypes.shape({
+  //   id: propTypes.number.isRequired,
+  //   isPremium: propTypes.bool,
+  //   images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+  //   price: propTypes.number.isRequired,
+  //   isBookmark: propTypes.bool,
+  //   rating: propTypes.number.isRequired,
+  //   name: propTypes.oneOf(APPROVED_NAME).isRequired,
+  //   type: propTypes.string.isRequired,
+  // }).isRequired,
+
+  onPlaceCardNameClick: propTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  activPlaceCard: state.activPlaceCard,
+  reviews: state.reviews,
+  activeCity: state.activeCity,
+});
+const mapDispatchToProps = (dispatch) => ({
+  onPlaceCardNameClick(placeData) {
+    dispatch(ActionCreater.changePlace(placeData));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

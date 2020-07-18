@@ -21,15 +21,16 @@ export default class CityMap extends PureComponent {
   }
 
   _getMap() {
-    const {offers: offersAll, city} = this.props;
+    const {offers: offersAll, activeCity} = this.props;
 
-    const offers = offersAll.filter((place) => place.city.name === city);
+    // const offers = offersAll.filter((place) => place.city.name === city);
+    const offers = offersAll;
 
     const mapContainer = this._divRef.current;
 
     let cityCoordinate = [
-      Coordinate[city.toUpperCase()][0],
-      Coordinate[city.toUpperCase()][1],
+      Coordinate[activeCity.toUpperCase()][0],
+      Coordinate[activeCity.toUpperCase()][1],
     ];
 
     let zoom = 10;
@@ -110,7 +111,7 @@ CityMap.propTypes = {
     })
   ).isRequired,
 
-  city: propTypes.string.isRequired,
+  activeCity: propTypes.string.isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 };
