@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME} from '../../const.js';
+import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
 
 import PlaceCard from '../place-card/place-card.jsx';
 
@@ -23,13 +23,14 @@ export default class PlaceList extends PureComponent {
   }
 
   render() {
-    const {offers, onPlaceCardNameClick} = this.props;
+    const {offers, className, onPlaceCardNameClick} = this.props;
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${className[0]} places__list tabs__content`}>
         {offers.map((placeData) => (
           <PlaceCard
             key={placeData.id}
             placeData={placeData}
+            className={className[1]}
             onPlaceCardNameClick={onPlaceCardNameClick}
             onPlaceCardHover={this.handlePlaceCardHover}
           />
@@ -52,5 +53,8 @@ PlaceList.propTypes = {
       type: propTypes.string.isRequired,
     })
   ).isRequired,
+
+  className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
+
   onPlaceCardNameClick: propTypes.func.isRequired,
 };

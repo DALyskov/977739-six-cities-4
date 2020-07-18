@@ -1,7 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {offers as offersData, incompletePlace} from '../../mocks/mocks-test.js';
+import {
+  offers as offersData,
+  incompletePlace,
+  reviews,
+} from '../../mocks/mocks-test.js';
 
 import App from './app.jsx';
 
@@ -12,7 +16,7 @@ const incompleteOffers = [incompletePlace];
 describe(`App_snapchots`, () => {
   it(`with_data`, () => {
     const tree = renderer
-      .create(<App offers={offers} />, {
+      .create(<App offers={offers} reviews={reviews} />, {
         createNodeMock: () => {
           return document.createElement(`div`);
         },
@@ -23,7 +27,7 @@ describe(`App_snapchots`, () => {
 
   it(`without_data`, () => {
     const tree = renderer
-      .create(<App offers={[]} />, {
+      .create(<App offers={[]} reviews={[]} />, {
         createNodeMock: () => {
           return document.createElement(`div`);
         },
@@ -34,7 +38,7 @@ describe(`App_snapchots`, () => {
 
   it(`incomplete_data`, () => {
     const tree = renderer
-      .create(<App offers={incompleteOffers} />, {
+      .create(<App offers={incompleteOffers} reviews={reviews} />, {
         createNodeMock: () => {
           return document.createElement(`div`);
         },

@@ -1,10 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME} from '../../const.js';
+import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
+import {getStyleStars} from '../../utils/common.js';
 
 const PlaceCard = (props) => {
-  const {placeData, onPlaceCardNameClick, onPlaceCardHover} = props;
+  const {placeData, className, onPlaceCardNameClick, onPlaceCardHover} = props;
   const {
     id,
     isPremium = false,
@@ -26,11 +27,13 @@ const PlaceCard = (props) => {
     bookmarkStatus = `In bookmarks`;
   }
 
-  const starsStyle = `${Math.round(rating) * 20}%`;
+  const starsStyle = getStyleStars(rating);
+
+  const classNameImgWrapper = className.substring(0, className.indexOf(`__`));
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`${className} place-card`}
       onMouseEnter={() => {
         onPlaceCardHover(placeData);
       }}>
@@ -41,7 +44,8 @@ const PlaceCard = (props) => {
       ) : (
         ``
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={`${classNameImgWrapper}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
@@ -98,6 +102,10 @@ PlaceCard.propTypes = {
     name: propTypes.oneOf(APPROVED_NAME).isRequired,
     type: propTypes.string.isRequired,
   }).isRequired,
+
+  className: propTypes.oneOf(Object.values(PlacesClassNames).map((v) => v[1]))
+    .isRequired,
+
   onPlaceCardNameClick: propTypes.func.isRequired,
   onPlaceCardHover: propTypes.func.isRequired,
 };
