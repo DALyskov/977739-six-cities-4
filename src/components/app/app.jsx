@@ -24,12 +24,7 @@ class App extends PureComponent {
   // }
 
   _renderMain() {
-    const {
-      offers: offersAll,
-      activPlaceCard,
-      activeCity,
-      onPlaceCardNameClick,
-    } = this.props;
+    const {activPlaceCard, activeCity, onPlaceCardNameClick} = this.props;
     // const {activPlaceCard} = this.state;
 
     const offers = this._getOffersByCity(activeCity);
@@ -49,7 +44,8 @@ class App extends PureComponent {
   }
 
   _renderProperty(placeData) {
-    const {offers, reviews, onPlaceCardNameClick} = this.props;
+    const {reviews, onPlaceCardNameClick} = this.props;
+    const offers = this._getOffersByCity(placeData.city.name);
     if (offers.length > 0) {
       return (
         <Property

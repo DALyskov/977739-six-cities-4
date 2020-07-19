@@ -103,11 +103,7 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <CityMap
-                offers={offers}
-                activeCity={activeCity}
-                className={MapClassName.MAIN}
-              />
+              <CityMap offers={offers} className={MapClassName.MAIN} />
             </div>
           </div>
         </div>

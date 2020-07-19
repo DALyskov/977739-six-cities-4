@@ -46,6 +46,8 @@ const Property = (props) => {
 
   const starsStyle = getStyleStars(rating);
 
+  console.log(offers);
+
   return (
     <div className="page">
       <header className="header">
@@ -174,11 +176,7 @@ const Property = (props) => {
             </div>
           </div>
 
-          <CityMap
-            offers={offers}
-            city={City.AMSTERDAM}
-            className={MapClassName.PROPERTY}
-          />
+          <CityMap offers={offers} className={MapClassName.PROPERTY} />
         </section>
 
         <div className="container">

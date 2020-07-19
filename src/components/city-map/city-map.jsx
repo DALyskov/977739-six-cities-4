@@ -20,42 +20,53 @@ export default class CityMap extends PureComponent {
     mapContainer.remove();
   }
 
+  componentDidUpdate() {
+    this._map.remove();
+    this._getMap();
+  }
+
   _getMap() {
-    const {offers: offersAll, activeCity} = this.props;
+    const {offers} = this.props;
 
     // const offers = offersAll.filter((place) => place.city.name === city);
-    const offers = offersAll;
+    // const offers = offersAll;
 
     const mapContainer = this._divRef.current;
 
-    let cityCoordinate = [
-      Coordinate[activeCity.toUpperCase()][0],
-      Coordinate[activeCity.toUpperCase()][1],
+    // let cityCoordinate = [
+    //   Coordinate[activeCity.toUpperCase()][0],
+    //   Coordinate[activeCity.toUpperCase()][1],
+    // ];
+
+    // let zoom = 10;
+
+    // if (offers.length > 0) {
+    //   cityCoordinate = [
+    //     offers[0].city.location.latitude,
+    //     offers[0].city.location.longitude,
+    //   ];
+    //   zoom = offers[0].city.location.zoom;
+    // }
+
+    const cityCoordinate = [
+      offers[0].city.location.latitude,
+      offers[0].city.location.longitude,
     ];
-
-    let zoom = 10;
-
-    if (offers.length > 0) {
-      cityCoordinate = [
-        offers[0].city.location.latitude,
-        offers[0].city.location.longitude,
-      ];
-      zoom = offers[0].city.location.zoom;
-    }
+    const zoom = offers[0].city.location.zoom;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 40],
     });
 
-    const map = leaflet.map(mapContainer, {
+    this._map = leaflet.map(mapContainer, {
       center: cityCoordinate,
       zoom,
       zoomControl: false,
       marker: false,
     });
 
-    map.setView(cityCoordinate, zoom);
+    this._map.setView(cityCoordinate, zoom);
 
     leaflet
       .tileLayer(
@@ -65,14 +76,14 @@ export default class CityMap extends PureComponent {
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }
       )
-      .addTo(map);
+      .addTo(this._map);
 
     offers.forEach((place) => {
       leaflet
         .marker([place.location.latitude, place.location.longitude], {
           icon,
         })
-        .addTo(map);
+        .addTo(this._map);
     });
   }
 
@@ -111,7 +122,7 @@ CityMap.propTypes = {
     })
   ).isRequired,
 
-  activeCity: propTypes.string.isRequired,
+  // activeCity: propTypes.string.isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 };

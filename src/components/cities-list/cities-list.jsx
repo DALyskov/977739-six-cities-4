@@ -15,7 +15,7 @@ class CitiesList extends PureComponent {
   //   };
   // }
   render() {
-    const {cities, activeCity, onCityClick} = this.props;
+    const {cities, activeCity, onCityClick, onGetOffersByCity} = this.props;
 
     return (
       <section className="locations container">
@@ -29,6 +29,7 @@ class CitiesList extends PureComponent {
                 onClick={(evt) => {
                   evt.preventDefault();
                   onCityClick(city);
+                  onGetOffersByCity(city);
                 }}
                 href="#">
                 <span>{city}</span>
@@ -67,6 +68,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
     dispatch(ActionCreater.changeActiveCity(CityName));
+  },
+  onGetOffersByCity(activeCity) {
+    dispatch(ActionCreater.getOffers(activeCity));
   },
 });
 

@@ -1,4 +1,3 @@
-// import {City} from './const.js';
 import offers from './mocks/offers.js';
 import reviews from './mocks/reviews.js';
 import {extend} from './utils/common.js';
@@ -32,6 +31,10 @@ const ActionCreater = {
     type: ActionType.CHANGE_ACTIVE_CITY,
     payload: targetCity,
   }),
+  getOffers: (activeCity) => ({
+    type: ActionType.GET_OFFERS,
+    payload: activeCity,
+  }),
   changePlace: (placeData) => ({
     type: ActionType.CHANGE_PLACE,
     payload: placeData,
@@ -43,7 +46,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ACTIVE_CITY:
       return extend(state, {activeCity: action.payload});
     case ActionType.GET_OFFERS:
-      return extend(state, {offers: action.payload});
+      return extend(state, {offers: getOffersByCity(action.payload)});
     case ActionType.CHANGE_PLACE:
       return extend(state, {activPlaceCard: action.payload});
   }
