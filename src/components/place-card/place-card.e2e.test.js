@@ -14,35 +14,35 @@ Enzyme.configure({
 const placeData = offers[0];
 
 describe(`PlaceCard_ee`, () => {
-  it(`PlaceCard_on_hover`, () => {
-    const onPlaceCardNameClick = jest.fn();
-    const onPlaceCardHover = jest.fn((...args) => [...args]);
-    const placeCard = mount(
-      <PlaceCard
-        placeData={placeData}
-        className={PlacesClassNames.MAIN[1]}
-        onPlaceCardNameClick={onPlaceCardNameClick}
-        onPlaceCardHover={onPlaceCardHover}
-      />
-    );
+  // it(`PlaceCard_on_hover`, () => {
+  //   const onPlaceCardNameClick = jest.fn();
+  //   const onPlaceCardHover = jest.fn((...args) => [...args]);
+  //   const placeCard = mount(
+  //     <PlaceCard
+  //       placeData={placeData}
+  //       className={PlacesClassNames.MAIN[1]}
+  //       onPlaceCardNameClick={onPlaceCardNameClick}
+  //       // onPlaceCardHover={onPlaceCardHover}
+  //     />
+  //   );
 
-    placeCard.simulate(`mouseenter`);
+  //   placeCard.simulate(`mouseenter`);
 
-    expect(onPlaceCardHover).toHaveBeenCalledTimes(1);
+  //   expect(onPlaceCardHover).toHaveBeenCalledTimes(1);
 
-    expect(onPlaceCardHover.mock.calls[0][0]).toMatchObject(placeData);
-  });
+  //   expect(onPlaceCardHover.mock.calls[0][0]).toMatchObject(placeData);
+  // });
 
   it(`PlaceCardName_on_click`, () => {
     const onPlaceCardNameClick = jest.fn();
-    const onPlaceCardHover = jest.fn((...args) => [...args]);
+    // const onPlaceCardHover = jest.fn((...args) => [...args]);
     const preventLinck = jest.fn();
     const placeCard = mount(
       <PlaceCard
         placeData={placeData}
         className={PlacesClassNames.MAIN[1]}
         onPlaceCardNameClick={onPlaceCardNameClick}
-        onPlaceCardHover={onPlaceCardHover}
+        // onPlaceCardHover={onPlaceCardHover}
       />
     );
 

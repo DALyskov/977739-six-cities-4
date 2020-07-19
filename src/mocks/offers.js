@@ -111,7 +111,7 @@ export default [
     },
   },
   {
-    id: 5,
+    id: 4,
     isPremium: true,
     images: [
       `img/apartment-01.jpg`,
@@ -153,7 +153,7 @@ export default [
     },
   },
   {
-    id: 4,
+    id: 5,
     isPremium: true,
     images: [`img/apartment-03.jpg`],
     price: 180,

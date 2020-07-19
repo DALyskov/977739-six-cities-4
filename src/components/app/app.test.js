@@ -1,48 +1,57 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-import {
-  offers as offersData,
-  incompletePlace,
-  reviews,
-} from '../../mocks/mocks-test.js';
+import {offers, reviews, cities} from '../../mocks/mocks-test.js';
 
 import App from './app.jsx';
 
-const offers = offersData;
-
-const incompleteOffers = [incompletePlace];
+const mockStore = configureStore([]);
 
 describe(`App_snapchots`, () => {
-  it(`with_data`, () => {
+  it(`main`, () => {
+    const store = mockStore({
+      activeCity: cities[0],
+      offersByCity: offers.slice(0, 3),
+      activPlaceCard: false,
+      reviews,
+      cities,
+    });
     const tree = renderer
-      .create(<App offers={offers} reviews={reviews} />, {
-        createNodeMock: () => {
-          return document.createElement(`div`);
-        },
-      })
+      .create(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          },
+        }
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`without_data`, () => {
+  it(`property`, () => {
+    const store = mockStore({
+      activeCity: cities[0],
+      offersByCity: offers.slice(0, 3),
+      activPlaceCard: offers[0],
+      reviews,
+      cities,
+    });
     const tree = renderer
-      .create(<App offers={[]} reviews={[]} />, {
-        createNodeMock: () => {
-          return document.createElement(`div`);
-        },
-      })
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`incomplete_data`, () => {
-    const tree = renderer
-      .create(<App offers={incompleteOffers} reviews={reviews} />, {
-        createNodeMock: () => {
-          return document.createElement(`div`);
-        },
-      })
+      .create(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          },
+        }
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

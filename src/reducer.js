@@ -16,25 +16,20 @@ const initialState = {
   cities: getCities(offers),
   offers,
   offersByCity: getOffersByCity(offers, offers[0].city.name),
-  activPlaceCard: null,
+  activPlaceCard: false,
   reviews,
   activeCity: offers[0].city.name,
 };
 
 const ActionType = {
   CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
-  GET_OFFERS: `GET_OFFERS;`,
   CHANGE_PLACE: `CHANGE_PLACE`,
 };
 
-const ActionCreater = {
+const ActionCreator = {
   changeActiveCity: (targetCity) => ({
     type: ActionType.CHANGE_ACTIVE_CITY,
     payload: targetCity,
-  }),
-  getOffers: (activeCity) => ({
-    type: ActionType.GET_OFFERS,
-    payload: activeCity,
   }),
   changePlace: (placeData) => ({
     type: ActionType.CHANGE_PLACE,
@@ -45,10 +40,8 @@ const ActionCreater = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_ACTIVE_CITY:
-      return extend(state, {activeCity: action.payload});
-    // возможно, стоит подключить GET_OFFERS в CHANGE_ACTIVE_CITY
-    case ActionType.GET_OFFERS:
       return extend(state, {
+        activeCity: action.payload,
         offersByCity: getOffersByCity(state.offers, action.payload),
       });
     case ActionType.CHANGE_PLACE:
@@ -57,4 +50,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, ActionCreater};
+export {reducer, ActionType, ActionCreator};

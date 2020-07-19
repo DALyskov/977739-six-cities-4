@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreater} from '../../reducer.js';
+import {ActionCreator} from '../../reducer.js';
 
 import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
 
@@ -61,14 +61,11 @@ PlaceList.propTypes = {
   onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offersByCity: state.offersByCity,
-});
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
-    dispatch(ActionCreater.changePlace(placeData));
+    dispatch(ActionCreator.changePlace(placeData));
   },
 });
 
 export {PlaceList};
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceList);
+export default connect(null, mapDispatchToProps)(PlaceList);

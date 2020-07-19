@@ -1,20 +1,15 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {
-  APPROVED_NAME,
-  City,
-  MapClassName,
-  PlacesClassNames,
-} from '../../const.js';
+import {APPROVED_NAME, MapClassName, PlacesClassNames} from '../../const.js';
 
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Main = (props) => {
-  const {offers, activeCity /* onPlaceCardNameClick */} = props;
-  const placesCount = offers.length;
+  const {offersByCity, activeCity} = props;
+  const placesCount = offersByCity.length;
 
   return (
     <div className="page page--gray page--main">
@@ -97,13 +92,15 @@ const Main = (props) => {
               </form>
 
               <PlaceList
-                // offers={offers}
+                offersByCity={offersByCity}
                 className={PlacesClassNames.MAIN}
-                // onPlaceCardNameClick={onPlaceCardNameClick}
               />
             </section>
             <div className="cities__right-section">
-              <CityMap /* offers={offers} */ className={MapClassName.MAIN} />
+              <CityMap
+                offersByCity={offersByCity}
+                className={MapClassName.MAIN}
+              />
             </div>
           </div>
         </div>
@@ -113,7 +110,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -138,7 +135,8 @@ Main.propTypes = {
       }),
     })
   ).isRequired,
-  // onPlaceCardNameClick: propTypes.func.isRequired,
+
+  activeCity: propTypes.string.isRequired,
 };
 
 export default Main;

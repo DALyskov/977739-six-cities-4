@@ -1,12 +1,10 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
-import {connect} from 'react-redux';
-// import {ActionCreater} from '../../reducer.js';
 import leaflet from 'leaflet';
 
 import {APPROVED_NAME, MapClassName} from '../../const.js';
 
-class CityMap extends PureComponent {
+export default class CityMap extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -29,32 +27,13 @@ class CityMap extends PureComponent {
 
   _getMap() {
     const {offersByCity} = this.props;
-
-    // const offers = offersAll.filter((place) => place.city.name === city);
-    // const offers = offersAll;
-
     const mapContainer = this._divRef.current;
-
-    // let cityCoordinate = [
-    //   Coordinate[activeCity.toUpperCase()][0],
-    //   Coordinate[activeCity.toUpperCase()][1],
-    // ];
-
-    // let zoom = 10;
-
-    // if (offers.length > 0) {
-    //   cityCoordinate = [
-    //     offers[0].city.location.latitude,
-    //     offers[0].city.location.longitude,
-    //   ];
-    //   zoom = offers[0].city.location.zoom;
-    // }
+    const zoom = offersByCity[0].city.location.zoom;
 
     const cityCoordinate = [
       offersByCity[0].city.location.latitude,
       offersByCity[0].city.location.longitude,
     ];
-    const zoom = offersByCity[0].city.location.zoom;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -124,14 +103,5 @@ CityMap.propTypes = {
     })
   ).isRequired,
 
-  // activeCity: propTypes.string.isRequired,
-
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  offersByCity: state.offersByCity,
-});
-
-export {CityMap};
-export default connect(mapStateToProps)(CityMap);

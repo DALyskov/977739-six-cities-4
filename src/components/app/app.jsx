@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreater} from '../../reducer.js';
+// import {ActionCreator} from '../../reducer.js';
 
 import {APPROVED_NAME} from '../../const.js';
 
@@ -11,52 +11,31 @@ import Property from '../property/property.jsx';
 
 class App extends PureComponent {
   _renderMain() {
-    const {
-      offersByCity,
-      activPlaceCard,
-      activeCity,
-      // onPlaceCardNameClick,
-    } = this.props;
+    const {offersByCity, activPlaceCard, activeCity} = this.props;
 
-    // console.log(offersByCity);
-
-    if (activPlaceCard === null) {
-      return (
-        <Main
-          offers={offersByCity}
-          activeCity={activeCity}
-          // onPlaceCardNameClick={onPlaceCardNameClick}
-        />
-      );
+    if (activPlaceCard === false) {
+      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
     } else {
       return this._renderProperty(activPlaceCard);
     }
   }
 
   _renderProperty(placeData) {
-    const {offersByCity, reviews, onPlaceCardNameClick} = this.props;
+    const {offersByCity} = this.props;
     // неверное условие
     if (offersByCity.length > 0) {
       return (
         <Property
           placeData={placeData}
-          reviews={reviews}
-          offers={offersByCity.slice(0, 3)}
-          // onPlaceCardNameClick={onPlaceCardNameClick}
+          offersByCity={offersByCity.slice(0, 3)}
         />
       );
     }
     return <h1>no data</h1>;
   }
 
-  _getOffersByCity() {
-    return this.props.offers.filter(
-      (offer) => offer.city.name === this.props.activeCity
-    );
-  }
-
   render() {
-    const {offers} = this.props;
+    const {offersByCity} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -64,7 +43,7 @@ class App extends PureComponent {
             {this._renderMain()}
           </Route>
           <Route exact path="/dev-component">
-            {this._renderProperty(offers[0])}
+            {this._renderProperty(offersByCity[0])}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -73,7 +52,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -93,29 +72,21 @@ App.propTypes = {
     })
   ).isRequired,
 
-  reviews: propTypes.arrayOf(
+  activPlaceCard: propTypes.oneOfType([
     propTypes.shape({
-      comment: propTypes.string.isRequired,
-      date: propTypes.object.isRequired,
       id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
       rating: propTypes.number.isRequired,
-      userAvatar: propTypes.string.isRequired,
-      userName: propTypes.string.isRequired,
-    })
-  ).isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+    }).isRequired,
+    propTypes.bool,
+  ]),
 
-  // activPlaceCard: propTypes.shape({
-  //   id: propTypes.number.isRequired,
-  //   isPremium: propTypes.bool,
-  //   images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-  //   price: propTypes.number.isRequired,
-  //   isBookmark: propTypes.bool,
-  //   rating: propTypes.number.isRequired,
-  //   name: propTypes.oneOf(APPROVED_NAME).isRequired,
-  //   type: propTypes.string.isRequired,
-  // }).isRequired,
-
-  // onPlaceCardNameClick: propTypes.func.isRequired,
+  activeCity: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -125,14 +96,11 @@ const mapStateToProps = (state) => ({
   reviews: state.reviews,
   activeCity: state.activeCity,
 });
-const mapDispatchToProps = (dispatch) => ({
-  // onPlaceCardNameClick(placeData) {
-  //   dispatch(ActionCreater.changePlace(placeData));
-  // },
-  onGetOffersByCity(activeCity) {
-    dispatch(ActionCreater.getOffers(activeCity));
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onGetOffersByCity(activeCity) {
+//     dispatch(ActionCreator.getOffers(activeCity));
+//   },
+// });
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps /* mapDispatchToProps */)(App);

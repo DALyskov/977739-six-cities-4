@@ -1,21 +1,11 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreater} from '../../reducer.js';
-
-// import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
-
-// import PlaceCard from '../place-card/place-card.jsx';
+import {ActionCreator} from '../../reducer.js';
 
 class CitiesList extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     activCity: 0,
-  //   };
-  // }
   render() {
-    const {cities, activeCity, onCityClick, onGetOffersByCity} = this.props;
+    const {cities, activeCity, onCityClick} = this.props;
 
     return (
       <section className="locations container">
@@ -29,7 +19,6 @@ class CitiesList extends PureComponent {
                 onClick={(evt) => {
                   evt.preventDefault();
                   onCityClick(city);
-                  onGetOffersByCity(city);
                 }}
                 href="#">
                 <span>{city}</span>
@@ -42,24 +31,13 @@ class CitiesList extends PureComponent {
   }
 }
 
-// PlaceList.propTypes = {
-//   offers: propTypes.arrayOf(
-//     propTypes.shape({
-//       id: propTypes.number.isRequired,
-//       isPremium: propTypes.bool,
-//       images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-//       price: propTypes.number.isRequired,
-//       isBookmark: propTypes.bool,
-//       rating: propTypes.number.isRequired,
-//       name: propTypes.oneOf(APPROVED_NAME).isRequired,
-//       type: propTypes.string.isRequired,
-//     })
-//   ).isRequired,
+CitiesList.propTypes = {
+  cities: propTypes.arrayOf(propTypes.string).isRequired,
 
-//   className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
+  activeCity: propTypes.string.isRequired,
 
-//   onPlaceCardNameClick: propTypes.func.isRequired,
-// };
+  onCityClick: propTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   cities: state.cities,
@@ -67,10 +45,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
-    dispatch(ActionCreater.changeActiveCity(CityName));
-  },
-  onGetOffersByCity(activeCity) {
-    dispatch(ActionCreater.getOffers(activeCity));
+    dispatch(ActionCreator.changeActiveCity(CityName));
   },
 });
 

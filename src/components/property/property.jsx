@@ -9,7 +9,7 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Property = (props) => {
-  const {placeData, reviews /* offers */ /* onPlaceCardNameClick */} = props;
+  const {offersByCity, placeData} = props;
   const {
     isPremium = false,
     images,
@@ -165,11 +165,14 @@ const Property = (props) => {
                 </div>
               </div>
 
-              <ReviewsList /* reviews={reviews} */ />
+              <ReviewsList />
             </div>
           </div>
 
-          <CityMap /* offers={offers} */ className={MapClassName.PROPERTY} />
+          <CityMap
+            offersByCity={offersByCity}
+            className={MapClassName.PROPERTY}
+          />
         </section>
 
         <div className="container">
@@ -178,7 +181,7 @@ const Property = (props) => {
               Other places in the neighbourhood
             </h2>
             <PlaceList
-              // offers={offers}
+              offersByCity={offersByCity}
               className={PlacesClassNames.PROPERTY}
               // onPlaceCardNameClick={onPlaceCardNameClick}
             />
@@ -190,6 +193,19 @@ const Property = (props) => {
 };
 
 Property.propTypes = {
+  offersByCity: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      rating: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+    })
+  ).isRequired,
+
   placeData: propTypes.shape({
     id: propTypes.number.isRequired,
     isPremium: propTypes.bool,
@@ -207,45 +223,6 @@ Property.propTypes = {
     isHostPro: propTypes.bool,
     description: propTypes.string.isRequired,
   }).isRequired,
-
-  reviews: propTypes.arrayOf(
-    propTypes.shape({
-      comment: propTypes.string.isRequired,
-      date: propTypes.object.isRequired,
-      id: propTypes.number.isRequired,
-      rating: propTypes.number.isRequired,
-      userAvatar: propTypes.string.isRequired,
-      userName: propTypes.string.isRequired,
-    })
-  ).isRequired,
-
-  offers: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
-      type: propTypes.string.isRequired,
-      city: propTypes.shape({
-        location: propTypes.shape({
-          latitude: propTypes.number.isRequired,
-          longitude: propTypes.number.isRequired,
-          zoom: propTypes.number.isRequired,
-        }),
-        name: propTypes.string.isRequired,
-      }),
-      location: propTypes.shape({
-        latitude: propTypes.number.isRequired,
-        longitude: propTypes.number.isRequired,
-        zoom: propTypes.number.isRequired,
-      }),
-    })
-  ).isRequired,
-
-  // onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Property;
