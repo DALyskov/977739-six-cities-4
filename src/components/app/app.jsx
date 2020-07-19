@@ -10,32 +10,22 @@ import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
 class App extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     // activPlaceCardId: null,
-  //     activPlaceCard: null,
-  //   };
-  //   this.handlePlaceCardNameClick = this.handlePlaceCardNameClick.bind(this);
-  // }
-
-  // handlePlaceCardNameClick(placeData) {
-  //   this.setState({activPlaceCard: placeData});
-  // }
-
   _renderMain() {
-    const {activPlaceCard, activeCity, onPlaceCardNameClick} = this.props;
-    // const {activPlaceCard} = this.state;
+    const {
+      offersByCity,
+      activPlaceCard,
+      activeCity,
+      // onPlaceCardNameClick,
+    } = this.props;
 
-    const offers = this._getOffersByCity(activeCity);
+    // console.log(offersByCity);
 
     if (activPlaceCard === null) {
       return (
         <Main
-          offers={offers}
+          offers={offersByCity}
           activeCity={activeCity}
-          // onPlaceCardNameClick={this.handlePlaceCardNameClick}
-          onPlaceCardNameClick={onPlaceCardNameClick}
+          // onPlaceCardNameClick={onPlaceCardNameClick}
         />
       );
     } else {
@@ -44,16 +34,15 @@ class App extends PureComponent {
   }
 
   _renderProperty(placeData) {
-    const {reviews, onPlaceCardNameClick} = this.props;
-    const offers = this._getOffersByCity(placeData.city.name);
-    if (offers.length > 0) {
+    const {offersByCity, reviews, onPlaceCardNameClick} = this.props;
+    // неверное условие
+    if (offersByCity.length > 0) {
       return (
         <Property
           placeData={placeData}
           reviews={reviews}
-          offers={offers.slice(0, 3)}
-          // onPlaceCardNameClick={this.handlePlaceCardNameClick}
-          onPlaceCardNameClick={onPlaceCardNameClick}
+          offers={offersByCity.slice(0, 3)}
+          // onPlaceCardNameClick={onPlaceCardNameClick}
         />
       );
     }
@@ -126,18 +115,22 @@ App.propTypes = {
   //   type: propTypes.string.isRequired,
   // }).isRequired,
 
-  onPlaceCardNameClick: propTypes.func.isRequired,
+  // onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
+  offersByCity: state.offersByCity,
   activPlaceCard: state.activPlaceCard,
   reviews: state.reviews,
   activeCity: state.activeCity,
 });
 const mapDispatchToProps = (dispatch) => ({
-  onPlaceCardNameClick(placeData) {
-    dispatch(ActionCreater.changePlace(placeData));
+  // onPlaceCardNameClick(placeData) {
+  //   dispatch(ActionCreater.changePlace(placeData));
+  // },
+  onGetOffersByCity(activeCity) {
+    dispatch(ActionCreater.getOffers(activeCity));
   },
 });
 

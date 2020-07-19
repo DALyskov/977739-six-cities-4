@@ -1,12 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {
-  APPROVED_NAME,
-  City,
-  MapClassName,
-  PlacesClassNames,
-} from '../../const.js';
+import {APPROVED_NAME, MapClassName, PlacesClassNames} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 import PlaceList from '../places-list/places-list.jsx';
@@ -14,7 +9,7 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Property = (props) => {
-  const {placeData, reviews, offers, onPlaceCardNameClick} = props;
+  const {placeData, reviews /* offers */ /* onPlaceCardNameClick */} = props;
   const {
     isPremium = false,
     images,
@@ -45,8 +40,6 @@ const Property = (props) => {
     : `property__avatar-wrapper user__avatar-wrapper`;
 
   const starsStyle = getStyleStars(rating);
-
-  console.log(offers);
 
   return (
     <div className="page">
@@ -172,11 +165,11 @@ const Property = (props) => {
                 </div>
               </div>
 
-              <ReviewsList reviews={reviews} />
+              <ReviewsList /* reviews={reviews} */ />
             </div>
           </div>
 
-          <CityMap offers={offers} className={MapClassName.PROPERTY} />
+          <CityMap /* offers={offers} */ className={MapClassName.PROPERTY} />
         </section>
 
         <div className="container">
@@ -185,9 +178,9 @@ const Property = (props) => {
               Other places in the neighbourhood
             </h2>
             <PlaceList
-              offers={offers}
+              // offers={offers}
               className={PlacesClassNames.PROPERTY}
-              onPlaceCardNameClick={onPlaceCardNameClick}
+              // onPlaceCardNameClick={onPlaceCardNameClick}
             />
           </section>
         </div>
@@ -252,7 +245,7 @@ Property.propTypes = {
     })
   ).isRequired,
 
-  onPlaceCardNameClick: propTypes.func.isRequired,
+  // onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Property;

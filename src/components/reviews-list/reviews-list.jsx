@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import ReviewsItem from '../reviews-item/reviews-item.jsx';
 
@@ -146,4 +147,9 @@ ReviewsList.propTypes = {
   ).isRequired,
 };
 
-export default ReviewsList;
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+});
+
+export {ReviewsList};
+export default connect(mapStateToProps)(ReviewsList);

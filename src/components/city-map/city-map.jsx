@@ -1,10 +1,12 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
+// import {ActionCreater} from '../../reducer.js';
 import leaflet from 'leaflet';
 
-import {APPROVED_NAME, Coordinate, MapClassName} from '../../const.js';
+import {APPROVED_NAME, MapClassName} from '../../const.js';
 
-export default class CityMap extends PureComponent {
+class CityMap extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -26,7 +28,7 @@ export default class CityMap extends PureComponent {
   }
 
   _getMap() {
-    const {offers} = this.props;
+    const {offersByCity} = this.props;
 
     // const offers = offersAll.filter((place) => place.city.name === city);
     // const offers = offersAll;
@@ -49,10 +51,10 @@ export default class CityMap extends PureComponent {
     // }
 
     const cityCoordinate = [
-      offers[0].city.location.latitude,
-      offers[0].city.location.longitude,
+      offersByCity[0].city.location.latitude,
+      offersByCity[0].city.location.longitude,
     ];
-    const zoom = offers[0].city.location.zoom;
+    const zoom = offersByCity[0].city.location.zoom;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -78,7 +80,7 @@ export default class CityMap extends PureComponent {
       )
       .addTo(this._map);
 
-    offers.forEach((place) => {
+    offersByCity.forEach((place) => {
       leaflet
         .marker([place.location.latitude, place.location.longitude], {
           icon,
@@ -96,7 +98,7 @@ export default class CityMap extends PureComponent {
 }
 
 CityMap.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -126,3 +128,10 @@ CityMap.propTypes = {
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offersByCity: state.offersByCity,
+});
+
+export {CityMap};
+export default connect(mapStateToProps)(CityMap);

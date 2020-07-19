@@ -13,7 +13,7 @@ import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Main = (props) => {
-  const {offers, activeCity, onPlaceCardNameClick} = props;
+  const {offers, activeCity /* onPlaceCardNameClick */} = props;
   const placesCount = offers.length;
 
   return (
@@ -53,7 +53,7 @@ const Main = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList offers={offers} />
+          <CitiesList />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -97,13 +97,13 @@ const Main = (props) => {
               </form>
 
               <PlaceList
-                offers={offers}
+                // offers={offers}
                 className={PlacesClassNames.MAIN}
-                onPlaceCardNameClick={onPlaceCardNameClick}
+                // onPlaceCardNameClick={onPlaceCardNameClick}
               />
             </section>
             <div className="cities__right-section">
-              <CityMap offers={offers} className={MapClassName.MAIN} />
+              <CityMap /* offers={offers} */ className={MapClassName.MAIN} />
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ Main.propTypes = {
       }),
     })
   ).isRequired,
-  onPlaceCardNameClick: propTypes.func.isRequired,
+  // onPlaceCardNameClick: propTypes.func.isRequired,
 };
 
 export default Main;
