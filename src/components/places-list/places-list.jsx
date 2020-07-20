@@ -3,38 +3,56 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer.js';
 
-import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
+import {
+  APPROVED_NAME,
+  PlacesClassNames,
+  sortingItems,
+  SortingTypeDict,
+} from '../../const.js';
 
 import PlaceCard from '../place-card/place-card.jsx';
 
 class PlaceList extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     activPlaceCardId: null,
-  //     activPlaceCard: {},
-  //   };
-
-  //   this.handlePlaceCardHover = this.handlePlaceCardHover.bind(this);
-  // }
-
-  // handlePlaceCardHover(placeData) {
-  //   if (placeData !== this.state.activPlaceCard) {
-  //     this.setState({activPlaceCard: placeData});
-  //   }
-  // }
+  _sortOffersBytype(offers, sotringType) {
+    let sortedOffers = offers.slice();
+    switch (sotringType) {
+      case sortingItems[1]:
+        return sortedOffers.sort(
+          (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
+        );
+      case sortingItems[2]:
+        return sortedOffers.sort(
+          (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
+        );
+      case sortingItems[3]:
+        return sortedOffers.sort(
+          (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
+        );
+      default:
+        return offers;
+    }
+  }
 
   render() {
-    const {offersByCity, className, onPlaceCardNameClick} = this.props;
+    const {
+      offersByCity,
+      className,
+      sotringType,
+      onPlaceCardNameClick,
+      onPlaceCardHover,
+    } = this.props;
+
+    const sortedOffers = this._sortOffersBytype(offersByCity, sotringType);
+
     return (
       <div className={`${className[0]} places__list tabs__content`}>
-        {offersByCity.map((placeData) => (
+        {sortedOffers.map((placeData) => (
           <PlaceCard
             key={placeData.id}
             placeData={placeData}
             className={className[1]}
             onPlaceCardNameClick={onPlaceCardNameClick}
-            // onPlaceCardHover={this.handlePlaceCardHover}
+            onPlaceCardHover={onPlaceCardHover}
           />
         ))}
       </div>
@@ -64,6 +82,9 @@ PlaceList.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
     dispatch(ActionCreator.changePlace(placeData));
+  },
+  onPlaceCardHover(placeDataId) {
+    dispatch(ActionCreator.changeHoverCityId(placeDataId));
   },
 });
 

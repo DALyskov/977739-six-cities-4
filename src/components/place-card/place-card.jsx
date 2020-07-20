@@ -5,11 +5,7 @@ import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 const PlaceCard = (props) => {
-  const {
-    placeData,
-    className,
-    onPlaceCardNameClick /* onPlaceCardHover */,
-  } = props;
+  const {placeData, className, onPlaceCardNameClick, onPlaceCardHover} = props;
   const {
     id,
     isPremium = false,
@@ -38,10 +34,14 @@ const PlaceCard = (props) => {
   return (
     <article
       className={`${className} place-card`}
-      // onMouseEnter={() => {
-      //   onPlaceCardHover(placeData);
-      // }}
-    >
+      onMouseEnter={() => {
+        onPlaceCardHover(placeData.id);
+        console.log(placeData.id);
+      }}
+      onMouseLeave={() => {
+        onPlaceCardHover(false);
+        console.log(placeData.id);
+      }}>
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>

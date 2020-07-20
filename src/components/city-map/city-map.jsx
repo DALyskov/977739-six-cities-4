@@ -23,6 +23,8 @@ export default class CityMap extends PureComponent {
   componentDidUpdate() {
     this._map.remove();
     this._getMap();
+    this._changeMarkerIcon();
+    console.log(this.props.hoverCityId);
   }
 
   _getMap() {
@@ -39,6 +41,11 @@ export default class CityMap extends PureComponent {
       iconUrl: `img/pin.svg`,
       iconSize: [30, 40],
     });
+
+    // const newIcon = leaflet.icon({
+    //   iconUrl: `img/pin-active.svg`,
+    //   iconSize: [30, 40],
+    // });
 
     this._map = leaflet.map(mapContainer, {
       center: cityCoordinate,
@@ -59,12 +66,37 @@ export default class CityMap extends PureComponent {
       )
       .addTo(this._map);
 
-    offersByCity.forEach((place) => {
-      leaflet
-        .marker([place.location.latitude, place.location.longitude], {
+    this.markers = offersByCity.map((place) => {
+      const marker = leaflet.marker(
+        [place.location.latitude, place.location.longitude],
+        {
           icon,
-        })
-        .addTo(this._map);
+        }
+      );
+      marker.addTo(this._map);
+
+      marker.id = place.id;
+
+      return marker;
+    });
+
+    // this.markers[0].setIcon(newIcon);
+
+    console.log(this.markers);
+  }
+
+  _changeMarkerIcon() {
+    const {hoverCityId} = this.props;
+    // console.log(`map update`);
+    this.markers.forEach((marker) => {
+      if (marker.id === hoverCityId) {
+        const newIcon = leaflet.icon({
+          iconUrl: `img/pin-active.svg`,
+          iconSize: [30, 40],
+        });
+
+        marker.setIcon(newIcon);
+      }
     });
   }
 

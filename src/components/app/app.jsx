@@ -11,23 +11,37 @@ import Property from '../property/property.jsx';
 
 class App extends PureComponent {
   _renderMain() {
-    const {offersByCity, activPlaceCard, activeCity} = this.props;
+    const {
+      offersByCity,
+      activPlaceCard,
+      activeCity,
+      sotringType,
+      hoverCityId,
+    } = this.props;
 
     if (activPlaceCard === false) {
-      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
+      return (
+        <Main
+          offersByCity={offersByCity}
+          activeCity={activeCity}
+          sotringType={sotringType}
+          hoverCityId={hoverCityId}
+        />
+      );
     } else {
       return this._renderProperty(activPlaceCard);
     }
   }
 
   _renderProperty(placeData) {
-    const {offersByCity} = this.props;
+    const {offersByCity, hoverCityId} = this.props;
     // неверное условие
     if (offersByCity.length > 0) {
       return (
         <Property
           placeData={placeData}
           offersByCity={offersByCity.slice(0, 3)}
+          hoverCityId={hoverCityId}
         />
       );
     }
@@ -87,6 +101,7 @@ App.propTypes = {
   ]),
 
   activeCity: propTypes.string.isRequired,
+  sotringType: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -95,6 +110,8 @@ const mapStateToProps = (state) => ({
   activPlaceCard: state.activPlaceCard,
   reviews: state.reviews,
   activeCity: state.activeCity,
+  sotringType: state.sotringType,
+  hoverCityId: state.hoverCityId,
 });
 // const mapDispatchToProps = (dispatch) => ({
 //   onGetOffersByCity(activeCity) {
