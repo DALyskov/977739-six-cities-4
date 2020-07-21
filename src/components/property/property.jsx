@@ -9,7 +9,7 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Property = (props) => {
-  const {offersByCity, placeData, hoverCityId} = props;
+  const {offersByCity, placeData} = props;
   const {
     isPremium = false,
     images,
@@ -171,7 +171,6 @@ const Property = (props) => {
 
           <CityMap
             offersByCity={offersByCity}
-            hoverCityId={hoverCityId}
             className={MapClassName.PROPERTY}
           />
         </section>
@@ -184,7 +183,6 @@ const Property = (props) => {
             <PlaceList
               offersByCity={offersByCity}
               className={PlacesClassNames.PROPERTY}
-              // onPlaceCardNameClick={onPlaceCardNameClick}
             />
           </section>
         </div>

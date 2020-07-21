@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer.js';
 
-import {sortingItems} from '../../const.js';
+import {sotringItems} from '../../const.js';
 
 class PlacesSorting extends PureComponent {
   constructor(props) {
@@ -38,14 +38,16 @@ class PlacesSorting extends PureComponent {
           className={`places__options places__options--custom ${
             this.state.isOpen ? `places__options--opened` : ``
           }`}>
-          {sortingItems.map((item) => (
+          {sotringItems.map((item) => (
             <li
               key={item}
               onClick={() => {
                 onSortingItemClick(item);
                 this._onSortingClick();
               }}
-              className="places__option places__option--active"
+              className={`places__option ${
+                item === sotringType ? `places__option--active` : ``
+              }`}
               tabIndex="0">
               {item}
             </li>
@@ -56,6 +58,15 @@ class PlacesSorting extends PureComponent {
   }
 }
 
+PlacesSorting.propTypes = {
+  sotringType: propTypes.oneOf(sotringItems).isRequired,
+  onSortingItemClick: propTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  sotringType: state.sotringType,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSortingItemClick(sotringType) {
     dispatch(ActionCreator.changeSotringType(sotringType));
@@ -63,4 +74,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {PlacesSorting};
-export default connect(null, mapDispatchToProps)(PlacesSorting);
+export default connect(mapStateToProps, mapDispatchToProps)(PlacesSorting);

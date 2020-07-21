@@ -9,7 +9,7 @@ import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
 const Main = (props) => {
-  const {offersByCity, activeCity, sotringType, hoverCityId} = props;
+  const {offersByCity, activeCity} = props;
   const placesCount = offersByCity.length;
 
   return (
@@ -58,17 +58,15 @@ const Main = (props) => {
               <b className="places__found">
                 {placesCount} places to stay in {activeCity}
               </b>
-              <PlacesSorting sotringType={sotringType} />
+              <PlacesSorting />
               <PlaceList
                 offersByCity={offersByCity}
                 className={PlacesClassNames.MAIN}
-                sotringType={sotringType}
               />
             </section>
             <div className="cities__right-section">
               <CityMap
                 offersByCity={offersByCity}
-                hoverCityId={hoverCityId}
                 className={MapClassName.MAIN}
               />
             </div>

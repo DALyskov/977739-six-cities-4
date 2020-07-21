@@ -6,7 +6,7 @@ import {ActionCreator} from '../../reducer.js';
 import {
   APPROVED_NAME,
   PlacesClassNames,
-  sortingItems,
+  sotringItems,
   SortingTypeDict,
 } from '../../const.js';
 
@@ -16,15 +16,15 @@ class PlaceList extends PureComponent {
   _sortOffersBytype(offers, sotringType) {
     let sortedOffers = offers.slice();
     switch (sotringType) {
-      case sortingItems[1]:
+      case sotringItems[1]:
         return sortedOffers.sort(
           (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
         );
-      case sortingItems[2]:
+      case sotringItems[2]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
         );
-      case sortingItems[3]:
+      case sotringItems[3]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
         );
@@ -76,8 +76,15 @@ PlaceList.propTypes = {
 
   className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
 
+  sotringType: propTypes.oneOf(sotringItems).isRequired,
+
   onPlaceCardNameClick: propTypes.func.isRequired,
+  onPlaceCardHover: propTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  sotringType: state.sotringType,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
@@ -89,4 +96,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {PlaceList};
-export default connect(null, mapDispatchToProps)(PlaceList);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceList);

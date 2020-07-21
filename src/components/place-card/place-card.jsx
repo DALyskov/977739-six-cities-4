@@ -36,11 +36,9 @@ const PlaceCard = (props) => {
       className={`${className} place-card`}
       onMouseEnter={() => {
         onPlaceCardHover(placeData.id);
-        console.log(placeData.id);
       }}
       onMouseLeave={() => {
         onPlaceCardHover(false);
-        console.log(placeData.id);
       }}>
       {isPremium ? (
         <div className="place-card__mark">
@@ -112,7 +110,7 @@ PlaceCard.propTypes = {
     .isRequired,
 
   onPlaceCardNameClick: propTypes.func.isRequired,
-  // onPlaceCardHover: propTypes.func.isRequired,
+  onPlaceCardHover: propTypes.func.isRequired,
 };
 
 export default PlaceCard;

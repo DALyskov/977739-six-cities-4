@@ -1,4 +1,4 @@
-import {sortingItems} from './const.js';
+import {sotringItems} from './const.js';
 import offers from './mocks/offers.js';
 import reviews from './mocks/reviews.js';
 import {extend} from './utils/common.js';
@@ -20,7 +20,7 @@ const initialState = {
   activPlaceCard: false,
   reviews,
   activeCity: offers[0].city.name,
-  sotringType: sortingItems[0],
+  sotringType: sotringItems[0],
   hoverCityId: false,
 };
 
@@ -56,7 +56,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload,
         offersByCity: getOffersByCity(state.offers, action.payload),
-        sotringType: sortingItems[0],
+        sotringType: sotringItems[0],
       });
     case ActionType.CHANGE_PLACE:
       return extend(state, {activPlaceCard: action.payload});
