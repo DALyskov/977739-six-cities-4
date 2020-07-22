@@ -6,7 +6,6 @@ exports[`PlaceList_snapchots incomplete data 1`] = `
 >
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     
     <div
@@ -112,7 +111,6 @@ exports[`PlaceList_snapchots with_data 1`] = `
 >
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     <div
       className="place-card__mark"
@@ -217,7 +215,6 @@ exports[`PlaceList_snapchots with_data 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     
     <div
@@ -316,7 +313,6 @@ exports[`PlaceList_snapchots with_data 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     
     <div

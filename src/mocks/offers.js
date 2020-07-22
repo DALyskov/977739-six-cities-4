@@ -113,6 +113,48 @@ export default [
   {
     id: 4,
     isPremium: true,
+    images: [
+      `img/apartment-01.jpg`,
+      `img/room.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    price: 120,
+    isBookmark: false,
+    rating: 4.5,
+    name: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+    bedrooms: 3,
+    maxAdults: 1,
+    features: [
+      'Heating',
+      'Kitchen',
+      'Cable TV',
+      'Washing machine',
+      'Coffee machine',
+    ],
+    hostName: `Dima`,
+    hostAvatar: `img/avatar-angelina.jpg`,
+    isHostPro: true,
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    city: {
+      location: {
+        latitude: 48.8652777777778,
+        longitude: 2.3486111111111,
+        zoom: 10,
+      },
+      name: 'Paris',
+    },
+    location: {
+      latitude: 48.8653777777778,
+      longitude: 2.3486111111111,
+      zoom: 8,
+    },
+  },
+  {
+    id: 5,
+    isPremium: true,
     images: [`img/apartment-03.jpg`],
     price: 180,
     isBookmark: false,

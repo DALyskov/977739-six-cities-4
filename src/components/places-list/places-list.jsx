@@ -1,38 +1,40 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
 
 import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
 
 import PlaceCard from '../place-card/place-card.jsx';
 
-export default class PlaceList extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activPlaceCardId: null,
-      activPlaceCard: {},
-    };
+class PlaceList extends PureComponent {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     activPlaceCardId: null,
+  //     activPlaceCard: {},
+  //   };
 
-    this.handlePlaceCardHover = this.handlePlaceCardHover.bind(this);
-  }
+  //   this.handlePlaceCardHover = this.handlePlaceCardHover.bind(this);
+  // }
 
-  handlePlaceCardHover(placeData) {
-    if (placeData !== this.state.activPlaceCard) {
-      this.setState({activPlaceCard: placeData});
-    }
-  }
+  // handlePlaceCardHover(placeData) {
+  //   if (placeData !== this.state.activPlaceCard) {
+  //     this.setState({activPlaceCard: placeData});
+  //   }
+  // }
 
   render() {
-    const {offers, className, onPlaceCardNameClick} = this.props;
+    const {offersByCity, className, onPlaceCardNameClick} = this.props;
     return (
       <div className={`${className[0]} places__list tabs__content`}>
-        {offers.map((placeData) => (
+        {offersByCity.map((placeData) => (
           <PlaceCard
             key={placeData.id}
             placeData={placeData}
             className={className[1]}
             onPlaceCardNameClick={onPlaceCardNameClick}
-            onPlaceCardHover={this.handlePlaceCardHover}
+            // onPlaceCardHover={this.handlePlaceCardHover}
           />
         ))}
       </div>
@@ -41,7 +43,7 @@ export default class PlaceList extends PureComponent {
 }
 
 PlaceList.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -58,3 +60,12 @@ PlaceList.propTypes = {
 
   onPlaceCardNameClick: propTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  onPlaceCardNameClick(placeData) {
+    dispatch(ActionCreator.changePlace(placeData));
+  },
+});
+
+export {PlaceList};
+export default connect(null, mapDispatchToProps)(PlaceList);

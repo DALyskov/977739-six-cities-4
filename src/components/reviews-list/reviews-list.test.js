@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import {reviews} from '../../mocks/mocks-test.js';
 
-import ReviewsList from './reviews-list.jsx';
+import {ReviewsList} from './reviews-list.jsx';
 
 describe(`ReviewsList_snapchots`, () => {
   it(`with_data`, () => {

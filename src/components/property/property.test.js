@@ -1,23 +1,26 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 import {offers, incompletePlace, reviews} from '../../mocks/mocks-test.js';
 
 import Property from './property.jsx';
 
+const mockStore = configureStore([]);
 const placeData = offers[0];
 const incompletePlaceData = incompletePlace;
 
 describe(`Property_snapchots`, () => {
   it(`with_data`, () => {
+    const store = mockStore({
+      reviews,
+    });
     const tree = renderer
       .create(
-        <Property
-          placeData={placeData}
-          reviews={reviews}
-          offers={offers.slice(0, 3)}
-          onPlaceCardNameClick={() => {}}
-        />,
+        <Provider store={store}>
+          <Property placeData={placeData} offersByCity={offers.slice(0, 3)} />
+        </Provider>,
         {
           createNodeMock: () => {
             return document.createElement(`div`);
@@ -29,14 +32,17 @@ describe(`Property_snapchots`, () => {
   });
 
   it(`incomplete_data`, () => {
+    const store = mockStore({
+      reviews: [],
+    });
     const tree = renderer
       .create(
-        <Property
-          placeData={incompletePlaceData}
-          reviews={[]}
-          offers={offers.slice(0, 3)}
-          onPlaceCardNameClick={() => {}}
-        />,
+        <Provider store={store}>
+          <Property
+            placeData={incompletePlaceData}
+            offersByCity={offers.slice(0, 3)}
+          />
+        </Provider>,
         {
           createNodeMock: () => {
             return document.createElement(`div`);

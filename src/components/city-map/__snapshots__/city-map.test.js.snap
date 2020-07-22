@@ -5,9 +5,3 @@ exports[`CityMap_snapchots with_data 1`] = `
   className="cities__map map"
 />
 `;
-
-exports[`CityMap_snapchots without_data 1`] = `
-<section
-  className="cities__map map"
-/>
-`;

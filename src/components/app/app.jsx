@@ -1,51 +1,33 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+// import {ActionCreator} from '../../reducer.js';
 
 import {APPROVED_NAME} from '../../const.js';
 
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
-export default class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activPlaceCardId: null,
-      activPlaceCard: null,
-    };
-    this.handlePlaceCardNameClick = this.handlePlaceCardNameClick.bind(this);
-  }
-
-  handlePlaceCardNameClick(placeData) {
-    this.setState({activPlaceCard: placeData});
-  }
-
+class App extends PureComponent {
   _renderMain() {
-    const {offers} = this.props;
-    const {activPlaceCard} = this.state;
+    const {offersByCity, activPlaceCard, activeCity} = this.props;
 
-    if (activPlaceCard === null) {
-      return (
-        <Main
-          offers={offers}
-          onPlaceCardNameClick={this.handlePlaceCardNameClick}
-        />
-      );
+    if (activPlaceCard === false) {
+      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
     } else {
       return this._renderProperty(activPlaceCard);
     }
   }
 
   _renderProperty(placeData) {
-    const {offers, reviews} = this.props;
-    if (offers.length > 0) {
+    const {offersByCity} = this.props;
+    // неверное условие
+    if (offersByCity.length > 0) {
       return (
         <Property
           placeData={placeData}
-          reviews={reviews}
-          offers={offers.slice(0, 3)}
-          onPlaceCardNameClick={this.handlePlaceCardNameClick}
+          offersByCity={offersByCity.slice(0, 3)}
         />
       );
     }
@@ -53,7 +35,7 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offersByCity} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -61,7 +43,7 @@ export default class App extends PureComponent {
             {this._renderMain()}
           </Route>
           <Route exact path="/dev-component">
-            {this._renderProperty(offers[0])}
+            {this._renderProperty(offersByCity[0])}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -70,7 +52,7 @@ export default class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -90,14 +72,35 @@ App.propTypes = {
     })
   ).isRequired,
 
-  reviews: propTypes.arrayOf(
+  activPlaceCard: propTypes.oneOfType([
     propTypes.shape({
-      comment: propTypes.string.isRequired,
-      date: propTypes.object.isRequired,
       id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
       rating: propTypes.number.isRequired,
-      userAvatar: propTypes.string.isRequired,
-      userName: propTypes.string.isRequired,
-    })
-  ).isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+    }).isRequired,
+    propTypes.bool,
+  ]),
+
+  activeCity: propTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  offersByCity: state.offersByCity,
+  activPlaceCard: state.activPlaceCard,
+  reviews: state.reviews,
+  activeCity: state.activeCity,
+});
+// const mapDispatchToProps = (dispatch) => ({
+//   onGetOffersByCity(activeCity) {
+//     dispatch(ActionCreator.getOffers(activeCity));
+//   },
+// });
+
+export {App};
+export default connect(mapStateToProps /* mapDispatchToProps */)(App);

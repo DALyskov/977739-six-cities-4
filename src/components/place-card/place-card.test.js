@@ -17,7 +17,7 @@ describe(`PlaceCard_snapchots`, () => {
           placeData={placeData}
           className={PlacesClassNames.MAIN[1]}
           onPlaceCardNameClick={() => {}}
-          onPlaceCardHover={() => {}}
+          // onPlaceCardHover={() => {}}
         />
       )
       .toJSON();
@@ -31,7 +31,7 @@ describe(`PlaceCard_snapchots`, () => {
           placeData={incompletePlaceData}
           className={PlacesClassNames.MAIN[1]}
           onPlaceCardNameClick={() => {}}
-          onPlaceCardHover={() => {}}
+          // onPlaceCardHover={() => {}}
         />
       )
       .toJSON();

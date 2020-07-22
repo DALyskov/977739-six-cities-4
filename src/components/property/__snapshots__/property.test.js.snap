@@ -483,7 +483,6 @@ exports[`Property_snapchots incomplete_data 1`] = `
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -588,7 +587,6 @@ exports[`Property_snapchots incomplete_data 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             
             <div
@@ -687,7 +685,6 @@ exports[`Property_snapchots incomplete_data 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             
             <div
@@ -1399,7 +1396,6 @@ exports[`Property_snapchots with_data 1`] = `
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -1504,7 +1500,6 @@ exports[`Property_snapchots with_data 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             
             <div
@@ -1603,7 +1598,6 @@ exports[`Property_snapchots with_data 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             
             <div

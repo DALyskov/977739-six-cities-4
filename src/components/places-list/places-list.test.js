@@ -2,11 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import {PlacesClassNames} from '../../const.js';
-import {offers as offersData, incompletePlace} from '../../mocks/mocks-test.js';
+import {offers, incompletePlace} from '../../mocks/mocks-test.js';
 
-import PlaceList from './places-list.jsx';
-
-const offers = offersData;
+import {PlaceList} from './places-list.jsx';
 
 const incompleteOffers = [incompletePlace];
 
@@ -15,7 +13,7 @@ describe(`PlaceList_snapchots`, () => {
     const tree = renderer
       .create(
         <PlaceList
-          offers={offers}
+          offersByCity={offers}
           className={PlacesClassNames.MAIN}
           onPlaceCardNameClick={() => {}}
         />
@@ -28,7 +26,7 @@ describe(`PlaceList_snapchots`, () => {
     const tree = renderer
       .create(
         <PlaceList
-          offers={[]}
+          offersByCity={[]}
           className={PlacesClassNames.MAIN}
           onPlaceCardNameClick={() => {}}
         />
@@ -41,7 +39,7 @@ describe(`PlaceList_snapchots`, () => {
     const tree = renderer
       .create(
         <PlaceList
-          offers={incompleteOffers}
+          offersByCity={incompleteOffers}
           className={PlacesClassNames.MAIN}
           onPlaceCardNameClick={() => {}}
         />

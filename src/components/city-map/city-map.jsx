@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import leaflet from 'leaflet';
 
-import {APPROVED_NAME, Coordinate, MapClassName} from '../../const.js';
+import {APPROVED_NAME, MapClassName} from '../../const.js';
 
 export default class CityMap extends PureComponent {
   constructor(props) {
@@ -20,41 +20,34 @@ export default class CityMap extends PureComponent {
     mapContainer.remove();
   }
 
+  componentDidUpdate() {
+    this._map.remove();
+    this._getMap();
+  }
+
   _getMap() {
-    const {offers: offersAll, city} = this.props;
-
-    const offers = offersAll.filter((place) => place.city.name === city);
-
+    const {offersByCity} = this.props;
     const mapContainer = this._divRef.current;
+    const zoom = offersByCity[0].city.location.zoom;
 
-    let cityCoordinate = [
-      Coordinate[city.toUpperCase()][0],
-      Coordinate[city.toUpperCase()][1],
+    const cityCoordinate = [
+      offersByCity[0].city.location.latitude,
+      offersByCity[0].city.location.longitude,
     ];
-
-    let zoom = 10;
-
-    if (offers.length > 0) {
-      cityCoordinate = [
-        offers[0].city.location.latitude,
-        offers[0].city.location.longitude,
-      ];
-      zoom = offers[0].city.location.zoom;
-    }
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 40],
     });
 
-    const map = leaflet.map(mapContainer, {
+    this._map = leaflet.map(mapContainer, {
       center: cityCoordinate,
       zoom,
       zoomControl: false,
       marker: false,
     });
 
-    map.setView(cityCoordinate, zoom);
+    this._map.setView(cityCoordinate, zoom);
 
     leaflet
       .tileLayer(
@@ -64,14 +57,14 @@ export default class CityMap extends PureComponent {
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }
       )
-      .addTo(map);
+      .addTo(this._map);
 
-    offers.forEach((place) => {
+    offersByCity.forEach((place) => {
       leaflet
         .marker([place.location.latitude, place.location.longitude], {
           icon,
         })
-        .addTo(map);
+        .addTo(this._map);
     });
   }
 
@@ -84,7 +77,7 @@ export default class CityMap extends PureComponent {
 }
 
 CityMap.propTypes = {
-  offers: propTypes.arrayOf(
+  offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
       isPremium: propTypes.bool,
@@ -109,8 +102,6 @@ CityMap.propTypes = {
       }),
     })
   ).isRequired,
-
-  city: propTypes.string.isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 };
