@@ -183,7 +183,6 @@ const Property = (props) => {
             <PlaceList
               offersByCity={offersByCity}
               className={PlacesClassNames.PROPERTY}
-              // onPlaceCardNameClick={onPlaceCardNameClick}
             />
           </section>
         </div>

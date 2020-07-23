@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import {offers, reviews, cities} from '../../mocks/mocks-test.js';
-
+import {sotringItems} from '../../const.js';
 import App from './app.jsx';
 
 const mockStore = configureStore([]);
@@ -17,6 +17,8 @@ describe(`App_snapchots`, () => {
       activPlaceCard: false,
       reviews,
       cities,
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
     const tree = renderer
       .create(
@@ -40,6 +42,8 @@ describe(`App_snapchots`, () => {
       activPlaceCard: offers[0],
       reviews,
       cities,
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
     const tree = renderer
       .create(

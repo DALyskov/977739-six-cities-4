@@ -32,3 +32,15 @@ export const PlacesClassNames = {
   MAIN: [`cities__places-list`, `cities__place-card`],
   PROPERTY: [`near-places__list`, `near-places__card`],
 };
+
+export const sotringItems = [
+  `Popular`,
+  `Price: low to high`,
+  `Price: high to low`,
+  `Top rated first`,
+];
+
+export const SortingTypeDict = {
+  PRICE: `price`,
+  RATING: `rating`,
+};

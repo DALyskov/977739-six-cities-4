@@ -1,5 +1,6 @@
 import {reducer, ActionType, ActionCreator} from './reducer.js';
 
+import {sotringItems} from './const.js';
 import {offers, cities, reviews, offersByCity} from './mocks/mocks-test.js';
 import originalOffers from './mocks/offers';
 
@@ -20,6 +21,8 @@ const initialState = {
   activPlaceCard: false,
   reviews,
   activeCity: originalOffers[0].city.name,
+  sotringType: sotringItems[0],
+  hoverCityId: false,
 };
 
 describe(`reducer_test`, () => {
@@ -34,6 +37,8 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: originalOffers[0].city.name,
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
   });
 
@@ -50,6 +55,8 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: cities[1],
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
   });
 
@@ -66,6 +73,44 @@ describe(`reducer_test`, () => {
       activPlaceCard: originalOffers[0],
       reviews,
       activeCity: offers[0].city.name,
+      sotringType: sotringItems[0],
+      hoverCityId: false,
+    });
+  });
+
+  it(`Reducer_should_change_sotringType`, () => {
+    expect(
+      reducer(initialState, {
+        type: ActionType.CHANGE_SOTRING_TYPE,
+        payload: sotringItems[1],
+      })
+    ).toEqual({
+      cities,
+      offers: originalOffers,
+      offersByCity,
+      activPlaceCard: false,
+      reviews,
+      activeCity: offers[0].city.name,
+      sotringType: sotringItems[1],
+      hoverCityId: false,
+    });
+  });
+
+  it(`Reducer_should_change_changeHoverCityId`, () => {
+    expect(
+      reducer(initialState, {
+        type: ActionType.CHANGE_HOVER_CITY_ID,
+        payload: 1,
+      })
+    ).toEqual({
+      cities,
+      offers: originalOffers,
+      offersByCity,
+      activPlaceCard: false,
+      reviews,
+      activeCity: offers[0].city.name,
+      sotringType: sotringItems[0],
+      hoverCityId: 1,
     });
   });
 });
@@ -82,6 +127,20 @@ describe(`Action_creators_work_correctly`, () => {
     expect(ActionCreator.changePlace(offers[0])).toEqual({
       type: ActionType.CHANGE_PLACE,
       payload: offers[0],
+    });
+  });
+
+  it(`Action_creator_for_changeSotringType`, function () {
+    expect(ActionCreator.changeSotringType(sotringItems[0])).toEqual({
+      type: ActionType.CHANGE_SOTRING_TYPE,
+      payload: sotringItems[0],
+    });
+  });
+
+  it(`Action_creator_for_changeHoverCityId`, function () {
+    expect(ActionCreator.changeHoverCityId(1)).toEqual({
+      type: ActionType.CHANGE_HOVER_CITY_ID,
+      payload: 1,
     });
   });
 });
