@@ -3,23 +3,37 @@ import offers from './mocks/offers.js';
 import reviews from './mocks/reviews.js';
 import {extend} from './utils/common.js';
 
+const getActiveCity = (offersData) => {
+  if (offersData.length === 0) {
+    return false;
+  }
+
+  return offersData[0].city.name;
+};
+
 const getCities = (offersData) => {
+  if (offersData.lenght === 0) {
+    return [];
+  }
   const cities = [...new Set(offersData.map((place) => place.city.name))];
   const citiesList = cities.slice(0, 6);
   return citiesList;
 };
 
-const getOffersByCity = (state, activeCity) => {
-  return state.filter((offer) => offer.city.name === activeCity);
+const getOffersByCity = (offersData, activeCity) => {
+  if (offersData.lenght === 0) {
+    return [];
+  }
+  return offersData.filter((offer) => offer.city.name === activeCity);
 };
 
 const initialState = {
   cities: getCities(offers),
   offers,
-  offersByCity: getOffersByCity(offers, offers[0].city.name),
+  offersByCity: getOffersByCity(offers, getActiveCity(offers)),
   activPlaceCard: false,
   reviews,
-  activeCity: offers[0].city.name,
+  activeCity: getActiveCity(offers),
   sotringType: sotringItems[0],
   hoverCityId: false,
 };

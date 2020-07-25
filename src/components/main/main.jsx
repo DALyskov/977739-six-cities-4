@@ -8,11 +8,13 @@ import PlacesSorting from '../places-sorting/places-sorting.jsx';
 import withPlacesSorting from '../../hocs/with-places-sorting/with-places-sorting.jsx';
 import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
+import NoPlaces from '../no-places/no-places.jsx';
 
 const PlacesSortingWrapped = withPlacesSorting(PlacesSorting);
 
 const Main = (props) => {
-  const {offersByCity, activeCity} = props;
+  const {offers, offersByCity, activeCity} = props;
+  const isOffers = offers.length > 0;
   const placesCount = offersByCity.length;
 
   return (
@@ -49,38 +51,65 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main
+        className={`page__main page__main--index ${
+          isOffers ? `` : `page__main--index-empty`
+        }`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <CitiesList />
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">
-                {placesCount} places to stay in {activeCity}
-              </b>
-              <PlacesSortingWrapped />
-              <PlaceList
-                offersByCity={offersByCity}
-                className={PlacesClassNames.MAIN}
-              />
-            </section>
-            <div className="cities__right-section">
-              <CityMap
-                offersByCity={offersByCity}
-                className={MapClassName.MAIN}
-              />
+        {isOffers ? (
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">
+                  {placesCount} places to stay in {activeCity}
+                </b>
+                <PlacesSortingWrapped />
+                <PlaceList
+                  offersByCity={offersByCity}
+                  className={PlacesClassNames.MAIN}
+                />
+              </section>
+              <div className="cities__right-section">
+                <CityMap
+                  offersByCity={offersByCity}
+                  className={MapClassName.MAIN}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <NoPlaces />
+        )}
       </main>
     </div>
   );
 };
 
 Main.propTypes = {
+  offers: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      rating: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+      bedrooms: propTypes.number.isRequired,
+      maxAdults: propTypes.number.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      description: propTypes.string.isRequired,
+    })
+  ).isRequired,
+
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
@@ -107,7 +136,7 @@ Main.propTypes = {
     })
   ).isRequired,
 
-  activeCity: propTypes.string.isRequired,
+  activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
 };
 
 export default Main;

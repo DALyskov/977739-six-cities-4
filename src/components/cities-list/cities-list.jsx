@@ -34,7 +34,7 @@ class CitiesList extends PureComponent {
 CitiesList.propTypes = {
   cities: propTypes.arrayOf(propTypes.string).isRequired,
 
-  activeCity: propTypes.string.isRequired,
+  activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
 
   onCityClick: propTypes.func.isRequired,
 };

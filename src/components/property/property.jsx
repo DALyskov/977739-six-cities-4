@@ -205,23 +205,26 @@ Property.propTypes = {
     })
   ).isRequired,
 
-  placeData: propTypes.shape({
-    id: propTypes.number.isRequired,
-    isPremium: propTypes.bool,
-    images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-    price: propTypes.number.isRequired,
-    isBookmark: propTypes.bool,
-    rating: propTypes.number.isRequired,
-    name: propTypes.oneOf(APPROVED_NAME).isRequired,
-    type: propTypes.string.isRequired,
-    bedrooms: propTypes.number.isRequired,
-    maxAdults: propTypes.number.isRequired,
-    features: propTypes.arrayOf(propTypes.string.isRequired),
-    hostName: propTypes.string.isRequired,
-    hostAvatar: propTypes.string.isRequired,
-    isHostPro: propTypes.bool,
-    description: propTypes.string.isRequired,
-  }).isRequired,
+  placeData: propTypes.oneOfType([
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      rating: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+      bedrooms: propTypes.number.isRequired,
+      maxAdults: propTypes.number.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      description: propTypes.string.isRequired,
+    }),
+    propTypes.bool,
+  ]).isRequired,
 };
 
 export default Property;

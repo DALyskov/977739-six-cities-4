@@ -26,7 +26,11 @@ describe(`Main_snapchots`, () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <Main offersByCity={offers} activeCity={offers[0].city.name} />
+          <Main
+            offers={offers}
+            offersByCity={offers}
+            activeCity={offers[0].city.name}
+          />
         </Provider>,
         {
           createNodeMock: () => {
@@ -38,27 +42,28 @@ describe(`Main_snapchots`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // it(`without_data`, () => {
-  //   const tree = renderer
-  //     .create(
-  //       <Provider store={store}>
-  //         <Main offersByCity={[]} activeCity={offers[0].city.name} />
-  //       </Provider>,
-  //       {
-  //         createNodeMock: () => {
-  //           return document.createElement(`div`);
-  //         },
-  //       }
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it(`without_data`, () => {
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Main offers={[]} offersByCity={[]} activeCity={false} />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          },
+        }
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
   it(`incomplete_data`, () => {
     const tree = renderer
       .create(
         <Provider store={store}>
           <Main
+            offers={offers}
             offersByCity={incompleteOffers}
             activeCity={offers[0].city.name}
           />

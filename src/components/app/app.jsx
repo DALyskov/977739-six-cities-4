@@ -10,16 +10,22 @@ import Property from '../property/property.jsx';
 
 class App extends PureComponent {
   _renderMain() {
-    const {offersByCity, activPlaceCard, activeCity} = this.props;
+    const {offers, offersByCity, activPlaceCard, activeCity} = this.props;
 
     if (!activPlaceCard) {
-      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
+      return (
+        <Main
+          offers={offers}
+          offersByCity={offersByCity}
+          activeCity={activeCity}
+        />
+      );
     } else {
       return this._renderProperty(activPlaceCard);
     }
   }
 
-  _renderProperty(placeData) {
+  _renderProperty(placeData = false) {
     const {offersByCity} = this.props;
     return (
       <Property placeData={placeData} offersByCity={offersByCity.slice(0, 3)} />
@@ -44,6 +50,26 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  offers: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      isPremium: propTypes.bool,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      price: propTypes.number.isRequired,
+      isBookmark: propTypes.bool,
+      rating: propTypes.number.isRequired,
+      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      type: propTypes.string.isRequired,
+      bedrooms: propTypes.number.isRequired,
+      maxAdults: propTypes.number.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      description: propTypes.string.isRequired,
+    })
+  ).isRequired,
+
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
@@ -78,10 +104,11 @@ App.propTypes = {
     propTypes.bool,
   ]).isRequired,
 
-  activeCity: propTypes.string.isRequired,
+  activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.offers,
   offersByCity: state.offersByCity,
   activPlaceCard: state.activPlaceCard,
   activeCity: state.activeCity,
