@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {PlacesClassNames} from '../../const.js';
+import {PlacesClassNames, sotringItems} from '../../const.js';
 import {offers, incompletePlace} from '../../mocks/mocks-test.js';
 
 import {PlaceList} from './places-list.jsx';
@@ -15,7 +15,9 @@ describe(`PlaceList_snapchots`, () => {
         <PlaceList
           offersByCity={offers}
           className={PlacesClassNames.MAIN}
+          sotringType={sotringItems[0]}
           onPlaceCardNameClick={() => {}}
+          onPlaceCardHover={() => {}}
         />
       )
       .toJSON();
@@ -28,7 +30,9 @@ describe(`PlaceList_snapchots`, () => {
         <PlaceList
           offersByCity={[]}
           className={PlacesClassNames.MAIN}
+          sotringType={sotringItems[0]}
           onPlaceCardNameClick={() => {}}
+          onPlaceCardHover={() => {}}
         />
       )
       .toJSON();
@@ -41,7 +45,9 @@ describe(`PlaceList_snapchots`, () => {
         <PlaceList
           offersByCity={incompleteOffers}
           className={PlacesClassNames.MAIN}
+          sotringType={sotringItems[0]}
           onPlaceCardNameClick={() => {}}
+          onPlaceCardHover={() => {}}
         />
       )
       .toJSON();

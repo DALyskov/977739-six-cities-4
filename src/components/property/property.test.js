@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
+import {sotringItems} from '../../const.js';
 import {offers, incompletePlace, reviews} from '../../mocks/mocks-test.js';
 
 import Property from './property.jsx';
@@ -15,6 +16,8 @@ describe(`Property_snapchots`, () => {
   it(`with_data`, () => {
     const store = mockStore({
       reviews,
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
     const tree = renderer
       .create(
@@ -34,6 +37,8 @@ describe(`Property_snapchots`, () => {
   it(`incomplete_data`, () => {
     const store = mockStore({
       reviews: [],
+      sotringType: sotringItems[0],
+      hoverCityId: false,
     });
     const tree = renderer
       .create(

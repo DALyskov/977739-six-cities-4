@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-// import {ActionCreator} from '../../reducer.js';
 
 import {APPROVED_NAME} from '../../const.js';
 
@@ -22,16 +21,9 @@ class App extends PureComponent {
 
   _renderProperty(placeData) {
     const {offersByCity} = this.props;
-    // неверное условие
-    if (offersByCity.length > 0) {
-      return (
-        <Property
-          placeData={placeData}
-          offersByCity={offersByCity.slice(0, 3)}
-        />
-      );
-    }
-    return <h1>no data</h1>;
+    return (
+      <Property placeData={placeData} offersByCity={offersByCity.slice(0, 3)} />
+    );
   }
 
   render() {
@@ -82,25 +74,18 @@ App.propTypes = {
       rating: propTypes.number.isRequired,
       name: propTypes.oneOf(APPROVED_NAME).isRequired,
       type: propTypes.string.isRequired,
-    }).isRequired,
+    }),
     propTypes.bool,
-  ]),
+  ]).isRequired,
 
   activeCity: propTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
   offersByCity: state.offersByCity,
   activPlaceCard: state.activPlaceCard,
-  reviews: state.reviews,
   activeCity: state.activeCity,
 });
-// const mapDispatchToProps = (dispatch) => ({
-//   onGetOffersByCity(activeCity) {
-//     dispatch(ActionCreator.getOffers(activeCity));
-//   },
-// });
 
 export {App};
-export default connect(mapStateToProps /* mapDispatchToProps */)(App);
+export default connect(mapStateToProps)(App);
