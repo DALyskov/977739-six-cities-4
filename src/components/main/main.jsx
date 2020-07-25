@@ -61,7 +61,6 @@ const Main = (props) => {
               <b className="places__found">
                 {placesCount} places to stay in {activeCity}
               </b>
-              {/* <PlacesSorting /> */}
               <PlacesSortingWrapped />
               <PlaceList
                 offersByCity={offersByCity}

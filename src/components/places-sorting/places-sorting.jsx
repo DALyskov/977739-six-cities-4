@@ -45,7 +45,9 @@ const PlacesSorting = (props) => {
 
 PlacesSorting.propTypes = {
   sotringType: propTypes.oneOf(sotringItems).isRequired,
+  isOpen: propTypes.bool.isRequired,
   onSortingItemClick: propTypes.func.isRequired,
+  onSortingClick: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
