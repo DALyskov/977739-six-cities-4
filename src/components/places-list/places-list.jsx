@@ -1,15 +1,15 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+
+import {PlacesClassNames, sotringItems, SortingTypeDict} from '../../const.js';
 
 import {
-  APPROVED_NAME,
-  PlacesClassNames,
-  sotringItems,
-  SortingTypeDict,
-} from '../../const.js';
-
+  ActionCreator,
+  Operation as DataOperation,
+} from '../../reducer/data/data.js';
+import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
+import {getSotringType} from '../../reducer/state-application/selectors.js';
 import PlaceCard from '../place-card/place-card.jsx';
 
 class PlaceList extends PureComponent {
@@ -63,13 +63,35 @@ class PlaceList extends PureComponent {
 PlaceList.propTypes = {
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
+      bedrooms: propTypes.number.isRequired,
+      city: propTypes.shape({
+        location: propTypes.shape({
+          latitude: propTypes.number.isRequired,
+          longitude: propTypes.number.isRequired,
+          zoom: propTypes.number.isRequired,
+        }).isRequired,
+        name: propTypes.string.isRequired,
+      }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
       id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
       images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
       isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
       rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      name: propTypes.string.isRequired,
       type: propTypes.string.isRequired,
     })
   ).isRequired,
@@ -83,15 +105,17 @@ PlaceList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  sotringType: state.sotringType,
+  sotringType: getSotringType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
     dispatch(ActionCreator.changePlace(placeData));
+    dispatch(DataOperation.loadReviews(placeData.id));
+    dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },
   onPlaceCardHover(placeDataId) {
-    dispatch(ActionCreator.changeHoverCityId(placeDataId));
+    dispatch(AppActionCreator.changeHoverCityId(placeDataId));
   },
 });
 

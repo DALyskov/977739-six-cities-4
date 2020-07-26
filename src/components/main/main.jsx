@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME, MapClassName, PlacesClassNames} from '../../const.js';
+import {MapClassName, PlacesClassNames} from '../../const.js';
 
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
@@ -98,7 +98,7 @@ Main.propTypes = {
       price: propTypes.number.isRequired,
       isBookmark: propTypes.bool,
       rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      name: propTypes.string.isRequired,
       type: propTypes.string.isRequired,
       bedrooms: propTypes.number.isRequired,
       maxAdults: propTypes.number.isRequired,
@@ -118,7 +118,7 @@ Main.propTypes = {
       price: propTypes.number.isRequired,
       isBookmark: propTypes.bool,
       rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
+      name: propTypes.string.isRequired,
       type: propTypes.string.isRequired,
       city: propTypes.shape({
         location: propTypes.shape({

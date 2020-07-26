@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {getReviews} from '../../reducer/data/selectors.js';
 import ReviewsItem from '../reviews-item/reviews-item.jsx';
 
 const MAX_REVIEW = 10;
@@ -12,7 +13,7 @@ const getSortedReviews = (reviews) => {
 };
 
 const ReviewsList = (props) => {
-  const {reviews} = props;
+  const {reviews = []} = props;
   const sortedReviews = getSortedReviews(reviews).splice(0, MAX_REVIEW);
 
   return (
@@ -138,17 +139,19 @@ ReviewsList.propTypes = {
   reviews: propTypes.arrayOf(
     propTypes.shape({
       comment: propTypes.string.isRequired,
-      date: propTypes.object.isRequired,
+      date: propTypes.string.isRequired,
       id: propTypes.number.isRequired,
       rating: propTypes.number.isRequired,
       userAvatar: propTypes.string.isRequired,
+      userId: propTypes.number.isRequired,
+      isUserPro: propTypes.bool.isRequired,
       userName: propTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
 };
 
 const mapStateToProps = (state) => ({
-  reviews: state.reviews,
+  reviews: getReviews(state),
 });
 
 export {ReviewsList};

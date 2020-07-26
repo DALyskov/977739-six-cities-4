@@ -1,9 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/state-application/state-application.js';
 
 import {sotringItems} from '../../const.js';
+
+import {getSotringType} from '../../reducer/state-application/selectors.js';
 
 const PlacesSorting = (props) => {
   const {sotringType, isOpen, onSortingItemClick, onSortingClick} = props;
@@ -51,7 +53,7 @@ PlacesSorting.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  sotringType: state.sotringType,
+  sotringType: getSotringType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

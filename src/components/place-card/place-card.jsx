@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {APPROVED_NAME, PlacesClassNames} from '../../const.js';
+import {PlacesClassNames} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 const PlaceCard = (props) => {
@@ -96,13 +96,35 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   placeData: propTypes.shape({
+    bedrooms: propTypes.number.isRequired,
+    city: propTypes.shape({
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }).isRequired,
+      name: propTypes.string.isRequired,
+    }),
+    description: propTypes.string.isRequired,
+    features: propTypes.arrayOf(propTypes.string.isRequired),
+    hostName: propTypes.string.isRequired,
+    hostAvatar: propTypes.string.isRequired,
+    isHostPro: propTypes.bool,
+    hostId: propTypes.number.isRequired,
     id: propTypes.number.isRequired,
-    isPremium: propTypes.bool,
     images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-    price: propTypes.number.isRequired,
     isBookmark: propTypes.bool,
+    isPremium: propTypes.bool,
+    location: propTypes.shape({
+      latitude: propTypes.number.isRequired,
+      longitude: propTypes.number.isRequired,
+      zoom: propTypes.number.isRequired,
+    }).isRequired,
+    maxAdults: propTypes.number.isRequired,
+    previewImg: propTypes.string.isRequired,
+    price: propTypes.number.isRequired,
     rating: propTypes.number.isRequired,
-    name: propTypes.oneOf(APPROVED_NAME).isRequired,
+    name: propTypes.string.isRequired,
     type: propTypes.string.isRequired,
   }).isRequired,
 

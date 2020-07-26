@@ -1,7 +1,13 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+
+import {sotringItems} from '../../const.js';
+
+// import {ActionCreator} from '../../reducer/reducer.js';
+import {ActionCreator} from '../../reducer/data/data.js';
+import {getCities, getActiveCity} from '../../reducer/data/selectors.js';
+import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
 class CitiesList extends PureComponent {
   render() {
@@ -40,12 +46,13 @@ CitiesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity,
+  cities: getCities(state),
+  activeCity: getActiveCity(state),
 });
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
     dispatch(ActionCreator.changeActiveCity(CityName));
+    dispatch(AppActionCreator.changeSotringType(sotringItems[0]));
   },
 });
 
