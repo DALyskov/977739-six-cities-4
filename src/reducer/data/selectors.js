@@ -35,10 +35,6 @@ export const getOffersByCity = createSelector(
   }
 );
 
-// const getCities = (state) => {
-//   return state[NameSpace.DATA].cities;
-// };
-
 export const getCities = createSelector(getOffers, (offers) => {
   if (offers.lenght === 0) {
     return [];

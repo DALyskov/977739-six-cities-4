@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 
 import {sotringItems} from '../../const.js';
 
-// import {ActionCreator} from '../../reducer/reducer.js';
-import {ActionCreator} from '../../reducer/data/data.js';
+import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
 import {getCities, getActiveCity} from '../../reducer/data/selectors.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
@@ -51,7 +50,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
-    dispatch(ActionCreator.changeActiveCity(CityName));
+    dispatch(DataActionCreator.changeActiveCity(CityName));
     dispatch(AppActionCreator.changeSotringType(sotringItems[0]));
   },
 });

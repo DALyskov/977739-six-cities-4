@@ -49,7 +49,11 @@ const PlaceCard = (props) => {
       )}
       <div
         className={`${classNameImgWrapper}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <a
+          href="#"
+          onClick={(evt) => {
+            evt.preventDefault();
+          }}>
           <img
             className="place-card__image"
             src={image}

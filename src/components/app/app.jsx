@@ -7,7 +7,6 @@ import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
 import {
-  getOffers,
   getActiveCity,
   getOffersByCity,
   getActivPlaceCard,
@@ -16,15 +15,9 @@ import {
 
 class App extends PureComponent {
   _renderMain() {
-    const {offers, offersByCity, activPlaceCard, activeCity} = this.props;
+    const {offersByCity, activPlaceCard, activeCity} = this.props;
     if (!activPlaceCard) {
-      return (
-        <Main
-          offers={offers}
-          offersByCity={offersByCity}
-          activeCity={activeCity}
-        />
-      );
+      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
     } else {
       return this._renderProperty(activPlaceCard);
     }
@@ -55,41 +48,6 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: propTypes.arrayOf(
-    propTypes.shape({
-      bedrooms: propTypes.number.isRequired,
-      city: propTypes.shape({
-        location: propTypes.shape({
-          latitude: propTypes.number.isRequired,
-          longitude: propTypes.number.isRequired,
-          zoom: propTypes.number.isRequired,
-        }).isRequired,
-        name: propTypes.string.isRequired,
-      }),
-      description: propTypes.string.isRequired,
-      features: propTypes.arrayOf(propTypes.string.isRequired),
-      hostName: propTypes.string.isRequired,
-      hostAvatar: propTypes.string.isRequired,
-      isHostPro: propTypes.bool,
-      hostId: propTypes.number.isRequired,
-      id: propTypes.number.isRequired,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      isBookmark: propTypes.bool,
-      isPremium: propTypes.bool,
-      location: propTypes.shape({
-        latitude: propTypes.number.isRequired,
-        longitude: propTypes.number.isRequired,
-        zoom: propTypes.number.isRequired,
-      }).isRequired,
-      maxAdults: propTypes.number.isRequired,
-      previewImg: propTypes.string.isRequired,
-      price: propTypes.number.isRequired,
-      rating: propTypes.number.isRequired,
-      name: propTypes.string.isRequired,
-      type: propTypes.string.isRequired,
-    })
-  ).isRequired,
-
   nearbyOffers: propTypes.arrayOf(
     propTypes.shape({
       bedrooms: propTypes.number.isRequired,
@@ -200,7 +158,6 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffers(state),
   activeCity: getActiveCity(state),
   offersByCity: getOffersByCity(state),
   activPlaceCard: getActivPlaceCard(state),

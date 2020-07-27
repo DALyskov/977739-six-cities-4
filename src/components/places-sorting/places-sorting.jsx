@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/state-application/state-application.js';
+import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
 import {sotringItems} from '../../const.js';
 
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSortingItemClick(sotringType) {
-    dispatch(ActionCreator.changeSotringType(sotringType));
+    dispatch(AppActionCreator.changeSotringType(sotringType));
   },
 });
 

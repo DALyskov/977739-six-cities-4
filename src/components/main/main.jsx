@@ -13,8 +13,8 @@ import NoPlaces from '../no-places/no-places.jsx';
 const PlacesSortingWrapped = withPlacesSorting(PlacesSorting);
 
 const Main = (props) => {
-  const {offers, offersByCity, activeCity} = props;
-  const isOffers = offers.length > 0;
+  const {offersByCity, activeCity} = props;
+  const isOffers = offersByCity.length > 0;
   const placesCount = offersByCity.length;
 
   return (
@@ -90,26 +90,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.string.isRequired,
-      type: propTypes.string.isRequired,
-      bedrooms: propTypes.number.isRequired,
-      maxAdults: propTypes.number.isRequired,
-      features: propTypes.arrayOf(propTypes.string.isRequired),
-      hostName: propTypes.string.isRequired,
-      hostAvatar: propTypes.string.isRequired,
-      isHostPro: propTypes.bool,
-      description: propTypes.string.isRequired,
-    })
-  ).isRequired,
-
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.number.isRequired,
