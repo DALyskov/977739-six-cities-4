@@ -5,7 +5,9 @@ import {APPROVED_NAME, MapClassName, PlacesClassNames} from '../../const.js';
 
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
+
 import withPlacesSorting from '../../hocs/with-places-sorting/with-places-sorting.jsx';
+
 import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 import NoPlaces from '../no-places/no-places.jsx';
@@ -59,6 +61,7 @@ const Main = (props) => {
         <div className="tabs">
           <CitiesList />
         </div>
+
         {isOffers ? (
           <div className="cities">
             <div className="cities__places-container container">
@@ -79,6 +82,7 @@ const Main = (props) => {
                   className={MapClassName.MAIN}
                 />
               </div>
+
             </div>
           </div>
         ) : (
