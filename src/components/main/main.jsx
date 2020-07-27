@@ -82,7 +82,6 @@ const Main = (props) => {
                   className={MapClassName.MAIN}
                 />
               </div>
-
             </div>
           </div>
         ) : (

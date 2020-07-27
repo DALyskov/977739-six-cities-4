@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import propTypes from 'prop-types';
@@ -6,7 +5,6 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer.js';
 
 import {sotringItems} from '../../const.js';
-
 
 const PlacesSorting = (props) => {
   const {sotringType, isOpen, onSortingItemClick, onSortingClick} = props;
@@ -51,7 +49,6 @@ PlacesSorting.propTypes = {
   isOpen: propTypes.bool.isRequired,
   onSortingItemClick: propTypes.func.isRequired,
   onSortingClick: propTypes.func.isRequired,
-
 };
 
 const mapStateToProps = (state) => ({

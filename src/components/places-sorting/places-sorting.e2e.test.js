@@ -21,7 +21,6 @@ describe(`PlacesSorting_ee`, () => {
         isOpen={false}
         onSortingItemClick={onSortingItemClick}
         onSortingClick={onSortingClick}
-
       />
     );
 
@@ -33,7 +32,6 @@ describe(`PlacesSorting_ee`, () => {
 
     expect(onSortingItemClick).toHaveBeenCalledTimes(sotringItems.length);
   });
-
 
   it(`PlacesSorting_on_click`, () => {
     const onSortingItemClick = jest.fn();
@@ -53,5 +51,4 @@ describe(`PlacesSorting_ee`, () => {
 
     expect(onSortingClick).toHaveBeenCalledTimes(1);
   });
-
 });

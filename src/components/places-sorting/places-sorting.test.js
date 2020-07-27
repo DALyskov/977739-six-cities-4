@@ -10,15 +10,12 @@ describe(`PlacesSorting_snapchots`, () => {
       .create(
         <PlacesSorting
           sotringType={sotringItems[0]}
-
           isOpen={false}
           onSortingItemClick={() => {}}
           onSortingClick={() => {}}
-
         />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
