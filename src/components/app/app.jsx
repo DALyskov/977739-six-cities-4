@@ -12,7 +12,7 @@ class App extends PureComponent {
   _renderMain() {
     const {offersByCity, activPlaceCard, activeCity} = this.props;
 
-    if (activPlaceCard === false) {
+    if (!activPlaceCard) {
       return <Main offersByCity={offersByCity} activeCity={activeCity} />;
     } else {
       return this._renderProperty(activPlaceCard);
