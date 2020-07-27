@@ -5,7 +5,9 @@ import {APPROVED_NAME, MapClassName, PlacesClassNames} from '../../const.js';
 
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesSorting from '../places-sorting/places-sorting.jsx';
+
 import withPlacesSorting from '../../hocs/with-places-sorting/with-places-sorting.jsx';
+
 import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 
@@ -61,7 +63,9 @@ const Main = (props) => {
               <b className="places__found">
                 {placesCount} places to stay in {activeCity}
               </b>
+
               <PlacesSortingWrapped />
+
               <PlaceList
                 offersByCity={offersByCity}
                 className={PlacesClassNames.MAIN}

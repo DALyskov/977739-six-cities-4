@@ -13,6 +13,7 @@ Enzyme.configure({
 describe(`PlacesSorting_ee`, () => {
   it(`PlacesSortingItem_on_click`, () => {
     const onSortingItemClick = jest.fn();
+
     const onSortingClick = jest.fn();
     const placesSorting = mount(
       <PlacesSorting
@@ -20,6 +21,7 @@ describe(`PlacesSorting_ee`, () => {
         isOpen={false}
         onSortingItemClick={onSortingItemClick}
         onSortingClick={onSortingClick}
+
       />
     );
 
@@ -31,6 +33,7 @@ describe(`PlacesSorting_ee`, () => {
 
     expect(onSortingItemClick).toHaveBeenCalledTimes(sotringItems.length);
   });
+
 
   it(`PlacesSorting_on_click`, () => {
     const onSortingItemClick = jest.fn();
@@ -50,4 +53,5 @@ describe(`PlacesSorting_ee`, () => {
 
     expect(onSortingClick).toHaveBeenCalledTimes(1);
   });
+
 });
