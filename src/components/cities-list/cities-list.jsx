@@ -2,10 +2,12 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {sotringItems} from '../../const.js';
+import {sortingItems} from '../../const.js';
 
-import {ActionCreator as DataActionCreator} from '../../reducer/data/data.js';
-import {getCities, getActiveCity} from '../../reducer/data/selectors.js';
+import {
+  getCities,
+  getActiveCity,
+} from '../../reducer/state-application/selectors.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
 class CitiesList extends PureComponent {
@@ -18,14 +20,14 @@ class CitiesList extends PureComponent {
           {cities.map((city) => (
             <li key={city} className="locations__item">
               <a
+                href="#"
                 className={`locations__item-link tabs__item ${
                   city === activeCity ? `tabs__item--active` : ``
                 }`}
                 onClick={(evt) => {
                   evt.preventDefault();
                   onCityClick(city);
-                }}
-                href="#">
+                }}>
                 <span>{city}</span>
               </a>
             </li>
@@ -50,8 +52,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
-    dispatch(DataActionCreator.changeActiveCity(CityName));
-    dispatch(AppActionCreator.changeSotringType(sotringItems[0]));
+    dispatch(AppActionCreator.changeActiveCity(CityName));
+    dispatch(AppActionCreator.changesortingType(sortingItems[0]));
   },
 });
 

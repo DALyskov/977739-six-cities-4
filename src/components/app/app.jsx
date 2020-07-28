@@ -6,12 +6,12 @@ import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
+import {getNearbyOffers} from '../../reducer/data/selectors.js';
 import {
   getActiveCity,
   getOffersByCity,
   getActivPlaceCard,
-  getNearbyOffers,
-} from '../../reducer/data/selectors.js';
+} from '../../reducer/state-application/selectors.js';
 
 class App extends PureComponent {
   _renderMain() {

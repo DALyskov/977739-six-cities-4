@@ -1,6 +1,6 @@
 import {reducer, ActionType, ActionCreator} from './reducer.js';
 
-import {sotringItems} from './const.js';
+import {sortingItems} from './const.js';
 import {offers, cities, reviews, offersByCity} from './mocks/mocks-test.js';
 import originalOffers from './mocks/offers';
 
@@ -21,7 +21,7 @@ const initialState = {
   activPlaceCard: false,
   reviews,
   activeCity: originalOffers[0].city.name,
-  sotringType: sotringItems[0],
+  sortingType: sortingItems[0],
   hoverCityId: false,
 };
 
@@ -37,7 +37,7 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: originalOffers[0].city.name,
-      sotringType: sotringItems[0],
+      sortingType: sortingItems[0],
       hoverCityId: false,
     });
   });
@@ -55,7 +55,7 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: cities[1],
-      sotringType: sotringItems[0],
+      sortingType: sortingItems[0],
       hoverCityId: false,
     });
   });
@@ -73,16 +73,16 @@ describe(`reducer_test`, () => {
       activPlaceCard: originalOffers[0],
       reviews,
       activeCity: offers[0].city.name,
-      sotringType: sotringItems[0],
+      sortingType: sortingItems[0],
       hoverCityId: false,
     });
   });
 
-  it(`Reducer_should_change_sotringType`, () => {
+  it(`Reducer_should_change_sortingType`, () => {
     expect(
       reducer(initialState, {
         type: ActionType.CHANGE_SOTRING_TYPE,
-        payload: sotringItems[1],
+        payload: sortingItems[1],
       })
     ).toEqual({
       cities,
@@ -91,7 +91,7 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: offers[0].city.name,
-      sotringType: sotringItems[1],
+      sortingType: sortingItems[1],
       hoverCityId: false,
     });
   });
@@ -109,7 +109,7 @@ describe(`reducer_test`, () => {
       activPlaceCard: false,
       reviews,
       activeCity: offers[0].city.name,
-      sotringType: sotringItems[0],
+      sortingType: sortingItems[0],
       hoverCityId: 1,
     });
   });
@@ -130,10 +130,10 @@ describe(`Action_creators_work_correctly`, () => {
     });
   });
 
-  it(`Action_creator_for_changeSotringType`, function () {
-    expect(ActionCreator.changeSotringType(sotringItems[0])).toEqual({
+  it(`Action_creator_for_changesortingType`, function () {
+    expect(ActionCreator.changesortingType(sortingItems[0])).toEqual({
       type: ActionType.CHANGE_SOTRING_TYPE,
-      payload: sotringItems[0],
+      payload: sortingItems[0],
     });
   });
 

@@ -2,33 +2,24 @@ import {extend} from '../../utils/common.js';
 
 import {createOffers} from '../../adapters/offers.js';
 import {createReviews} from '../../adapters/reviews.js';
+import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
-const getActiveCity = (offersData) => {
+const getDefaultActiveCity = (offersData) => {
   if (offersData.length === 0) {
     return false;
   }
   return offersData[0].city.name;
 };
 
-// const getOffersByCity = (offersData, activeCity) => {
-//   if (offersData.lenght === 0) {
-//     return [];
-//   }
-//   return offersData.filter((offer) => offer.city.name === activeCity);
-// };
-
 const initialState = {
   offers: [],
   nearbyOffers: [],
-  activPlaceCard: false,
 };
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
-  CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
-  CHANGE_PLACE: `CHANGE_PLACE`,
 };
 
 const ActionCreator = {
@@ -44,14 +35,6 @@ const ActionCreator = {
     type: ActionType.LOAD_NEARBY_OFFERS,
     payload: offersData,
   }),
-  changeActiveCity: (targetCity) => ({
-    type: ActionType.CHANGE_ACTIVE_CITY,
-    payload: targetCity,
-  }),
-  changePlace: (placeData) => ({
-    type: ActionType.CHANGE_PLACE,
-    payload: placeData,
-  }),
 };
 
 const Operation = {
@@ -59,7 +42,9 @@ const Operation = {
     return api.get(`/hotels`).then((response) => {
       const offersData = createOffers(response.data);
       dispatch(ActionCreator.loadOffers(offersData));
-      dispatch(ActionCreator.changeActiveCity(getActiveCity(offersData)));
+      dispatch(
+        AppActionCreator.changeActiveCity(getDefaultActiveCity(offersData))
+      );
     });
   },
   loadReviews: (id) => (dispatch, getState, api) => {
@@ -82,13 +67,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {reviews: action.payload});
     case ActionType.LOAD_NEARBY_OFFERS:
       return extend(state, {nearbyOffers: action.payload});
-    case ActionType.CHANGE_ACTIVE_CITY:
-      return extend(state, {
-        activeCity: action.payload,
-        // offersByCity: getOffersByCity(state.offers, action.payload),
-      });
-    case ActionType.CHANGE_PLACE:
-      return extend(state, {activPlaceCard: action.payload});
   }
   return state;
 };

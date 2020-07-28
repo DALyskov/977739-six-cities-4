@@ -138,6 +138,7 @@ CityMap.propTypes = {
       name: propTypes.string.isRequired,
       type: propTypes.string.isRequired,
     })
+    // ),
   ).isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,

@@ -3,7 +3,7 @@ import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import {PlacesClassNames} from '../../const.js';
-import {offers} from '../../mocks/mocks-test.js';
+import {offers} from '../../mocks-test/offers.js';
 
 import PlaceCard from './place-card.jsx';
 

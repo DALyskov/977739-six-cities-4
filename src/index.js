@@ -7,11 +7,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
-import {
-  ActionCreator,
-  Operation as DataOperation,
-} from './reducer/data/data.js';
-import {getOffers} from './reducer/data/selectors.js';
+import {Operation as DataOperation} from './reducer/data/data.js';
 import {createAPI} from './reducer/api.js';
 
 // const onUnauthorized = () => {

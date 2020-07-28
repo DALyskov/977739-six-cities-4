@@ -54,9 +54,9 @@ exports[`ReviewsItem_snapchots with_data 1`] = `
     </p>
     <time
       className="reviews__time"
-      dateTime="2020-06-14"
+      dateTime="2020-07-08"
     >
-      June 2020
+      July 2020
     </time>
   </div>
 </li>

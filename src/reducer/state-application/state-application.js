@@ -1,20 +1,38 @@
-import {sotringItems} from '../../const.js';
+import {sortingItems} from '../../const.js';
 import {extend} from '../../utils/common.js';
 
+// const getOffersByCity = (offersData, activeCity) => {
+//   if (offersData.lenght === 0) {
+//     return [];
+//   }
+//   return offersData.filter((offer) => offer.city.name === activeCity);
+// };
+
 const initialState = {
-  sotringType: sotringItems[0],
+  sortingType: sortingItems[0],
   hoverCityId: false,
+  activPlaceCard: false,
 };
 
 const ActionType = {
+  CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
+  CHANGE_PLACE: `CHANGE_PLACE`,
   CHANGE_SOTRING_TYPE: `CHANGE_SOTRING_TYPE`,
   CHANGE_HOVER_CITY_ID: `CHANGE_HOVER_CITY_ID`,
 };
 
 const ActionCreator = {
-  changeSotringType: (sotringType) => ({
+  changeActiveCity: (targetCity) => ({
+    type: ActionType.CHANGE_ACTIVE_CITY,
+    payload: targetCity,
+  }),
+  changePlace: (placeData) => ({
+    type: ActionType.CHANGE_PLACE,
+    payload: placeData,
+  }),
+  changesortingType: (sortingType) => ({
     type: ActionType.CHANGE_SOTRING_TYPE,
-    payload: sotringType,
+    payload: sortingType,
   }),
   changeHoverCityId: (placeDataId) => ({
     type: ActionType.CHANGE_HOVER_CITY_ID,
@@ -24,8 +42,15 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.CHANGE_ACTIVE_CITY:
+      return extend(state, {
+        activeCity: action.payload,
+        // offersByCity: getOffersByCity(state.offers, action.payload),
+      });
+    case ActionType.CHANGE_PLACE:
+      return extend(state, {activPlaceCard: action.payload});
     case ActionType.CHANGE_SOTRING_TYPE:
-      return extend(state, {sotringType: action.payload});
+      return extend(state, {sortingType: action.payload});
     case ActionType.CHANGE_HOVER_CITY_ID:
       return extend(state, {hoverCityId: action.payload});
   }

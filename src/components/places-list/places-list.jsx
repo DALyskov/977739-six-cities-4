@@ -2,29 +2,26 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {PlacesClassNames, sotringItems, SortingTypeDict} from '../../const.js';
+import {PlacesClassNames, sortingItems, SortingTypeDict} from '../../const.js';
 
-import {
-  ActionCreator as DataActionCreator,
-  Operation as DataOperation,
-} from '../../reducer/data/data.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
-import {getSotringType} from '../../reducer/state-application/selectors.js';
+import {getSortingType} from '../../reducer/state-application/selectors.js';
 import PlaceCard from '../place-card/place-card.jsx';
 
 class PlaceList extends PureComponent {
-  _sortOffersBytype(offers, sotringType) {
+  _sortOffersBytype(offers, sortingType) {
     let sortedOffers = offers.slice();
-    switch (sotringType) {
-      case sotringItems[1]:
+    switch (sortingType) {
+      case sortingItems[1]:
         return sortedOffers.sort(
           (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
         );
-      case sotringItems[2]:
+      case sortingItems[2]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
         );
-      case sotringItems[3]:
+      case sortingItems[3]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
         );
@@ -37,12 +34,12 @@ class PlaceList extends PureComponent {
     const {
       offersByCity,
       className,
-      sotringType,
+      sortingType,
       onPlaceCardNameClick,
       onPlaceCardHover,
     } = this.props;
 
-    const sortedOffers = this._sortOffersBytype(offersByCity, sotringType);
+    const sortedOffers = this._sortOffersBytype(offersByCity, sortingType);
 
     return (
       <div className={`${className[0]} places__list tabs__content`}>
@@ -98,19 +95,19 @@ PlaceList.propTypes = {
 
   className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
 
-  sotringType: propTypes.oneOf(sotringItems).isRequired,
+  sortingType: propTypes.oneOf(sortingItems).isRequired,
 
   onPlaceCardNameClick: propTypes.func.isRequired,
   onPlaceCardHover: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  sotringType: getSotringType(state),
+  sortingType: getSortingType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
-    dispatch(DataActionCreator.changePlace(placeData));
+    dispatch(AppActionCreator.changePlace(placeData));
     dispatch(DataOperation.loadReviews(placeData.id));
     dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },

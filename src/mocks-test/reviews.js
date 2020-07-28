@@ -1,8 +1,8 @@
-export default [
+export const reviews = [
   {
     comment:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    date: new Date(2020, 5, 14),
+    date: `2020-07-08T16:06:01.819Z`,
     id: 1,
     rating: 4,
     userAvatar: 'img/avatar-max.jpg',
@@ -13,7 +13,7 @@ export default [
   {
     comment:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    date: new Date(2020, 7, 1),
+    date: `2020-07-08T16:06:01.819Z`,
     id: 2,
     rating: 3.5,
     userAvatar: `img/avatar-max.jpg`,

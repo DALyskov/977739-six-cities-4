@@ -3,12 +3,12 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
-import {sotringItems} from '../../const.js';
+import {sortingItems} from '../../const.js';
 
-import {getSotringType} from '../../reducer/state-application/selectors.js';
+import {getSortingType} from '../../reducer/state-application/selectors.js';
 
 const PlacesSorting = (props) => {
-  const {sotringType, isOpen, onSortingItemClick, onSortingClick} = props;
+  const {sortingType, isOpen, onSortingItemClick, onSortingClick} = props;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -17,7 +17,7 @@ const PlacesSorting = (props) => {
         onClick={onSortingClick}
         className="places__sorting-type"
         tabIndex="0">
-        {sotringType}
+        {sortingType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -26,7 +26,7 @@ const PlacesSorting = (props) => {
         className={`places__options places__options--custom ${
           isOpen ? `places__options--opened` : ``
         }`}>
-        {sotringItems.map((item) => (
+        {sortingItems.map((item) => (
           <li
             key={item}
             onClick={() => {
@@ -34,7 +34,7 @@ const PlacesSorting = (props) => {
               onSortingClick();
             }}
             className={`places__option ${
-              item === sotringType ? `places__option--active` : ``
+              item === sortingType ? `places__option--active` : ``
             }`}
             tabIndex="0">
             {item}
@@ -46,19 +46,19 @@ const PlacesSorting = (props) => {
 };
 
 PlacesSorting.propTypes = {
-  sotringType: propTypes.oneOf(sotringItems).isRequired,
+  sortingType: propTypes.oneOf(sortingItems).isRequired,
   isOpen: propTypes.bool.isRequired,
   onSortingItemClick: propTypes.func.isRequired,
   onSortingClick: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  sotringType: getSotringType(state),
+  sortingType: getSortingType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortingItemClick(sotringType) {
-    dispatch(AppActionCreator.changeSotringType(sotringType));
+  onSortingItemClick(sortingType) {
+    dispatch(AppActionCreator.changesortingType(sortingType));
   },
 });
 

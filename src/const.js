@@ -33,7 +33,7 @@ export const PlacesClassNames = {
   PROPERTY: [`near-places__list`, `near-places__card`],
 };
 
-export const sotringItems = [
+export const sortingItems = [
   `Popular`,
   `Price: low to high`,
   `Price: high to low`,

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {cities} from '../../mocks/mocks-test.js';
+import {cities} from '../../mocks-test/cities.js';
 
 import {CitiesList} from './cities-list.jsx';
 

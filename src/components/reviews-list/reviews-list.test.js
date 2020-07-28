@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {reviews} from '../../mocks/mocks-test.js';
+import {reviews} from '../../mocks-test/reviews.js';
 
 import {ReviewsList} from './reviews-list.jsx';
 
