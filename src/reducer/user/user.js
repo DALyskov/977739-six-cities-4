@@ -1,12 +1,9 @@
 import {extend} from '../../utils/common.js';
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from '../../const.js';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userEmail: false,
 };
 
 const ActionType = {
@@ -14,28 +11,25 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  requireAuthorization: (status) => {
+  requireAuthorization: (authorizationStatus, userEmail = false) => {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status,
+      payload: {authorizationStatus, userEmail},
     };
   },
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend(state, {authorizationStatus: action.payload});
-  }
-  return state;
 };
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api
       .get(`/login`)
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      .then((data) => {
+        dispatch(
+          ActionCreator.requireAuthorization(
+            AuthorizationStatus.AUTH,
+            data.data.email
+          )
+        );
       })
       .catch((err) => {
         throw err;
@@ -48,10 +42,29 @@ const Operation = {
         email: authData.login,
         password: authData.password,
       })
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      .then((data) => {
+        dispatch(
+          ActionCreator.requireAuthorization(
+            AuthorizationStatus.AUTH,
+            data.data.email
+          )
+        );
+      })
+      .catch((err) => {
+        throw err;
       });
   },
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return extend(state, {
+        authorizationStatus: action.payload.authorizationStatus,
+        userEmail: action.payload.userEmail,
+      });
+  }
+  return state;
 };
 
 export {ActionCreator, ActionType, AuthorizationStatus, Operation, reducer};

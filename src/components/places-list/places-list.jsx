@@ -2,7 +2,12 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {PlacesClassNames, sortingItems, SortingTypeDict} from '../../const.js';
+import {
+  PlacesClassNames,
+  sortingItems,
+  SortingTypeDict,
+  PageType,
+} from '../../const.js';
 
 import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
@@ -108,6 +113,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
     dispatch(AppActionCreator.changePlace(placeData));
+    dispatch(AppActionCreator.changeActivePage(PageType.PROPERTY));
     dispatch(DataOperation.loadReviews(placeData.id));
     dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },

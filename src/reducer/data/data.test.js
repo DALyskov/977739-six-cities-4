@@ -67,8 +67,8 @@ describe(`DataActionCreators_work_correctly`, () => {
   });
 });
 
-describe(`Operation_work_correctly`, () => {
-  it(`Should_make_a_correct_API_call_to_Offers`, function () {
+describe(`DataOperation_work_correctly`, () => {
+  it(`DataOperation_should_make_a_correct_API_call_to_Offers`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const offersLoader = Operation.loadOffers();

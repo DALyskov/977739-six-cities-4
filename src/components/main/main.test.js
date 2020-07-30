@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {sortingItems} from '../../const.js';
+import {sortingItems, PageType, AuthorizationStatus} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
 import {offers} from '../../mocks-test/offers.js';
 import {cities} from '../../mocks-test/cities.js';
@@ -22,6 +22,11 @@ describe(`Main_snapchots`, () => {
       activeCity: cities[0],
       sortingType: sortingItems[0],
       hoverCityId: false,
+      activePage: PageType.MAIN,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userEmail: false,
     },
   });
   it(`with_data`, () => {

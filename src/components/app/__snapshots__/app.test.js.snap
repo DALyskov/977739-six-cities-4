@@ -17,7 +17,7 @@ exports[`App_snapchots App_whith_main_with_data 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
           >
             <img
               alt="6 cities logo"
@@ -40,14 +40,15 @@ exports[`App_snapchots App_whith_main_with_data 1`] = `
               <a
                 className="header__nav-link header__nav-link--profile"
                 href="#"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -513,7 +514,7 @@ exports[`App_snapchots App_whith_main_without_data 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
           >
             <img
               alt="6 cities logo"
@@ -536,14 +537,15 @@ exports[`App_snapchots App_whith_main_without_data 1`] = `
               <a
                 className="header__nav-link header__nav-link--profile"
                 href="#"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -621,8 +623,9 @@ exports[`App_snapchots App_whith_property 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link"
+            className="header__logo-link header__logo-link--active"
             href="main.html"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -645,14 +648,15 @@ exports[`App_snapchots App_whith_property 1`] = `
               <a
                 className="header__nav-link header__nav-link--profile"
                 href="#"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>

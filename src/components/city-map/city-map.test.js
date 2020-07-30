@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import {MapClassName} from '../../const.js';
 import {offers} from '../../mocks-test/offers.js';
 
-import {MapClassName} from '../../const.js';
 import {CityMap} from './city-map.jsx';
 
 describe(`CityMap_snapchots`, () => {

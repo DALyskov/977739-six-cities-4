@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {sortingItems} from '../../const.js';
+import {sortingItems, PageType, AuthorizationStatus} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
 import {offers} from '../../mocks-test/offers.js';
 import {reviews} from '../../mocks-test/reviews.js';
@@ -27,6 +27,11 @@ describe(`App_snapchots`, () => {
         sortingType: sortingItems[0],
         hoverCityId: false,
         activPlaceCard: false,
+        activePage: PageType.MAIN,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userEmail: false,
       },
     });
     const tree = renderer
@@ -57,6 +62,11 @@ describe(`App_snapchots`, () => {
         sortingType: sortingItems[0],
         hoverCityId: false,
         activPlaceCard: false,
+        activePage: PageType.MAIN,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userEmail: false,
       },
     });
     const tree = renderer
@@ -87,6 +97,11 @@ describe(`App_snapchots`, () => {
         sortingType: sortingItems[0],
         hoverCityId: false,
         activPlaceCard: offers[0],
+        activePage: PageType.PROPERTY,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userEmail: false,
       },
     });
     const tree = renderer

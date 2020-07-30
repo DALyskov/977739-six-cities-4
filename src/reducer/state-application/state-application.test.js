@@ -1,4 +1,4 @@
-import {sortingItems} from '../../const.js';
+import {sortingItems, PageType} from '../../const.js';
 import {offers} from '../../mocks-test/offers.js';
 import {cities} from '../../mocks-test/cities.js';
 
@@ -8,6 +8,7 @@ const initialState = {
   sortingType: sortingItems[0],
   hoverCityId: false,
   activPlaceCard: false,
+  activePage: PageType.MAIN,
 };
 
 describe(`AppReducer_test`, () => {
@@ -42,13 +43,22 @@ describe(`AppReducer_test`, () => {
     ).toEqual(Object.assign({}, initialState, {sortingType: sortingItems[1]}));
   });
 
-  it(`AppReducer_should_change_changeHoverCityId`, () => {
+  it(`AppReducer_should_change_hoverCityId`, () => {
     expect(
       reducer(initialState, {
         type: ActionType.CHANGE_HOVER_CITY_ID,
         payload: 1,
       })
     ).toEqual(Object.assign({}, initialState, {hoverCityId: 1}));
+  });
+
+  it(`AppReducer_should_change_activePage`, () => {
+    expect(
+      reducer(initialState, {
+        type: ActionType.CHANGE_ACTIVE_PAGE,
+        payload: PageType.PROPERTY,
+      })
+    ).toEqual(Object.assign({}, initialState, {activePage: PageType.PROPERTY}));
   });
 });
 
@@ -78,6 +88,13 @@ describe(`AppActionCreators_work_correctly`, () => {
     expect(ActionCreator.changeHoverCityId(1)).toEqual({
       type: ActionType.CHANGE_HOVER_CITY_ID,
       payload: 1,
+    });
+  });
+
+  it(`AppActionCreator_for_changeActivePage`, function () {
+    expect(ActionCreator.changeActivePage(PageType.PROPERTY)).toEqual({
+      type: ActionType.CHANGE_ACTIVE_PAGE,
+      payload: PageType.PROPERTY,
     });
   });
 });

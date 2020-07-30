@@ -19,6 +19,10 @@ export const getHoverCityId = (state) => {
   return state[NameSpace.STATE_APPLICATION].hoverCityId;
 };
 
+export const getActivePage = (state) => {
+  return state[NameSpace.STATE_APPLICATION].activePage;
+};
+
 export const getCities = createSelector(getOffers, (offers) => {
   if (offers.lenght === 0) {
     return [];

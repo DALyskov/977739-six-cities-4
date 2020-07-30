@@ -44,3 +44,19 @@ export const SortingTypeDict = {
   PRICE: `price`,
   RATING: `rating`,
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const HeaderClassNames = {
+  MAIN: `header__logo-link`,
+  OTHER_PAGE: `header__logo-link header__logo-link--active`,
+};
+
+export const PageType = {
+  MAIN: `MAIN`,
+  PROPERTY: `PROPERTY`,
+  SING_IN: `SING_IN`,
+};

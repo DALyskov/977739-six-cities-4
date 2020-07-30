@@ -3,31 +3,55 @@ import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import {PageType} from '../../const.js';
+
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
-
+import SignIn from '../sign-in/sign-in.jsx';
 import {getNearbyOffers} from '../../reducer/data/selectors.js';
 import {
   getActiveCity,
   getOffersByCity,
   getActivPlaceCard,
+  getActivePage,
 } from '../../reducer/state-application/selectors.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 
 class App extends PureComponent {
   _renderMain() {
-    const {offersByCity, activPlaceCard, activeCity} = this.props;
-    if (!activPlaceCard) {
-      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
-    } else {
-      return this._renderProperty(activPlaceCard);
-    }
+    const {offersByCity, activeCity} = this.props;
+    return <Main offersByCity={offersByCity} activeCity={activeCity} />;
   }
 
-  _renderProperty(placeData = false) {
-    const {nearbyOffers} = this.props;
+  _renderProperty() {
+    const {activPlaceCard, nearbyOffers} = this.props;
     return (
-      <Property placeData={placeData} nearbyOffers={nearbyOffers.slice(0, 3)} />
+      <Property
+        placeData={activPlaceCard}
+        nearbyOffers={nearbyOffers.slice(0, 3)}
+      />
     );
+  }
+
+  _renderSignIn() {
+    const {activeCity, onSignInBtnClick} = this.props;
+    return (
+      <SignIn activeCity={activeCity} onSignInBtnClick={onSignInBtnClick} />
+    );
+  }
+
+  _renderScreen() {
+    const {activePage} = this.props;
+    switch (activePage) {
+      case PageType.MAIN:
+        return this._renderMain();
+      case PageType.PROPERTY:
+        return this._renderProperty();
+      case PageType.SING_IN:
+        return this._renderSignIn();
+      default:
+        return null;
+    }
   }
 
   render() {
@@ -36,10 +60,13 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this._renderMain()}
+            {this._renderScreen()}
           </Route>
-          <Route exact path="/dev-component">
+          <Route exact path="/property">
             {this._renderProperty(offersByCity[0])}
+          </Route>
+          <Route exact path="/sing-in">
+            {this._renderSignIn()}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -154,7 +181,11 @@ App.propTypes = {
     propTypes.bool,
   ]).isRequired,
 
-  activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool])
+    .isRequired,
+  activePage: propTypes.oneOf(Object.values(PageType)).isRequired,
+
+  onSignInBtnClick: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -162,7 +193,14 @@ const mapStateToProps = (state) => ({
   offersByCity: getOffersByCity(state),
   activPlaceCard: getActivPlaceCard(state),
   nearbyOffers: getNearbyOffers(state),
+  activePage: getActivePage(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSignInBtnClick(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 });
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
