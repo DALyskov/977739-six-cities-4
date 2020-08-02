@@ -4,6 +4,7 @@ import {extend} from '../../utils/common.js';
 const initialState = {
   sortingType: sortingItems[0],
   hoverCityId: false,
+  activeCity: false,
   activPlaceCard: false,
   activePage: PageType.MAIN,
 };

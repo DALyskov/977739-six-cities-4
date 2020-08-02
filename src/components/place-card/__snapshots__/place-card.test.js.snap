@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlaceCard_snapchots with_data 1`] = `
+exports[`PlaceCard_snapchots PlaceCard_with_data 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}

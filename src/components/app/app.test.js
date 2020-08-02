@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {sortingItems, PageType, AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus, PageType, sortingItems} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
 import {offers} from '../../mocks-test/offers.js';
 import {reviews} from '../../mocks-test/reviews.js';
@@ -100,8 +100,8 @@ describe(`App_snapchots`, () => {
         activePage: PageType.PROPERTY,
       },
       [NameSpace.USER]: {
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-        userEmail: false,
+        authorizationStatus: AuthorizationStatus.AUTH,
+        userEmail: `A@mail.ru`,
       },
     });
     const tree = renderer

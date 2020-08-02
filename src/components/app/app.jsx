@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {PageType} from '../../const.js';
+import {AuthorizationStatus, PageType} from '../../const.js';
 
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
@@ -11,11 +11,12 @@ import SignIn from '../sign-in/sign-in.jsx';
 import {getNearbyOffers} from '../../reducer/data/selectors.js';
 import {
   getActiveCity,
-  getOffersByCity,
-  getActivPlaceCard,
   getActivePage,
+  getActivPlaceCard,
+  getOffersByCity,
 } from '../../reducer/state-application/selectors.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 class App extends PureComponent {
   _renderMain() {
@@ -34,9 +35,13 @@ class App extends PureComponent {
   }
 
   _renderSignIn() {
-    const {activeCity, onSignInBtnClick} = this.props;
+    const {activeCity, authorizationStatus, onSignInBtnClick} = this.props;
     return (
-      <SignIn activeCity={activeCity} onSignInBtnClick={onSignInBtnClick} />
+      <SignIn
+        activeCity={activeCity}
+        onSignInBtnClick={onSignInBtnClick}
+        authorizationStatus={authorizationStatus}
+      />
     );
   }
 
@@ -55,7 +60,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {offersByCity} = this.props;
+    // const {offersByCity} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -63,7 +68,7 @@ class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/property">
-            {this._renderProperty(offersByCity[0])}
+            {this._renderProperty()}
           </Route>
           <Route exact path="/sing-in">
             {this._renderSignIn()}
@@ -184,6 +189,8 @@ App.propTypes = {
   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool])
     .isRequired,
   activePage: propTypes.oneOf(Object.values(PageType)).isRequired,
+  authorizationStatus: propTypes.oneOf(Object.values(AuthorizationStatus))
+    .isRequired,
 
   onSignInBtnClick: propTypes.func.isRequired,
 };
@@ -194,6 +201,7 @@ const mapStateToProps = (state) => ({
   activPlaceCard: getActivPlaceCard(state),
   nearbyOffers: getNearbyOffers(state),
   activePage: getActivePage(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

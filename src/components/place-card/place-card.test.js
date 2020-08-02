@@ -9,7 +9,7 @@ import PlaceCard from './place-card.jsx';
 const placeData = offers[0];
 
 describe(`PlaceCard_snapchots`, () => {
-  it(`with_data`, () => {
+  it(`PlaceCard_with_data`, () => {
     const tree = renderer
       .create(
         <PlaceCard

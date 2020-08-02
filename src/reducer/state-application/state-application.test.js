@@ -7,6 +7,7 @@ import {reducer, ActionType, ActionCreator} from './state-application.js';
 const initialState = {
   sortingType: sortingItems[0],
   hoverCityId: false,
+  activeCity: false,
   activPlaceCard: false,
   activePage: PageType.MAIN,
 };

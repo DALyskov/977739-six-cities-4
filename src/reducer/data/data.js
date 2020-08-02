@@ -57,6 +57,17 @@ const Operation = {
       dispatch(ActionCreator.loadNearbyOffers(createOffers(response.data)));
     });
   },
+  sendReview: (id, newReview) => (dispatch, getState, api) => {
+    return api
+      .post(`/comments/${id}`, {
+        comment: newReview.comment,
+        rating: newReview.rating,
+      })
+      .then((response) => {
+        dispatch(ActionCreator.loadReviews(createReviews(response.data)));
+        return response;
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {

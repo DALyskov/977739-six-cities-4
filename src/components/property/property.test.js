@@ -14,7 +14,37 @@ const mockStore = configureStore([]);
 const placeData = offers[0];
 
 describe(`Property_snapchots`, () => {
-  it(`with_data`, () => {
+  it(`Property_with_data`, () => {
+    const store = mockStore({
+      [NameSpace.DATA]: {
+        reviews,
+      },
+      [NameSpace.STATE_APPLICATION]: {
+        sortingType: sortingItems[0],
+        hoverCityId: false,
+        activePage: PageType.PROPERTY,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.AUTH,
+        userEmail: `A@mail.ru`,
+      },
+    });
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Property placeData={placeData} nearbyOffers={offers.slice(0, 3)} />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          },
+        }
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Property_without_data`, () => {
     const store = mockStore({
       [NameSpace.DATA]: {
         reviews,

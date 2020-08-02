@@ -8,10 +8,10 @@ const withPlacesSorting = (Component) => {
         isOpen: false,
       };
 
-      this._handleSortingClick = this._handleSortingClick.bind(this);
+      this.handleSortingClick = this.handleSortingClick.bind(this);
     }
 
-    _handleSortingClick() {
+    handleSortingClick() {
       this.setState((prevState) => ({isOpen: !prevState.isOpen}));
     }
 
@@ -22,7 +22,7 @@ const withPlacesSorting = (Component) => {
         <Component
           {...this.props}
           isOpen={isOpen}
-          onSortingClick={this._handleSortingClick}></Component>
+          onSortingClick={this.handleSortingClick}></Component>
       );
     }
   }
