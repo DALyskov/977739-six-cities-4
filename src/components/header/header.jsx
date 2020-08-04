@@ -1,8 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-import {AuthorizationStatus, HeaderClassNames, PageType} from '../../const.js';
+import {
+  AuthorizationStatus,
+  HeaderClassNames,
+  PageType,
+  AppRoute,
+} from '../../const.js';
 
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import {getActivePage} from '../../reducer/state-application/selectors.js';
@@ -15,20 +21,14 @@ const Header = (props) => {
   const {
     authorizationStatus,
     userEmail,
-    activePage,
+    // activePage,
+    className,
     onLoginClick,
     onLogoClick,
   } = props;
 
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
-
-  let isActiveLink = true;
-  let className = HeaderClassNames.OTHER_PAGE;
-
-  if (activePage === PageType.MAIN) {
-    isActiveLink = false;
-    className = HeaderClassNames.MAIN;
-  }
+  const isActiveLink = className === HeaderClassNames.MAIN;
 
   return (
     <header className="header">
@@ -38,11 +38,12 @@ const Header = (props) => {
             {isActiveLink ? (
               <a
                 className={className}
-                href="main.html"
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  onLogoClick();
-                }}>
+
+                // onClick={(evt) => {
+                //   evt.preventDefault();
+                //   onLogoClick();
+                // }}
+              >
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -52,7 +53,7 @@ const Header = (props) => {
                 />
               </a>
             ) : (
-              <a className={className}>
+              <Link className={className} to={AppRoute.MAIN}>
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -60,19 +61,20 @@ const Header = (props) => {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             )}
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a
+                <Link
                   className="header__nav-link header__nav-link--profile"
-                  href="#"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    onLoginClick();
-                  }}>
+                  to={isLoggedIn ? AppRoute.FAVORITES : AppRoute.SING_IN}
+                  // onClick={(evt) => {
+                  //   evt.preventDefault();
+                  //   onLoginClick();
+                  // }}
+                >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   {isLoggedIn ? (
                     <span className="header__user-name user__name">
@@ -81,7 +83,7 @@ const Header = (props) => {
                   ) : (
                     <span className="header__login">Sign in</span>
                   )}
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -95,7 +97,7 @@ Header.propTypes = {
   authorizationStatus: propTypes.oneOf(Object.values(AuthorizationStatus))
     .isRequired,
   userEmail: propTypes.oneOfType([propTypes.string, propTypes.bool]).isRequired,
-  activePage: propTypes.oneOf(Object.values(PageType)).isRequired,
+  // activePage: propTypes.oneOf(Object.values(PageType)).isRequired,
   onLoginClick: propTypes.func.isRequired,
   onLogoClick: propTypes.func.isRequired,
 };

@@ -60,3 +60,10 @@ export const PageType = {
   PROPERTY: `PROPERTY`,
   SING_IN: `SING_IN`,
 };
+
+export const AppRoute = {
+  MAIN: `/`,
+  PROPERTY: `/offer/:`,
+  SING_IN: `/login`,
+  FAVORITES: `/favorites`,
+};

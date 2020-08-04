@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {MapClassName, PlacesClassNames} from '../../const.js';
+import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 import Header from '../header/header.jsx';
@@ -44,7 +44,7 @@ const Property = (props) => {
 
   return (
     <div className="page">
-      <Header />
+      <Header className={HeaderClassNames.OTHER_PAGE} />
 
       <main className="page__main page__main--property">
         <section className="property">

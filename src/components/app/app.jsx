@@ -1,19 +1,25 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {AuthorizationStatus, PageType} from '../../const.js';
+import {AuthorizationStatus, PageType, AppRoute} from '../../const.js';
 
+import history from '../../history.js';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {getNearbyOffers} from '../../reducer/data/selectors.js';
+import Favorite from '../favorit/favorit.jsx';
+import {
+  getNearbyOffers,
+  getFavoriteOffers,
+} from '../../reducer/data/selectors.js';
 import {
   getActiveCity,
   getActivePage,
   getActivPlaceCard,
   getOffersByCity,
+  getFavoriteCities,
 } from '../../reducer/state-application/selectors.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
@@ -60,21 +66,34 @@ class App extends PureComponent {
   }
 
   render() {
-    // const {offersByCity} = this.props;
+    const {
+      // offersByCity,
+      // activeCity,
+      authorizationStatus,
+      // favoriteOffers,
+      favoriteCities,
+    } = this.props;
+    const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             {this._renderScreen()}
+            {/* <Main offersByCity={offersByCity} activeCity={activeCity} /> */}
           </Route>
           <Route exact path="/property">
             {this._renderProperty()}
           </Route>
-          <Route exact path="/sing-in">
+          <Route exact path={AppRoute.SING_IN}>
+            {/* {isLoggedIn && <Redirect to={AppRoute.FAVORITES} />} */}
             {this._renderSignIn()}
           </Route>
+          <Route exact path={AppRoute.FAVORITES}>
+            {!isLoggedIn && <Redirect to={AppRoute.SING_IN} />}
+            <Favorite favoriteCities={favoriteCities} />
+          </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -202,6 +221,8 @@ const mapStateToProps = (state) => ({
   nearbyOffers: getNearbyOffers(state),
   activePage: getActivePage(state),
   authorizationStatus: getAuthorizationStatus(state),
+  favoriteOffers: getFavoriteOffers(state),
+  // favoriteCities: getFavoriteCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

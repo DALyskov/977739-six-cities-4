@@ -5,13 +5,19 @@ import {PlacesClassNames} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 const PlaceCard = (props) => {
-  const {placeData, className, onPlaceCardNameClick, onPlaceCardHover} = props;
+  const {
+    placeData,
+    className,
+    onPlaceCardNameClick,
+    onPlaceCardHover,
+    onFavoriteBtnClick,
+  } = props;
   const {
     id,
     isPremium = false,
     images,
     price,
-    isBookmark = false,
+    isBookmark /* = false */,
     rating,
     name,
     type,
@@ -69,7 +75,13 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={bookmarkClass} type="button">
+          <button
+            className={bookmarkClass}
+            onClick={(evt) => {
+              evt.preventDefault();
+              onFavoriteBtnClick(id, isBookmark);
+            }}
+            type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -137,6 +149,7 @@ PlaceCard.propTypes = {
 
   onPlaceCardNameClick: propTypes.func.isRequired,
   onPlaceCardHover: propTypes.func.isRequired,
+  onFavoriteBtnClick: propTypes.func.isRequired,
 };
 
 export default PlaceCard;

@@ -11,3 +11,7 @@ export const getNearbyOffers = (state) => {
 export const getReviews = (state) => {
   return state[NameSpace.DATA].reviews;
 };
+
+export const getFavoriteOffers = (state) => {
+  return state[NameSpace.DATA].favoriteOffers;
+};

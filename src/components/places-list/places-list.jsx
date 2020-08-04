@@ -42,6 +42,7 @@ class PlaceList extends PureComponent {
       sortingType,
       onPlaceCardNameClick,
       onPlaceCardHover,
+      onFavoriteBtnClick,
     } = this.props;
 
     const sortedOffers = this._sortOffersBytype(offersByCity, sortingType);
@@ -55,6 +56,7 @@ class PlaceList extends PureComponent {
             className={className[1]}
             onPlaceCardNameClick={onPlaceCardNameClick}
             onPlaceCardHover={onPlaceCardHover}
+            onFavoriteBtnClick={onFavoriteBtnClick}
           />
         ))}
       </div>
@@ -119,6 +121,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onPlaceCardHover(placeDataId) {
     dispatch(AppActionCreator.changeHoverCityId(placeDataId));
+  },
+  onFavoriteBtnClick(placeDataId, placeDataIsBookmark) {
+    dispatch(DataOperation.sendFavoriteOffer(placeDataId, placeDataIsBookmark));
   },
 });
 

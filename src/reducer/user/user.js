@@ -1,5 +1,7 @@
 import {extend} from '../../utils/common.js';
-import {AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus, AppRoute} from '../../const.js';
+
+import history from '../../history.js';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -43,6 +45,7 @@ const Operation = {
         password: authData.password,
       })
       .then((data) => {
+        history.goBack();
         dispatch(
           ActionCreator.requireAuthorization(
             AuthorizationStatus.AUTH,

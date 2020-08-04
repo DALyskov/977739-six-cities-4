@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 
 import Header from '../header/header.jsx';
+import {HeaderClassNames} from '../../const.js';
 
 export default class SignIn extends PureComponent {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class SignIn extends PureComponent {
 
     return (
       <div className="page page--gray page--login">
-        <Header />
+        <Header className={HeaderClassNames.OTHER_PAGE} />
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">

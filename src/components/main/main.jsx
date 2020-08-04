@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {MapClassName, PlacesClassNames} from '../../const.js';
+import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
 
 import Header from '../header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
@@ -20,7 +20,7 @@ const Main = (props) => {
 
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header className={HeaderClassNames.MAIN} />
       <main
         className={`page__main page__main--index ${
           isOffers ? `` : `page__main--index-empty`
