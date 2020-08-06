@@ -68,7 +68,7 @@ class CityMap extends PureComponent {
 
   _setMapMarkers() {
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 40],
     });
     this.props.offersByCity.forEach((place) => {
@@ -88,7 +88,7 @@ class CityMap extends PureComponent {
     this._markersLayerGroup.getLayers().forEach((marker) => {
       if (marker.id === hoverCityId) {
         const newIcon = leaflet.icon({
-          iconUrl: `img/pin-active.svg`,
+          iconUrl: `/img/pin-active.svg`,
           iconSize: [30, 40],
         });
         marker.setIcon(newIcon);
@@ -138,7 +138,6 @@ CityMap.propTypes = {
       name: propTypes.string.isRequired,
       type: propTypes.string.isRequired,
     })
-    // ),
   ).isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,

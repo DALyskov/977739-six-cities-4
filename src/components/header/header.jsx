@@ -6,16 +6,17 @@ import {Link} from 'react-router-dom';
 import {
   AuthorizationStatus,
   HeaderClassNames,
-  PageType,
+  // PageType,
   AppRoute,
 } from '../../const.js';
 
-import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
+// import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import {getActivePage} from '../../reducer/state-application/selectors.js';
 import {
   getAuthorizationStatus,
   getUserEmail,
 } from '../../reducer/user/selectors.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 
 const Header = (props) => {
   const {
@@ -23,8 +24,9 @@ const Header = (props) => {
     userEmail,
     // activePage,
     className,
-    onLoginClick,
-    onLogoClick,
+    // onLoginClick,
+    // onLogoClick,
+    // onMailClick,
   } = props;
 
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
@@ -46,7 +48,7 @@ const Header = (props) => {
               >
                 <img
                   className="header__logo"
-                  src="img/logo.svg"
+                  src="/img/logo.svg"
                   alt="6 cities logo"
                   width="81"
                   height="41"
@@ -56,7 +58,7 @@ const Header = (props) => {
               <Link className={className} to={AppRoute.MAIN}>
                 <img
                   className="header__logo"
-                  src="img/logo.svg"
+                  src="/img/logo.svg"
                   alt="6 cities logo"
                   width="81"
                   height="41"
@@ -70,10 +72,13 @@ const Header = (props) => {
                 <Link
                   className="header__nav-link header__nav-link--profile"
                   to={isLoggedIn ? AppRoute.FAVORITES : AppRoute.SING_IN}
-                  // onClick={(evt) => {
-                  //   evt.preventDefault();
-                  //   onLoginClick();
-                  // }}
+                  // onClick={
+                  //   isLoggedIn
+                  //     ? () => {
+                  //         onMailClick();
+                  //       }
+                  //     : () => {}
+                  // }
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   {isLoggedIn ? (
@@ -98,8 +103,9 @@ Header.propTypes = {
     .isRequired,
   userEmail: propTypes.oneOfType([propTypes.string, propTypes.bool]).isRequired,
   // activePage: propTypes.oneOf(Object.values(PageType)).isRequired,
-  onLoginClick: propTypes.func.isRequired,
-  onLogoClick: propTypes.func.isRequired,
+  // onLoginClick: propTypes.func.isRequired,
+  // onLogoClick: propTypes.func.isRequired,
+  className: propTypes.oneOf(Object.values(HeaderClassNames)).isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -109,12 +115,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoginClick() {
-    dispatch(AppActionCreator.changeActivePage(PageType.SING_IN));
-  },
-  onLogoClick() {
-    dispatch(AppActionCreator.changeActivePage(PageType.MAIN));
-  },
+  // onLoginClick() {
+  //   dispatch(AppActionCreator.changeActivePage(PageType.SING_IN));
+  // },
+  // onLogoClick() {
+  //   dispatch(AppActionCreator.changeActivePage(PageType.MAIN));
+  // },
+  // onMailClick() {
+  //   dispatch(DataOperation.loadFavoriteOffers());
+  // },
 });
 
 export {Header};

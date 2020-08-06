@@ -7,9 +7,24 @@ export const getActiveCity = (state) => {
   return state[NameSpace.STATE_APPLICATION].activeCity;
 };
 
-export const getActivPlaceCard = (state) => {
-  return state[NameSpace.STATE_APPLICATION].activPlaceCard;
+export const getActivPlaceId = (state) => {
+  return state[NameSpace.STATE_APPLICATION].activPlaceId;
 };
+
+// export const getActivPlaceCard = (state) => {
+//   return state[NameSpace.STATE_APPLICATION].activPlaceCard;
+// };
+
+// export const getActivPlaceCard = createSelector(
+//   getOffers,
+//   getActivPlaceId,
+//   (offers, activePlaceId) => {
+//     // if (offers.lenght === 0 || !activePlaceId) {
+//     //   return [];
+//     // }
+//     return offers.find((place) => place.id === activePlaceId);
+//   }
+// );
 
 export const getSortingType = (state) => {
   return state[NameSpace.STATE_APPLICATION].sortingType;

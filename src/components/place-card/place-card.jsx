@@ -1,8 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import {PlacesClassNames} from '../../const.js';
+import {PlacesClassNames, AppRoute} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
+import {Link} from 'react-router-dom';
 
 const PlaceCard = (props) => {
   const {
@@ -17,20 +18,27 @@ const PlaceCard = (props) => {
     isPremium = false,
     images,
     price,
-    isBookmark /* = false */,
+    isBookmark = false,
     rating,
     name,
     type,
   } = placeData;
 
   const image = images[0];
+  const isFavorite = className === PlacesClassNames.FAVORITE[1];
 
   let bookmarkClass = `place-card__bookmark-button button`;
   let bookmarkStatus = `To bookmarks`;
+  let imgWidth = `260`;
+  let imgHeght = `200`;
 
   if (isBookmark) {
     bookmarkClass += ` place-card__bookmark-button--active`;
     bookmarkStatus = `In bookmarks`;
+  }
+  if (isFavorite) {
+    imgWidth = `150`;
+    imgHeght = `110`;
   }
 
   const starsStyle = getStyleStars(rating);
@@ -63,13 +71,16 @@ const PlaceCard = (props) => {
           <img
             className="place-card__image"
             src={image}
-            width="260"
-            height="200"
+            width={imgWidth}
+            height={imgHeght}
             alt="Place image"
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div
+        className={`${
+          isFavorite ? `favorites__card-info` : ``
+        } place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -94,15 +105,15 @@ const PlaceCard = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2
-          className="place-card__name"
-          onClick={(evt) => {
-            evt.preventDefault();
-            onPlaceCardNameClick(placeData);
-          }}>
-          <a href="#" data-id={id}>
+        <h2 className="place-card__name">
+          <Link
+            to={`${AppRoute.PROPERTY}/${id}`}
+            data-id={id}
+            onClick={() => {
+              onPlaceCardNameClick(placeData);
+            }}>
             {name}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

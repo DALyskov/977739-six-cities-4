@@ -17,6 +17,7 @@ import {
 import {createAPI} from './reducer/api.js';
 
 const onUnauthorized = () => {
+  console.log(`STORE`);
   store.dispatch(
     UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)
   );
@@ -29,8 +30,10 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(DataOperation.loadOffers());
+store.dispatch(DataOperation.loadOffers()); // неверно
 store.dispatch(UserOperation.checkAuth());
+
+console.log(`INDEX`);
 
 ReactDOM.render(
   <Provider store={store}>

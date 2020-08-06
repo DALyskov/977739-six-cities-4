@@ -6,7 +6,7 @@ import {
   PlacesClassNames,
   sortingItems,
   SortingTypeDict,
-  PageType,
+  // PageType,
 } from '../../const.js';
 
 import {Operation as DataOperation} from '../../reducer/data/data.js';
@@ -45,10 +45,14 @@ class PlaceList extends PureComponent {
       onFavoriteBtnClick,
     } = this.props;
 
-    const sortedOffers = this._sortOffersBytype(offersByCity, sortingType);
+    let sortedOffers = offersByCity;
+
+    if (className === PlacesClassNames.MAIN) {
+      sortedOffers = this._sortOffersBytype(offersByCity, sortingType);
+    }
 
     return (
-      <div className={`${className[0]} places__list tabs__content`}>
+      <div className={className[0]}>
         {sortedOffers.map((placeData) => (
           <PlaceCard
             key={placeData.id}
@@ -106,6 +110,7 @@ PlaceList.propTypes = {
 
   onPlaceCardNameClick: propTypes.func.isRequired,
   onPlaceCardHover: propTypes.func.isRequired,
+  onFavoriteBtnClick: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -114,10 +119,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
-    dispatch(AppActionCreator.changePlace(placeData));
-    dispatch(AppActionCreator.changeActivePage(PageType.PROPERTY));
-    dispatch(DataOperation.loadReviews(placeData.id));
-    dispatch(DataOperation.loadNearbyOffers(placeData.id));
+    // dispatch(AppActionCreator.changePlace(placeData));
+    // dispatch(AppActionCreator.changeActivePage(PageType.PROPERTY));
+    // dispatch(DataOperation.loadReviews(placeData.id));
+    // dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },
   onPlaceCardHover(placeDataId) {
     dispatch(AppActionCreator.changeHoverCityId(placeDataId));

@@ -1,5 +1,5 @@
 import {extend} from '../../utils/common.js';
-import {AuthorizationStatus, AppRoute} from '../../const.js';
+import {AuthorizationStatus} from '../../const.js';
 
 import history from '../../history.js';
 

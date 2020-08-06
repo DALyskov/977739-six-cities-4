@@ -5,13 +5,14 @@ const initialState = {
   sortingType: sortingItems[0],
   hoverCityId: false,
   activeCity: false,
-  activPlaceCard: false,
+  // activPlaceCard: false,
   activePage: PageType.MAIN,
 };
 
 const ActionType = {
   CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
-  CHANGE_PLACE: `CHANGE_PLACE`,
+  CHANGE_ACTIV_PLACE_ID: `CHANGE_ACTIV_PLACE_ID`,
+  // CHANGE_PLACE: `CHANGE_PLACE`,
   CHANGE_SOTRING_TYPE: `CHANGE_SOTRING_TYPE`,
   CHANGE_HOVER_CITY_ID: `CHANGE_HOVER_CITY_ID`,
   CHANGE_ACTIVE_PAGE: `CHANGE_ACTIVE_PAGE`,
@@ -21,6 +22,10 @@ const ActionCreator = {
   changeActiveCity: (targetCity) => ({
     type: ActionType.CHANGE_ACTIVE_CITY,
     payload: targetCity,
+  }),
+  changeActivPlaceId: (targetCityId) => ({
+    type: ActionType.CHANGE_ACTIV_PLACE_ID,
+    payload: targetCityId,
   }),
   changePlace: (placeData) => ({
     type: ActionType.CHANGE_PLACE,
@@ -46,6 +51,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload,
         // offersByCity: getOffersByCity(state.offers, action.payload),
+      });
+    case ActionType.CHANGE_ACTIV_PLACE_ID:
+      return extend(state, {
+        activPlaceCardId: action.payload,
       });
     case ActionType.CHANGE_PLACE:
       return extend(state, {activPlaceCard: action.payload});

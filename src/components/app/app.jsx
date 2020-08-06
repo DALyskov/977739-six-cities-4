@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
-import {BrowserRouter, Route, Switch, Redirect, Router} from 'react-router-dom';
+import {Route, Switch, Redirect, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {AuthorizationStatus, PageType, AppRoute} from '../../const.js';
@@ -9,10 +9,11 @@ import history from '../../history.js';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import Favorite from '../favorit/favorit.jsx';
+import Favorite from '../favorite/favorite.jsx';
 import {
   getNearbyOffers,
   getFavoriteOffers,
+  getOffers,
 } from '../../reducer/data/selectors.js';
 import {
   getActiveCity,
@@ -67,8 +68,11 @@ class App extends PureComponent {
 
   render() {
     const {
-      // offersByCity,
-      // activeCity,
+      // offers,
+      offersByCity,
+      activeCity,
+      activPlaceCard,
+      nearbyOffers,
       authorizationStatus,
       // favoriteOffers,
       favoriteCities,
@@ -78,19 +82,33 @@ class App extends PureComponent {
       <Router history={history}>
         <Switch>
           <Route exact path={AppRoute.MAIN}>
-            {this._renderScreen()}
-            {/* <Main offersByCity={offersByCity} activeCity={activeCity} /> */}
+            {/* {this._renderScreen()} */}
+            <Main offersByCity={offersByCity} activeCity={activeCity} />
           </Route>
-          <Route exact path="/property">
-            {this._renderProperty()}
-          </Route>
+          <Route
+            exact
+            path={`${AppRoute.PROPERTY}/:id`}
+            render={(props) => {
+              return (
+                <Property
+                  {...props}
+                  // offers={offers}
+                  placeData={activPlaceCard}
+                  nearbyOffers={nearbyOffers.slice(0, 3)}
+                />
+              );
+            }}
+          />
           <Route exact path={AppRoute.SING_IN}>
-            {/* {isLoggedIn && <Redirect to={AppRoute.FAVORITES} />} */}
+            {isLoggedIn && <Redirect to={AppRoute.MAIN} />}
             {this._renderSignIn()}
           </Route>
           <Route exact path={AppRoute.FAVORITES}>
             {!isLoggedIn && <Redirect to={AppRoute.SING_IN} />}
-            <Favorite favoriteCities={favoriteCities} />
+            <Favorite
+            // favoriteOffers={favoriteOffers}
+            // favoriteCities={favoriteCities}
+            />
           </Route>
         </Switch>
       </Router>
@@ -216,13 +234,14 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   activeCity: getActiveCity(state),
+  // offers: getOffers(state),
   offersByCity: getOffersByCity(state),
-  activPlaceCard: getActivPlaceCard(state),
+  // activPlaceCard: getActivPlaceCard(state),
   nearbyOffers: getNearbyOffers(state),
   activePage: getActivePage(state),
   authorizationStatus: getAuthorizationStatus(state),
-  favoriteOffers: getFavoriteOffers(state),
-  // favoriteCities: getFavoriteCities(state),
+  // favoriteOffers: getFavoriteOffers(state),
+  favoriteCities: getFavoriteCities(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

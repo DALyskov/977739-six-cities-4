@@ -5,6 +5,7 @@ import {createReviews} from '../../adapters/reviews.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import history from '../../history.js';
 import {AppRoute} from '../../const.js';
+import NameSpace from '../name-space.js';
 
 const getDefaultActiveCity = (offersData) => {
   if (offersData.length === 0) {
@@ -13,7 +14,7 @@ const getDefaultActiveCity = (offersData) => {
   return offersData[0].city.name;
 };
 
-const updateData = (newOffer, offers) => {
+const updateOffersData = (newOffer, offers) => {
   const oferIndex = offers.findIndex((offer) => offer.id === newOffer.id);
   const newOffers = [].concat(
     ...offers.slice(0, oferIndex),
@@ -23,9 +24,17 @@ const updateData = (newOffer, offers) => {
   return newOffers;
 };
 
+const updateFavoriteOffersData = (newOffer, offers) => {
+  if (newOffer.isBookmark) {
+    return [].concat(offers, newOffer);
+  }
+  return offers.filter((offer) => offer.id !== newOffer.id);
+};
+
 const initialState = {
   offers: [],
   nearbyOffers: [],
+  favoriteOffers: [],
 };
 
 const ActionType = {
@@ -34,7 +43,7 @@ const ActionType = {
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   UPDATE_OFFERS: `UPDATE_OFFERS`,
-  // UPDATE_FAVORITE_OFFERS: `UPDATE_FAVORITE_OFFERS`,
+  UPDATE_FAVORITE_OFFERS: `UPDATE_FAVORITE_OFFERS`,
 };
 
 const ActionCreator = {
@@ -58,10 +67,10 @@ const ActionCreator = {
     type: ActionType.UPDATE_OFFERS,
     payload: offerData,
   }),
-  // updateFavoriteOffers: (favoriteOfferData) => ({
-  //   type: ActionType.UPDATE_FAVORITE_OFFERS,
-  //   payload: favoriteOfferData,
-  // }),
+  updateFavoriteOffers: (favoriteOfferData) => ({
+    type: ActionType.UPDATE_FAVORITE_OFFERS,
+    payload: favoriteOfferData,
+  }),
 };
 
 const Operation = {
@@ -101,7 +110,6 @@ const Operation = {
 
   loadFavoriteOffers: () => (dispatch, getState, api) => {
     return api.get(`/favorite`).then((response) => {
-      console.log(response);
       dispatch(ActionCreator.loadFavoriteOffers(createOffers(response.data)));
     });
   },
@@ -113,9 +121,12 @@ const Operation = {
       .post(`/favorite/${id}/${status}`)
       .then((response) => {
         dispatch(ActionCreator.updateOffers(createOffers([response.data])[0]));
-        // dispatch(
-        //   ActionCreator.updateFavoriteOffers(createOffers([response.data])[0])
-        // );
+
+        if (getState()[NameSpace.DATA].favoriteOffers.langth !== 0) {
+          dispatch(
+            ActionCreator.updateFavoriteOffers(createOffers([response.data])[0])
+          );
+        }
         return response;
       })
       .catch((err) => {
@@ -138,14 +149,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_OFFERS:
       return extend(state, {favoriteOffers: action.payload});
     case ActionType.UPDATE_OFFERS:
-      const newOffers = updateData(action.payload, state.offers);
+      const newOffers = updateOffersData(action.payload, state.offers);
       return extend(state, {offers: newOffers});
-    // case ActionType.UPDATE_FAVORITE_OFFERS:
-    //   const newFavoriteOffers = updateData(
-    //     action.payload,
-    //     state.favoriteOffers
-    //   );
-    //   return extend(state, {favoriteOffers: newFavoriteOffers});
+    case ActionType.UPDATE_FAVORITE_OFFERS:
+      const newFavoriteOffers = updateFavoriteOffersData(
+        action.payload,
+        state.favoriteOffers
+      );
+      return extend(state, {favoriteOffers: newFavoriteOffers});
   }
   return state;
 };

@@ -21,10 +21,10 @@ const withReviewsForm = (Component) => {
       this.setState({[name]: value});
     }
 
-    handleSubmit(activPlaceCard, sendReview) {
+    handleSubmit(activPlaceId, sendReview) {
       const {review, rating} = this.state;
 
-      const reviewId = activPlaceCard.id;
+      const reviewId = activPlaceId;
 
       this.setState({isDisabled: true});
 
