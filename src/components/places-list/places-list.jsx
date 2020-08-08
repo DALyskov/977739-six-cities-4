@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {
   PlacesClassNames,
-  sortingItems,
+  SORTING_ITEMS,
   SortingTypeDict,
   // PageType,
 } from '../../const.js';
@@ -18,15 +18,15 @@ class PlaceList extends PureComponent {
   _sortOffersBytype(offers, sortingType) {
     let sortedOffers = offers.slice();
     switch (sortingType) {
-      case sortingItems[1]:
+      case SORTING_ITEMS[1]:
         return sortedOffers.sort(
           (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
         );
-      case sortingItems[2]:
+      case SORTING_ITEMS[2]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
         );
-      case sortingItems[3]:
+      case SORTING_ITEMS[3]:
         return sortedOffers.sort(
           (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
         );
@@ -106,7 +106,7 @@ PlaceList.propTypes = {
 
   className: propTypes.oneOf(Object.values(PlacesClassNames)).isRequired,
 
-  sortingType: propTypes.oneOf(sortingItems).isRequired,
+  sortingType: propTypes.oneOf(SORTING_ITEMS).isRequired,
 
   onPlaceCardNameClick: propTypes.func.isRequired,
   onPlaceCardHover: propTypes.func.isRequired,
@@ -121,8 +121,8 @@ const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
     // dispatch(AppActionCreator.changePlace(placeData));
     // dispatch(AppActionCreator.changeActivePage(PageType.PROPERTY));
-    // dispatch(DataOperation.loadReviews(placeData.id));
-    // dispatch(DataOperation.loadNearbyOffers(placeData.id));
+    dispatch(DataOperation.loadReviews(placeData.id));
+    dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },
   onPlaceCardHover(placeDataId) {
     dispatch(AppActionCreator.changeHoverCityId(placeDataId));

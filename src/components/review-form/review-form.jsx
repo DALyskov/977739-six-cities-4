@@ -3,10 +3,7 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {Operation as DataOperation} from '../../reducer/data/data.js';
-import {
-  getActivPlaceCard,
-  getActivPlaceId,
-} from '../../reducer/state-application/selectors.js';
+import {getActivPlaceId} from '../../reducer/state-application/selectors.js';
 
 const RATING_NAMES = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
@@ -17,7 +14,6 @@ const ReviewsForm = (props) => {
     isDisabled,
     onInputChange,
     onSubmit,
-    // activPlaceCard,
     activPlaceId,
     sendReview,
   } = props;
@@ -35,7 +31,6 @@ const ReviewsForm = (props) => {
       method="post"
       onSubmit={(evt) => {
         evt.preventDefault();
-        console.log(activPlaceId);
         onSubmit(activPlaceId, sendReview);
       }}>
       <label className="reviews__label form__label" htmlFor="review">

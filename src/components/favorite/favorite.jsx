@@ -1,12 +1,15 @@
 import React, {PureComponent} from 'react';
 // import propTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-import {HeaderClassNames} from '../../const.js';
+import {HeaderClassNames, AppRoute} from '../../const.js';
 
 import Header from '../header/header.jsx';
 import FavoriteItem from '../favorite-item/favorite-item.jsx';
+import FavoritesEmpty from '../favorite-empty/favorite-empty.jsx';
 import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {getErrReason} from '../../reducer/data/selectors.js';
 import {getFavoriteCities} from '../../reducer/state-application/selectors.js';
 
 // const PlacesSortingWrapped = withPlacesSorting(PlacesSorting);
@@ -23,39 +26,45 @@ class Favorite extends PureComponent {
 
   render() {
     // const Favorite = (props) => {
-    const {favoriteCities} = this.props;
+    const {favoriteCities, errReason} = this.props;
     // const isOffers = offersByCity.length > 0;
     // const placesCount = offersByCity.length;
     // console.log(favoriteCities);
+    console.log(favoriteCities);
+    const isSavedOffer = favoriteCities.length > 0;
 
     return (
       <div className="page">
         <Header className={HeaderClassNames.OTHER_PAGE} />
-        <main className="page__main page__main--favorites">
-          <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                {favoriteCities.map((favoriteCity) => (
-                  // <div>{favoriteCity}</div>
-                  <FavoriteItem
-                    key={favoriteCity}
-                    favoriteCity={favoriteCity}
-                  />
-                ))}
-              </ul>
-            </section>
-          </div>
-        </main>
+        {isSavedOffer ? (
+          <main className="page__main page__main--favorites">
+            <div className="page__favorites-container container">
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {favoriteCities.map((favoriteCity) => (
+                    <FavoriteItem
+                      key={favoriteCity}
+                      favoriteCity={favoriteCity}
+                    />
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </main>
+        ) : (
+          <FavoritesEmpty errReason={errReason} />
+        )}
+
         <footer className="footer container">
-          <a className="footer__logo-link" href="main.html">
+          <Link className="footer__logo-link" to={AppRoute.MAIN}>
             <img
               className="footer__logo"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               alt="6 cities logo"
               width="64"
               height="33"></img>
-          </a>
+          </Link>
         </footer>
       </div>
     );
@@ -96,6 +105,7 @@ class Favorite extends PureComponent {
 
 const mapStateToProps = (state) => ({
   favoriteCities: getFavoriteCities(state),
+  errReason: getErrReason(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,8 @@
 import {extend} from '../../utils/common.js';
-import {AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus, ErrReason} from '../../const.js';
 
 import history from '../../history.js';
+import {ActionCreator as DataActionCreator} from '../data/data.js';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -54,6 +55,7 @@ const Operation = {
         );
       })
       .catch((err) => {
+        dispatch(DataActionCreator.changeErrReason(ErrReason.LOGIN));
         throw err;
       });
   },

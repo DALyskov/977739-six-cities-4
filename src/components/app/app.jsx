@@ -26,46 +26,6 @@ import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 class App extends PureComponent {
-  _renderMain() {
-    const {offersByCity, activeCity} = this.props;
-    return <Main offersByCity={offersByCity} activeCity={activeCity} />;
-  }
-
-  _renderProperty() {
-    const {activPlaceCard, nearbyOffers} = this.props;
-    return (
-      <Property
-        placeData={activPlaceCard}
-        nearbyOffers={nearbyOffers.slice(0, 3)}
-      />
-    );
-  }
-
-  _renderSignIn() {
-    const {activeCity, authorizationStatus, onSignInBtnClick} = this.props;
-    return (
-      <SignIn
-        activeCity={activeCity}
-        onSignInBtnClick={onSignInBtnClick}
-        authorizationStatus={authorizationStatus}
-      />
-    );
-  }
-
-  _renderScreen() {
-    const {activePage} = this.props;
-    switch (activePage) {
-      case PageType.MAIN:
-        return this._renderMain();
-      case PageType.PROPERTY:
-        return this._renderProperty();
-      case PageType.SING_IN:
-        return this._renderSignIn();
-      default:
-        return null;
-    }
-  }
-
   render() {
     const {
       // offers,
@@ -76,39 +36,33 @@ class App extends PureComponent {
       authorizationStatus,
       // favoriteOffers,
       favoriteCities,
+      onSignInBtnClick,
     } = this.props;
     const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
     return (
       <Router history={history}>
         <Switch>
           <Route exact path={AppRoute.MAIN}>
-            {/* {this._renderScreen()} */}
-            <Main offersByCity={offersByCity} activeCity={activeCity} />
+            <Main />
           </Route>
           <Route
             exact
             path={`${AppRoute.PROPERTY}/:id`}
             render={(props) => {
-              return (
-                <Property
-                  {...props}
-                  // offers={offers}
-                  placeData={activPlaceCard}
-                  nearbyOffers={nearbyOffers.slice(0, 3)}
-                />
-              );
+              return <Property {...props} />;
             }}
           />
           <Route exact path={AppRoute.SING_IN}>
             {isLoggedIn && <Redirect to={AppRoute.MAIN} />}
-            {this._renderSignIn()}
+            <SignIn
+            // activeCity={activeCity}
+            // authorizationStatus={authorizationStatus}
+            // onSignInBtnClick={onSignInBtnClick}
+            />
           </Route>
           <Route exact path={AppRoute.FAVORITES}>
             {!isLoggedIn && <Redirect to={AppRoute.SING_IN} />}
-            <Favorite
-            // favoriteOffers={favoriteOffers}
-            // favoriteCities={favoriteCities}
-            />
+            <Favorite />
           </Route>
         </Switch>
       </Router>

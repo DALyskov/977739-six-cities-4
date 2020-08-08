@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {PlacesClassNames, sortingItems} from '../../const.js';
+import {PlacesClassNames, SORTING_ITEMS} from '../../const.js';
 import {offers} from '../../mocks-test/offers.js';
 
 import {PlaceList} from './places-list.jsx';
@@ -13,7 +13,7 @@ describe(`PlaceList_snapchots`, () => {
         <PlaceList
           offersByCity={offers}
           className={PlacesClassNames.MAIN}
-          sortingType={sortingItems[0]}
+          sortingType={SORTING_ITEMS[0]}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />
@@ -28,7 +28,7 @@ describe(`PlaceList_snapchots`, () => {
         <PlaceList
           offersByCity={[]}
           className={PlacesClassNames.MAIN}
-          sortingType={sortingItems[0]}
+          sortingType={SORTING_ITEMS[0]}
           onPlaceCardNameClick={() => {}}
           onPlaceCardHover={() => {}}
         />

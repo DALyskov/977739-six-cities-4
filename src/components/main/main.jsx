@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
 
@@ -11,10 +12,16 @@ import PlaceList from '../places-list/places-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 import NoPlaces from '../no-places/no-places.jsx';
 
+import {
+  getActiveCity,
+  getOffersByCity,
+} from '../../reducer/state-application/selectors.js';
+import {getErrReason} from '../../reducer/data/selectors.js';
+
 const PlacesSortingWrapped = withPlacesSorting(PlacesSorting);
 
 const Main = (props) => {
-  const {offersByCity, activeCity} = props;
+  const {offersByCity, activeCity, errReason} = props;
   const isOffers = offersByCity.length > 0;
   const placesCount = offersByCity.length;
 
@@ -46,13 +53,14 @@ const Main = (props) => {
               <div className="cities__right-section">
                 <CityMap
                   offersByCity={offersByCity}
+                  currentOffer={false}
                   className={MapClassName.MAIN}
                 />
               </div>
             </div>
           </div>
         ) : (
-          <NoPlaces />
+          <NoPlaces errReason={errReason} />
         )}
       </main>
     </div>
@@ -89,4 +97,13 @@ Main.propTypes = {
   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
 };
 
-export default Main;
+// export default Main;
+
+const mapStateToProps = (state) => ({
+  activeCity: getActiveCity(state),
+  offersByCity: getOffersByCity(state),
+  errReason: getErrReason(state),
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);

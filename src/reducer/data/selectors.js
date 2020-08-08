@@ -15,3 +15,11 @@ export const getReviews = (state) => {
 export const getFavoriteOffers = (state) => {
   return state[NameSpace.DATA].favoriteOffers;
 };
+
+export const getErrReason = (state) => {
+  return state[NameSpace.DATA].errReason;
+};
+
+export const getErrMessage = (state) => {
+  return state[NameSpace.DATA].errMessage;
+};

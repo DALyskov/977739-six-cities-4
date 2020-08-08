@@ -1,11 +1,11 @@
-import {sortingItems, PageType} from '../../const.js';
+import {SORTING_ITEMS, PageType} from '../../const.js';
 import {offers} from '../../mocks-test/offers.js';
 import {cities} from '../../mocks-test/cities.js';
 
 import {reducer, ActionType, ActionCreator} from './state-application.js';
 
 const initialState = {
-  sortingType: sortingItems[0],
+  sortingType: SORTING_ITEMS[0],
   hoverCityId: false,
   activeCity: false,
   activPlaceCard: false,
@@ -39,9 +39,9 @@ describe(`AppReducer_test`, () => {
     expect(
       reducer(initialState, {
         type: ActionType.CHANGE_SOTRING_TYPE,
-        payload: sortingItems[1],
+        payload: SORTING_ITEMS[1],
       })
-    ).toEqual(Object.assign({}, initialState, {sortingType: sortingItems[1]}));
+    ).toEqual(Object.assign({}, initialState, {sortingType: SORTING_ITEMS[1]}));
   });
 
   it(`AppReducer_should_change_hoverCityId`, () => {
@@ -79,9 +79,9 @@ describe(`AppActionCreators_work_correctly`, () => {
   });
 
   it(`AppActionCreator_for_changesortingType`, function () {
-    expect(ActionCreator.changesortingType(sortingItems[0])).toEqual({
+    expect(ActionCreator.changesortingType(SORTING_ITEMS[0])).toEqual({
       type: ActionType.CHANGE_SOTRING_TYPE,
-      payload: sortingItems[0],
+      payload: SORTING_ITEMS[0],
     });
   });
 

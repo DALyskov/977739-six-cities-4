@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 // import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
 
 import PlaceList from '../places-list/places-list.jsx';
-import {PlacesClassNames, AppRoute, sortingItems} from '../../const.js';
+import {PlacesClassNames, AppRoute, SORTING_ITEMS} from '../../const.js';
 import {getFavoriteOffers} from '../../reducer/data/selectors.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
@@ -66,7 +66,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
     dispatch(AppActionCreator.changeActiveCity(CityName));
-    dispatch(AppActionCreator.changesortingType(sortingItems[0]));
+    dispatch(AppActionCreator.changesortingType(SORTING_ITEMS[0]));
   },
 });
 

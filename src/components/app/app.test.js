@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {AuthorizationStatus, PageType, sortingItems} from '../../const.js';
+import {AuthorizationStatus, PageType, SORTING_ITEMS} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
 import {offers} from '../../mocks-test/offers.js';
 import {reviews} from '../../mocks-test/reviews.js';
@@ -24,7 +24,7 @@ describe(`App_snapchots`, () => {
       [NameSpace.STATE_APPLICATION]: {
         cities,
         activeCity: cities[0],
-        sortingType: sortingItems[0],
+        sortingType: SORTING_ITEMS[0],
         hoverCityId: false,
         activPlaceCard: false,
         activePage: PageType.MAIN,
@@ -59,7 +59,7 @@ describe(`App_snapchots`, () => {
       [NameSpace.STATE_APPLICATION]: {
         cities,
         activeCity: false,
-        sortingType: sortingItems[0],
+        sortingType: SORTING_ITEMS[0],
         hoverCityId: false,
         activPlaceCard: false,
         activePage: PageType.MAIN,
@@ -94,7 +94,7 @@ describe(`App_snapchots`, () => {
       [NameSpace.STATE_APPLICATION]: {
         cities,
         activeCity: cities[0],
-        sortingType: sortingItems[0],
+        sortingType: SORTING_ITEMS[0],
         hoverCityId: false,
         activPlaceCard: offers[0],
         activePage: PageType.PROPERTY,

@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {sortingItems} from '../../const.js';
+import {SORTING_ITEMS} from '../../const.js';
 
 import {
   getCities,
@@ -53,7 +53,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(CityName) {
     dispatch(AppActionCreator.changeActiveCity(CityName));
-    dispatch(AppActionCreator.changesortingType(sortingItems[0]));
+    dispatch(AppActionCreator.changesortingType(SORTING_ITEMS[0]));
   },
 });
 

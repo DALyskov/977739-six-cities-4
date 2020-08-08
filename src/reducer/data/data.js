@@ -4,7 +4,7 @@ import {createOffers} from '../../adapters/offers.js';
 import {createReviews} from '../../adapters/reviews.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import history from '../../history.js';
-import {AppRoute} from '../../const.js';
+import {AppRoute, ErrReason} from '../../const.js';
 import NameSpace from '../name-space.js';
 
 const getDefaultActiveCity = (offersData) => {
@@ -33,8 +33,11 @@ const updateFavoriteOffersData = (newOffer, offers) => {
 
 const initialState = {
   offers: [],
+  reviews: [],
   nearbyOffers: [],
   favoriteOffers: [],
+  errReason: false,
+  errMessage: ``,
 };
 
 const ActionType = {
@@ -44,6 +47,8 @@ const ActionType = {
   LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   UPDATE_OFFERS: `UPDATE_OFFERS`,
   UPDATE_FAVORITE_OFFERS: `UPDATE_FAVORITE_OFFERS`,
+  CHANGE_ERR_REASON: `CHANGE_ERR_REASON`,
+  CHANGE_ERR_MESSAGE: `CHANGE_ERR_MESSAGE`,
 };
 
 const ActionCreator = {
@@ -71,29 +76,55 @@ const ActionCreator = {
     type: ActionType.UPDATE_FAVORITE_OFFERS,
     payload: favoriteOfferData,
   }),
+  changeErrReason: (errReason) => ({
+    type: ActionType.CHANGE_ERR_REASON,
+    payload: errReason,
+  }),
+  changeErrMessage: (errMessage) => ({
+    type: ActionType.CHANGE_ERR_MESSAGE,
+    payload: errMessage,
+  }),
 };
 
 const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
-    return api.get(`/hotels`).then((response) => {
-      const offersData = createOffers(response.data);
-      dispatch(ActionCreator.loadOffers(offersData));
-      dispatch(
-        AppActionCreator.changeActiveCity(getDefaultActiveCity(offersData))
-      );
-    });
+    return api
+      .get(`/hotels`)
+      .then((response) => {
+        const offersData = createOffers(response.data);
+        dispatch(ActionCreator.loadOffers(offersData));
+        dispatch(
+          AppActionCreator.changeActiveCity(getDefaultActiveCity(offersData))
+        );
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_OFFERS));
+        throw err;
+      });
   },
 
   loadReviews: (id) => (dispatch, getState, api) => {
-    return api.get(`/comments/${id}`).then((response) => {
-      dispatch(ActionCreator.loadReviews(createReviews(response.data)));
-    });
+    return api
+      .get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadReviews(createReviews(response.data)));
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_REVIEWS));
+        throw err;
+      });
   },
 
   loadNearbyOffers: (id) => (dispatch, getState, api) => {
-    return api.get(`/hotels/${id}/nearby`).then((response) => {
-      dispatch(ActionCreator.loadNearbyOffers(createOffers(response.data)));
-    });
+    return api
+      .get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        dispatch(ActionCreator.loadNearbyOffers(createOffers(response.data)));
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_NEARBY_OFFERS));
+        throw err;
+      });
   },
 
   sendReview: (id, newReview) => (dispatch, getState, api) => {
@@ -109,16 +140,21 @@ const Operation = {
   },
 
   loadFavoriteOffers: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`).then((response) => {
-      dispatch(ActionCreator.loadFavoriteOffers(createOffers(response.data)));
-    });
+    return api
+      .get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavoriteOffers(createOffers(response.data)));
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_FAVORITE_OFFERS));
+        throw err;
+      });
   },
 
   sendFavoriteOffer: (id, isBookmark) => (dispatch, getState, api) => {
     const status = Number(!isBookmark);
-
     return api
-      .post(`/favorite/${id}/${status}`)
+      .post(`/favorite1/${id}/${status}`)
       .then((response) => {
         dispatch(ActionCreator.updateOffers(createOffers([response.data])[0]));
 
@@ -132,8 +168,12 @@ const Operation = {
       .catch((err) => {
         if (err.response.status === 401) {
           history.push(AppRoute.SING_IN);
+        } else {
+          dispatch(
+            ActionCreator.changeErrReason(ErrReason.SEND_FAVORITE_OFFER)
+          );
         }
-        // throw err;
+        throw err;
       });
   },
 };
@@ -157,6 +197,11 @@ const reducer = (state = initialState, action) => {
         state.favoriteOffers
       );
       return extend(state, {favoriteOffers: newFavoriteOffers});
+    case ActionType.CHANGE_ERR_REASON:
+      return extend(state, {errReason: action.payload});
+    case ActionType.CHANGE_ERR_MESSAGE:
+      console.log(action.payload);
+      return extend(state, {errMessage: action.payload});
   }
   return state;
 };

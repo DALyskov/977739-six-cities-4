@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
-import {sortingItems} from '../../const.js';
+import {SORTING_ITEMS} from '../../const.js';
 
 import {getSortingType} from '../../reducer/state-application/selectors.js';
 
@@ -26,7 +26,7 @@ const PlacesSorting = (props) => {
         className={`places__options places__options--custom ${
           isOpen ? `places__options--opened` : ``
         }`}>
-        {sortingItems.map((item) => (
+        {SORTING_ITEMS.map((item) => (
           <li
             key={item}
             onClick={() => {
@@ -46,7 +46,7 @@ const PlacesSorting = (props) => {
 };
 
 PlacesSorting.propTypes = {
-  sortingType: propTypes.oneOf(sortingItems).isRequired,
+  sortingType: propTypes.oneOf(SORTING_ITEMS).isRequired,
   isOpen: propTypes.bool.isRequired,
   onSortingItemClick: propTypes.func.isRequired,
   onSortingClick: propTypes.func.isRequired,

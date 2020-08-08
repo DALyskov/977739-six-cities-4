@@ -1,15 +1,23 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {HeaderClassNames, ErrReason} from '../../const.js';
 
 import Header from '../header/header.jsx';
-import {HeaderClassNames} from '../../const.js';
+import ErrMessage from '../err-message/err-message.jsx';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+import {getErrReason} from '../../reducer/data/selectors.js';
+import {getActiveCity} from '../../reducer/state-application/selectors.js';
 
-export default class SignIn extends PureComponent {
+class SignIn extends PureComponent {
   constructor(props) {
     super(props);
 
     this._loginRef = React.createRef();
     this._passwordRef = React.createRef();
+    // this._login = ``;
 
     this._handleSubmit = this._handleSubmit.bind(this);
   }
@@ -21,10 +29,22 @@ export default class SignIn extends PureComponent {
       login: this._loginRef.current.value,
       password: this._passwordRef.current.value,
     });
+    // .catch((err) => {
+    //   const userLogin = this._loginRef.current.value;
+    //   const errMessage = `${err.response.status}. ${err.message}`;
+    //   // this.setState({review: errMessage});
+    //   this._login = errMessage;
+
+    //   // setTimeout(() => {
+    //   //   this.setState({review: userReview, isDisabled: false});
+    //   // }, ERR_MESSAGE_TIMEOUT);
+
+    //   throw err;
+    // });
   }
 
   render() {
-    const {activeCity} = this.props;
+    const {activeCity, errReason} = this.props;
 
     return (
       <div className="page page--gray page--login">
@@ -45,8 +65,9 @@ export default class SignIn extends PureComponent {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    required=""
+                    required={true}
                     ref={this._loginRef}
+                    // value={this._login}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
@@ -56,7 +77,7 @@ export default class SignIn extends PureComponent {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    required=""
+                    required={true}
                     ref={this._passwordRef}
                   />
                 </div>
@@ -65,6 +86,7 @@ export default class SignIn extends PureComponent {
                   type="submit">
                   Sign in
                 </button>
+                {errReason === ErrReason.LOGIN && <ErrMessage />}
               </form>
             </section>
             <section className="locations locations--login locations--current">
@@ -85,3 +107,18 @@ SignIn.propTypes = {
   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
   onSignInBtnClick: propTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  activeCity: getActiveCity(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  errReason: getErrReason(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSignInBtnClick(authData) {
+    return dispatch(UserOperation.login(authData));
+  },
+});
+
+export {SignIn};
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

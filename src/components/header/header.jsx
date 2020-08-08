@@ -8,15 +8,17 @@ import {
   HeaderClassNames,
   // PageType,
   AppRoute,
+  ErrReason,
 } from '../../const.js';
 
-// import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
+import ErrMessage from '../err-message/err-message.jsx';
+// import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {getErrReason} from '../../reducer/data/selectors.js';
 import {getActivePage} from '../../reducer/state-application/selectors.js';
 import {
   getAuthorizationStatus,
   getUserEmail,
 } from '../../reducer/user/selectors.js';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
 
 const Header = (props) => {
   const {
@@ -27,6 +29,7 @@ const Header = (props) => {
     // onLoginClick,
     // onLogoClick,
     // onMailClick,
+    errReason,
   } = props;
 
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
@@ -93,6 +96,7 @@ const Header = (props) => {
             </ul>
           </nav>
         </div>
+        {errReason === ErrReason.SEND_FAVORITE_OFFER && <ErrMessage />}
       </div>
     </header>
   );
@@ -112,6 +116,7 @@ const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   userEmail: getUserEmail(state),
   activePage: getActivePage(state),
+  errReason: getErrReason(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

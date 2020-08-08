@@ -1,17 +1,27 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
+import {
+  MapClassName,
+  PlacesClassNames,
+  HeaderClassNames,
+  ErrReason,
+} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 
 import Header from '../header/header.jsx';
 import PlaceList from '../places-list/places-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
-import {connect} from 'react-redux';
-// import {getActivPlaceCard} from '../../reducer/state-application/selectors.js';
+import ErrMessage from '../err-message/err-message.jsx';
+
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
-import {getOffers} from '../../reducer/data/selectors.js';
+import {
+  getOffers,
+  getNearbyOffers,
+  getErrReason,
+} from '../../reducer/data/selectors.js';
 import {Operation as DataOperation} from '../../reducer/data/data.js';
 
 const getActivPlaceCard = (offers, activePlaceId) => {
@@ -28,14 +38,29 @@ class Property extends PureComponent {
   }
 
   componentDidMount() {
-    const {match, loadAdditionalData} = this.props;
-    loadAdditionalData(match.params.id);
+    const {
+      match,
+      nearbyOffers,
+      loadAdditionalData,
+      changeActivPlaceId,
+    } = this.props;
+    if (nearbyOffers.length === 0) {
+      loadAdditionalData(match.params.id);
+      changeActivPlaceId(match.params.id);
+    }
   }
+
+  // componentDidUpdate() {
+  //   // const {match, loadAdditionalData, changeActivPlaceId} = this.props;
+  //   // loadAdditionalData(match.params.id);
+  //   // changeActivPlaceId(match.params.id);
+  // }
 
   render() {
     const {
       nearbyOffers,
-      /* placeData, */ offers,
+      offers,
+      errReason,
       match,
       onFavoriteBtnClick,
     } = this.props;
@@ -189,7 +214,8 @@ class Property extends PureComponent {
             </div>
 
             <CityMap
-              offersByCity={nearbyOffers}
+              offersByCity={nearbyOffers.slice(0, 3)}
+              currentOffer={placeData}
               className={MapClassName.PROPERTY}
             />
           </section>
@@ -203,6 +229,7 @@ class Property extends PureComponent {
                 offersByCity={nearbyOffers}
                 className={PlacesClassNames.PROPERTY}
               />
+              {errReason === ErrReason.LOAD_NEARBY_OFFERS && <ErrMessage />}
             </section>
           </div>
         </main>
@@ -287,8 +314,9 @@ Property.propTypes = {
 // export default Property;
 
 const mapStateToProps = (state) => ({
-  // activPlaceId: getActivPlaceCard(state),
   offers: getOffers(state),
+  nearbyOffers: getNearbyOffers(state),
+  errReason: getErrReason(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -298,6 +326,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadAdditionalData(activePlaceId) {
     dispatch(DataOperation.loadReviews(activePlaceId));
     dispatch(DataOperation.loadNearbyOffers(activePlaceId));
+    // dispatch(AppActionCreator.changeActivPlaceId(activePlaceId));
   },
   onFavoriteBtnClick(placeDataId, placeDataIsBookmark) {
     dispatch(DataOperation.sendFavoriteOffer(placeDataId, placeDataIsBookmark));

@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {sortingItems} from '../../const.js';
+import {SORTING_ITEMS} from '../../const.js';
 import {PlacesSorting} from './places-sorting.jsx';
 
 Enzyme.configure({
@@ -15,7 +15,7 @@ describe(`PlacesSorting_ee`, () => {
     const onSortingClick = jest.fn();
     const placesSorting = mount(
       <PlacesSorting
-        sortingType={sortingItems[0]}
+        sortingType={SORTING_ITEMS[0]}
         isOpen={false}
         onSortingItemClick={onSortingItemClick}
         onSortingClick={onSortingClick}
@@ -28,7 +28,7 @@ describe(`PlacesSorting_ee`, () => {
       v.simulate(`click`, {});
     });
 
-    expect(onSortingItemClick).toHaveBeenCalledTimes(sortingItems.length);
+    expect(onSortingItemClick).toHaveBeenCalledTimes(SORTING_ITEMS.length);
   });
 
   it(`PlacesSorting_on_click`, () => {
@@ -36,7 +36,7 @@ describe(`PlacesSorting_ee`, () => {
     const onSortingClick = jest.fn();
     const placesSorting = mount(
       <PlacesSorting
-        sortingType={sortingItems[0]}
+        sortingType={SORTING_ITEMS[0]}
         isOpen={false}
         onSortingItemClick={onSortingItemClick}
         onSortingClick={onSortingClick}

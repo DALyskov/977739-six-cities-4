@@ -6,8 +6,10 @@ import {getReviews} from '../../reducer/data/selectors.js';
 import ReviewsItem from '../reviews-item/reviews-item.jsx';
 import ReviewsForm from '../review-form/review-form.jsx';
 import withReviewsForm from '../../hocs/with-review-form/with-review-form.jsx';
+import ErrMessage from '../err-message/err-message.jsx';
+import {getErrReason} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
-import {AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus, ErrReason} from '../../const.js';
 
 const ReviewsFormWrapped = withReviewsForm(ReviewsForm);
 
@@ -15,21 +17,21 @@ const MAX_REVIEW = 10;
 
 const getSortedReviews = (reviews) => {
   const newReviews = reviews.slice();
-  return newReviews.sort((a, b) => b.date - a.date);
+  return newReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
 const ReviewsList = (props) => {
-  const {reviews = [], authorizationStatus} = props;
-  const sortedReviews = getSortedReviews(reviews).splice(0, MAX_REVIEW);
-
+  const {reviews = [], errReason, authorizationStatus} = props;
+  const sortedReviews = getSortedReviews(reviews).slice(0, MAX_REVIEW);
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
-
+  console.log(errReason);
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
         Reviews &middot;{' '}
         <span className="reviews__amount">{reviews.length}</span>
       </h2>
+      {errReason === ErrReason.LOAD_REVIEWS && <ErrMessage />}
       <ul className="reviews__list">
         {sortedReviews.map((review) => (
           <ReviewsItem key={review.id} reviewData={review} />
@@ -61,6 +63,7 @@ ReviewsList.propTypes = {
 const mapStateToProps = (state) => ({
   reviews: getReviews(state),
   authorizationStatus: getAuthorizationStatus(state),
+  errReason: getErrReason(state),
 });
 
 export {ReviewsList};

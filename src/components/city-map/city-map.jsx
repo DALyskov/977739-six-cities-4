@@ -5,7 +5,10 @@ import leaflet from 'leaflet';
 
 import {MapClassName} from '../../const.js';
 
-import {getHoverCityId} from '../../reducer/state-application/selectors.js';
+import {
+  getHoverCityId,
+  getActivPlaceId,
+} from '../../reducer/state-application/selectors.js';
 
 class CityMap extends PureComponent {
   constructor(props) {
@@ -22,6 +25,7 @@ class CityMap extends PureComponent {
     this._setMap();
     this._setMapView();
     this._setMapMarkers();
+    // if (activPlaceId)
   }
 
   componentWillUnmount() {
@@ -71,16 +75,32 @@ class CityMap extends PureComponent {
       iconUrl: `/img/pin.svg`,
       iconSize: [30, 40],
     });
+
     this.props.offersByCity.forEach((place) => {
-      const marker = leaflet.marker(
-        [place.location.latitude, place.location.longitude],
-        {
+      const marker = leaflet
+        .marker([place.location.latitude, place.location.longitude], {
           icon,
-        }
-      );
+        })
+        .addTo(this._markersLayerGroup);
       marker.id = place.id;
-      marker.addTo(this._markersLayerGroup);
+      // marker.addTo(this._markersLayerGroup);
     });
+
+    if (this.props.currentOffer) {
+      const icon = leaflet.icon({
+        iconUrl: `/img/pin-active.svg`,
+        iconSize: [30, 40],
+      });
+
+      const place = this.props.currentOffer;
+      const marker = leaflet
+        .marker([place.location.latitude, place.location.longitude], {
+          icon,
+        })
+        .addTo(this._markersLayerGroup);
+      marker.id = place.id;
+      // marker.addTo(this._markersLayerGroup);
+    }
   }
 
   _changeMarkerIcon() {
@@ -94,6 +114,7 @@ class CityMap extends PureComponent {
         marker.setIcon(newIcon);
       }
     });
+    // console.log(this._markersLayerGroup);
   }
 
   render() {
@@ -148,6 +169,7 @@ CityMap.propTypes = {
 
 const mapStateToProps = (state) => ({
   hoverCityId: getHoverCityId(state),
+  activPlaceId: getActivPlaceId(state),
 });
 
 export {CityMap};

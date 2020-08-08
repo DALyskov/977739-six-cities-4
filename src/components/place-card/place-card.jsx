@@ -5,6 +5,28 @@ import {PlacesClassNames, AppRoute} from '../../const.js';
 import {getStyleStars} from '../../utils/common.js';
 import {Link} from 'react-router-dom';
 
+const ImgSize = {
+  BIG: {
+    WIDTH: 260,
+    HEIGHT: 210,
+  },
+  SMALL: {
+    WIDTH: 150,
+    HEIGHT: 110,
+  },
+};
+
+const BookmarkBtnType = {
+  OUT_BOOKMARK: {
+    CLASS: `place-card__bookmark-button button`,
+    STATUS: `To bookmarks`,
+  },
+  IN_BOOKMARK: {
+    CLASS: `place-card__bookmark-button button place-card__bookmark-button--active`,
+    STATUS: `In bookmarks`,
+  },
+};
+
 const PlaceCard = (props) => {
   const {
     placeData,
@@ -27,18 +49,18 @@ const PlaceCard = (props) => {
   const image = images[0];
   const isFavorite = className === PlacesClassNames.FAVORITE[1];
 
-  let bookmarkClass = `place-card__bookmark-button button`;
-  let bookmarkStatus = `To bookmarks`;
-  let imgWidth = `260`;
-  let imgHeght = `200`;
+  let bookmarkClass = BookmarkBtnType.OUT_BOOKMARK.CLASS;
+  let bookmarkStatus = BookmarkBtnType.OUT_BOOKMARK.STATUS;
+  let imgWidth = ImgSize.BIG.WIDTH;
+  let imgHeght = ImgSize.BIG.HEIGHT;
 
   if (isBookmark) {
-    bookmarkClass += ` place-card__bookmark-button--active`;
-    bookmarkStatus = `In bookmarks`;
+    bookmarkClass = BookmarkBtnType.IN_BOOKMARK.CLASS;
+    bookmarkStatus = BookmarkBtnType.IN_BOOKMARK.STATUS;
   }
   if (isFavorite) {
-    imgWidth = `150`;
-    imgHeght = `110`;
+    imgWidth = ImgSize.SMALL.WIDTH;
+    imgHeght = ImgSize.SMALL.HEIGHT;
   }
 
   const starsStyle = getStyleStars(rating);
@@ -96,6 +118,7 @@ const PlaceCard = (props) => {
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
+
             <span className="visually-hidden">{bookmarkStatus}</span>
           </button>
         </div>
