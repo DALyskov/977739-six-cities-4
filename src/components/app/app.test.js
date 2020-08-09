@@ -3,22 +3,36 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {offers, reviews, cities} from '../../mocks/mocks-test.js';
-import {sotringItems} from '../../const.js';
+import {AuthorizationStatus, SORTING_ITEMS} from '../../const.js';
+import NameSpace from '../../reducer/name-space.js';
+import {offers} from '../../mocks-test/offers.js';
+import {reviews} from '../../mocks-test/reviews.js';
+import {cities} from '../../mocks-test/cities.js';
+
 import App from './app.jsx';
 
 const mockStore = configureStore([]);
 
 describe(`App_snapchots`, () => {
-  it(`main`, () => {
+  it(`App_whith_main_with_data`, () => {
     const store = mockStore({
-      activeCity: cities[0],
-      offersByCity: offers.slice(0, 3),
-      activPlaceCard: false,
-      reviews,
-      cities,
-      sotringType: sotringItems[0],
-      hoverCityId: false,
+      [NameSpace.DATA]: {
+        offers,
+        nearbyOffers: offers.slice(0, 3),
+        reviews,
+        errReason: false,
+      },
+      [NameSpace.STATE_APPLICATION]: {
+        cities,
+        activeCity: cities[0],
+        sortingType: SORTING_ITEMS[0],
+        hoverCityId: false,
+        activPlaceCard: false,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userEmail: false,
+      },
     });
     const tree = renderer
       .create(
@@ -35,15 +49,25 @@ describe(`App_snapchots`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`property`, () => {
+  it(`App_whith_main_without_data`, () => {
     const store = mockStore({
-      activeCity: cities[0],
-      offersByCity: offers.slice(0, 3),
-      activPlaceCard: offers[0],
-      reviews,
-      cities,
-      sotringType: sotringItems[0],
-      hoverCityId: false,
+      [NameSpace.DATA]: {
+        offers: [],
+        nearbyOffers: [],
+        reviews,
+        errReason: false,
+      },
+      [NameSpace.STATE_APPLICATION]: {
+        cities,
+        activeCity: false,
+        sortingType: SORTING_ITEMS[0],
+        hoverCityId: false,
+        activPlaceCard: false,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userEmail: false,
+      },
     });
     const tree = renderer
       .create(

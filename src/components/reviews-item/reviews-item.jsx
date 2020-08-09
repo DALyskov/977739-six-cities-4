@@ -12,7 +12,6 @@ const ReviewsItem = (props) => {
   const {comment, date, rating, userAvatar, userName} = reviewData;
 
   const starsStyle = getStyleStars(rating);
-
   const shortDate = formatCommentDateShort(date);
   const fullDate = formatCommentDateFull(date);
 
@@ -48,10 +47,12 @@ const ReviewsItem = (props) => {
 ReviewsItem.propTypes = {
   reviewData: propTypes.shape({
     comment: propTypes.string.isRequired,
-    date: propTypes.object.isRequired,
+    date: propTypes.string.isRequired,
     id: propTypes.number.isRequired,
     rating: propTypes.number.isRequired,
     userAvatar: propTypes.string.isRequired,
+    userId: propTypes.number.isRequired,
+    isUserPro: propTypes.bool.isRequired,
     userName: propTypes.string.isRequired,
   }).isRequired,
 };

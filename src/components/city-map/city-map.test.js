@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {offers} from '../../mocks/mocks-test.js';
-
 import {MapClassName} from '../../const.js';
+import {offers} from '../../mocks-test/offers.js';
+
 import {CityMap} from './city-map.jsx';
 
 describe(`CityMap_snapchots`, () => {
@@ -12,6 +12,7 @@ describe(`CityMap_snapchots`, () => {
       .create(
         <CityMap
           offersByCity={offers}
+          currentOffer={false}
           className={MapClassName.MAIN}
           hoverCityId={1}
         />,

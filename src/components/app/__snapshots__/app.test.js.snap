@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App_snapchots main 1`] = `
+exports[`App_snapchots App_whith_main_with_data 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -17,13 +17,13 @@ exports[`App_snapchots main 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -39,15 +39,16 @@ exports[`App_snapchots main 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -57,7 +58,7 @@ exports[`App_snapchots main 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index"
+    className="page__main page__main--index "
   >
     <h1
       className="visually-hidden"
@@ -83,19 +84,6 @@ exports[`App_snapchots main 1`] = `
             >
               <span>
                 Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Paris
               </span>
             </a>
           </li>
@@ -190,6 +178,210 @@ exports[`App_snapchots main 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
+              
+              <div
+                className="cities__image-wrapper place-card__image-wrapper"
+              >
+                <a
+                  href="#"
+                  onClick={[Function]}
+                >
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height={210}
+                    src="img/apartment-01.jpg"
+                    width={260}
+                  />
+                </a>
+              </div>
+              <div
+                className=" place-card__info"
+              >
+                <div
+                  className="place-card__price-wrapper"
+                >
+                  <div
+                    className="place-card__price"
+                  >
+                    <b
+                      className="place-card__price-value"
+                    >
+                      €
+                      101
+                    </b>
+                    <span
+                      className="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    className="place-card__bookmark-button button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <svg
+                      className="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        xlinkHref="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      className="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className="place-card__rating rating"
+                >
+                  <div
+                    className="place-card__stars rating__stars"
+                  >
+                    <span
+                      style={
+                        Object {
+                          "width": "80%",
+                        }
+                      }
+                    />
+                    <span
+                      className="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  className="place-card__name"
+                >
+                  <a
+                    className="place-card__link"
+                    href="/offer/5"
+                    onClick={[Function]}
+                  >
+                    Perfectly located Castro
+                  </a>
+                </h2>
+                <p
+                  className="place-card__type"
+                >
+                  room
+                </p>
+              </div>
+            </article>
+            <article
+              className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              
+              <div
+                className="cities__image-wrapper place-card__image-wrapper"
+              >
+                <a
+                  href="#"
+                  onClick={[Function]}
+                >
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height={210}
+                    src="img/apartment-01.jpg"
+                    width={260}
+                  />
+                </a>
+              </div>
+              <div
+                className=" place-card__info"
+              >
+                <div
+                  className="place-card__price-wrapper"
+                >
+                  <div
+                    className="place-card__price"
+                  >
+                    <b
+                      className="place-card__price-value"
+                    >
+                      €
+                      813
+                    </b>
+                    <span
+                      className="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    className="place-card__bookmark-button button"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <svg
+                      className="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        xlinkHref="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      className="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className="place-card__rating rating"
+                >
+                  <div
+                    className="place-card__stars rating__stars"
+                  >
+                    <span
+                      style={
+                        Object {
+                          "width": "40%",
+                        }
+                      }
+                    />
+                    <span
+                      className="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  className="place-card__name"
+                >
+                  <a
+                    className="place-card__link"
+                    href="/offer/1"
+                    onClick={[Function]}
+                  >
+                    Wood and stone place
+                  </a>
+                </h2>
+                <p
+                  className="place-card__type"
+                >
+                  house
+                </p>
+              </div>
+            </article>
+            <article
+              className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
               <div
                 className="place-card__mark"
               >
@@ -202,18 +394,19 @@ exports[`App_snapchots main 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
                     className="place-card__image"
-                    height="200"
+                    height={210}
                     src="img/apartment-01.jpg"
-                    width="260"
+                    width={260}
                   />
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className=" place-card__info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -225,7 +418,7 @@ exports[`App_snapchots main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      120
+                      423
                     </b>
                     <span
                       className="place-card__price-text"
@@ -235,6 +428,7 @@ exports[`App_snapchots main 1`] = `
                   </div>
                   <button
                     className="place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -275,219 +469,19 @@ exports[`App_snapchots main 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    data-id={1}
-                    href="#"
+                    className="place-card__link"
+                    href="/offer/14"
+                    onClick={[Function]}
                   >
-                    Beautiful & luxurious apartment at great location
+                    Penthouse, 4-5 rooms + 5 balconies
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/room.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      80
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      In bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                  onClick={[Function]}
-                >
-                  <a
-                    data-id={2}
-                    href="#"
-                  >
-                    Wood and stone place
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Private room
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-02.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      132
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                  onClick={[Function]}
-                >
-                  <a
-                    data-id={3}
-                    href="#"
-                  >
-                    Canal View Prinsengracht
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Apartment
+                  hotel
                 </p>
               </div>
             </article>
@@ -506,9 +500,9 @@ exports[`App_snapchots main 1`] = `
 </div>
 `;
 
-exports[`App_snapchots property 1`] = `
+exports[`App_snapchots App_whith_main_without_data 1`] = `
 <div
-  className="page"
+  className="page page--gray page--main"
 >
   <header
     className="header"
@@ -524,13 +518,12 @@ exports[`App_snapchots property 1`] = `
         >
           <a
             className="header__logo-link"
-            href="main.html"
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -546,15 +539,16 @@ exports[`App_snapchots property 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -564,862 +558,52 @@ exports[`App_snapchots property 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--property"
+    className="page__main page__main--index page__main--index-empty"
   >
-    <section
-      className="property"
+    <h1
+      className="visually-hidden"
+    >
+      Cities
+    </h1>
+    <div
+      className="tabs"
+    >
+      <section
+        className="locations container"
+      >
+        <ul
+          className="locations__list tabs__list"
+        />
+      </section>
+    </div>
+    <div
+      className="cities"
     >
       <div
-        className="property__gallery-container container"
+        className="cities__places-container cities__places-container--empty container"
       >
-        <div
-          className="property__gallery"
+        <section
+          className="cities__no-places"
         >
           <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/room.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-02.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-03.jpg"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="property__container container"
-      >
-        <div
-          className="property__wrapper"
-        >
-          <div
-            className="property__mark"
-          >
-            <span>
-              Premium
-            </span>
-          </div>
-          <div
-            className="property__name-wrapper"
-          >
-            <h1
-              className="property__name"
-            >
-              Beautiful & luxurious apartment at great location
-            </h1>
-            <button
-              className="property__bookmark-button button"
-              type="button"
-            >
-              <svg
-                className="property__bookmark-icon"
-                height="33"
-                width="31"
-              >
-                <use
-                  xlinkHref="#icon-bookmark"
-                />
-              </svg>
-              <span
-                className="visually-hidden"
-              >
-                To bookmarks
-              </span>
-            </button>
-          </div>
-          <div
-            className="property__rating rating"
-          >
-            <div
-              className="property__stars rating__stars"
-            >
-              <span
-                style={
-                  Object {
-                    "width": "100%",
-                  }
-                }
-              />
-              <span
-                className="visually-hidden"
-              >
-                Rating
-              </span>
-            </div>
-            <span
-              className="property__rating-value rating__value"
-            >
-              4.5
-            </span>
-          </div>
-          <ul
-            className="property__features"
-          >
-            <li
-              className="property__feature property__feature--entire"
-            >
-              Apartment
-            </li>
-            <li
-              className="property__feature property__feature--bedrooms"
-            >
-              3
-               Bedroom
-              s
-            </li>
-            <li
-              className="property__feature property__feature--adults"
-            >
-              Max 
-              1
-               adult
-              
-            </li>
-          </ul>
-          <div
-            className="property__price"
+            className="cities__status-wrapper tabs__content"
           >
             <b
-              className="property__price-value"
+              className="cities__status"
             >
-              €
-              120
+              No places to stay available
             </b>
-            <span
-              className="property__price-text"
+            <p
+              className="cities__status-description"
             >
-               night
-            </span>
+              We could not find any property availbale at the moment in Dusseldorf
+            </p>
           </div>
-          <div
-            className="property__inside"
-          >
-            <h2
-              className="property__inside-title"
-            >
-              What's inside
-            </h2>
-            <ul
-              className="property__inside-list"
-            >
-              <li
-                className="property__inside-item"
-              >
-                Heating
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Kitchen
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Cable TV
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Washing machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Coffee machine
-              </li>
-            </ul>
-          </div>
-          <div
-            className="property__host"
-          >
-            <h2
-              className="property__host-title"
-            >
-              Meet the host
-            </h2>
-            <div
-              className="property__host-user user"
-            >
-              <div
-                className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
-              >
-                <img
-                  alt="Host avatar"
-                  className="img/avatar-angelina.jpg"
-                  height="74"
-                  src="img/avatar-angelina.jpg"
-                  width="74"
-                />
-              </div>
-              <span
-                className="property__user-name"
-              >
-                Dima
-              </span>
-            </div>
-            <div
-              className="property__description"
-            >
-              <p
-                className="property__text"
-              >
-                A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-              </p>
-            </div>
-          </div>
-          <section
-            className="property__reviews reviews"
-          >
-            <h2
-              className="reviews__title"
-            >
-              Reviews ·
-               
-              <span
-                className="reviews__amount"
-              >
-                2
-              </span>
-            </h2>
-            <ul
-              className="reviews__list"
-            >
-              <li
-                className="reviews__item"
-              >
-                <div
-                  className="reviews__user user"
-                >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
-                  >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                    />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Lex
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
-                >
-                  <div
-                    className="reviews__rating rating"
-                  >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
-                  >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2020-08-01"
-                  >
-                    August 2020
-                  </time>
-                </div>
-              </li>
-              <li
-                className="reviews__item"
-              >
-                <div
-                  className="reviews__user user"
-                >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
-                  >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                    />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Max
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
-                >
-                  <div
-                    className="reviews__rating rating"
-                  >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
-                  >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2020-06-14"
-                  >
-                    June 2020
-                  </time>
-                </div>
-              </li>
-            </ul>
-            <form
-              action="#"
-              className="reviews__form form"
-              method="post"
-            >
-              <label
-                className="reviews__label form__label"
-                htmlFor="review"
-              >
-                Your review
-              </label>
-              <div
-                className="reviews__rating-form form__rating"
-              >
-                <input
-                  className="form__rating-input visually-hidden"
-                  id="5-stars"
-                  name="rating"
-                  type="radio"
-                  value="5"
-                />
-                <label
-                  className="reviews__rating-label form__rating-label"
-                  htmlFor="5-stars"
-                  title="perfect"
-                >
-                  <svg
-                    className="form__star-image"
-                    height="33"
-                    width="37"
-                  >
-                    <use
-                      xlinkHref="#icon-star"
-                    />
-                  </svg>
-                </label>
-                <input
-                  className="form__rating-input visually-hidden"
-                  id="4-stars"
-                  name="rating"
-                  type="radio"
-                  value="4"
-                />
-                <label
-                  className="reviews__rating-label form__rating-label"
-                  htmlFor="4-stars"
-                  title="good"
-                >
-                  <svg
-                    className="form__star-image"
-                    height="33"
-                    width="37"
-                  >
-                    <use
-                      xlinkHref="#icon-star"
-                    />
-                  </svg>
-                </label>
-                <input
-                  className="form__rating-input visually-hidden"
-                  id="3-stars"
-                  name="rating"
-                  type="radio"
-                  value="3"
-                />
-                <label
-                  className="reviews__rating-label form__rating-label"
-                  htmlFor="3-stars"
-                  title="not bad"
-                >
-                  <svg
-                    className="form__star-image"
-                    height="33"
-                    width="37"
-                  >
-                    <use
-                      xlinkHref="#icon-star"
-                    />
-                  </svg>
-                </label>
-                <input
-                  className="form__rating-input visually-hidden"
-                  id="2-stars"
-                  name="rating"
-                  type="radio"
-                  value="2"
-                />
-                <label
-                  className="reviews__rating-label form__rating-label"
-                  htmlFor="2-stars"
-                  title="badly"
-                >
-                  <svg
-                    className="form__star-image"
-                    height="33"
-                    width="37"
-                  >
-                    <use
-                      xlinkHref="#icon-star"
-                    />
-                  </svg>
-                </label>
-                <input
-                  className="form__rating-input visually-hidden"
-                  id="1-star"
-                  name="rating"
-                  type="radio"
-                  value="1"
-                />
-                <label
-                  className="reviews__rating-label form__rating-label"
-                  htmlFor="1-star"
-                  title="terribly"
-                >
-                  <svg
-                    className="form__star-image"
-                    height="33"
-                    width="37"
-                  >
-                    <use
-                      xlinkHref="#icon-star"
-                    />
-                  </svg>
-                </label>
-              </div>
-              <textarea
-                className="reviews__textarea form__textarea"
-                id="review"
-                name="review"
-                placeholder="Tell how was your stay, what you like and what can be improved"
-              />
-              <div
-                className="reviews__button-wrapper"
-              >
-                <p
-                  className="reviews__help"
-                >
-                  To submit review please make sure to set
-                   
-                  <span
-                    className="reviews__star"
-                  >
-                    rating
-                  </span>
-                   and describe your stay with at least 
-                  <b
-                    className="reviews__text-amount"
-                  >
-                    50 characters
-                  </b>
-                  .
-                </p>
-                <button
-                  className="reviews__submit form__submit button"
-                  disabled=""
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
-      </div>
-      <section
-        className="property__map map"
-      />
-    </section>
-    <div
-      className="container"
-    >
-      <section
-        className="near-places places"
-      >
-        <h2
-          className="near-places__title"
-        >
-          Other places in the neighbourhood
-        </h2>
+        </section>
         <div
-          className="near-places__list places__list tabs__content"
-        >
-          <article
-            className="near-places__card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <div
-              className="place-card__mark"
-            >
-              <span>
-                Premium
-              </span>
-            </div>
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-01.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €
-                    120
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    To bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    style={
-                      Object {
-                        "width": "100%",
-                      }
-                    }
-                  />
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-                onClick={[Function]}
-              >
-                <a
-                  data-id={1}
-                  href="#"
-                >
-                  Beautiful & luxurious apartment at great location
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Apartment
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/room.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €
-                    80
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button place-card__bookmark-button--active"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    In bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    style={
-                      Object {
-                        "width": "80%",
-                      }
-                    }
-                  />
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-                onClick={[Function]}
-              >
-                <a
-                  data-id={2}
-                  href="#"
-                >
-                  Wood and stone place
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Private room
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-02.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €
-                    132
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    To bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    style={
-                      Object {
-                        "width": "80%",
-                      }
-                    }
-                  />
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-                onClick={[Function]}
-              >
-                <a
-                  data-id={3}
-                  href="#"
-                >
-                  Canal View Prinsengracht
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Apartment
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
+          className="cities__right-section"
+        />
+      </div>
     </div>
   </main>
 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {sotringItems} from '../../const.js';
+import {SORTING_ITEMS} from '../../const.js';
 import {PlacesSorting} from './places-sorting.jsx';
 
 describe(`PlacesSorting_snapchots`, () => {
@@ -9,7 +9,7 @@ describe(`PlacesSorting_snapchots`, () => {
     const tree = renderer
       .create(
         <PlacesSorting
-          sotringType={sotringItems[0]}
+          sortingType={SORTING_ITEMS[0]}
           isOpen={false}
           onSortingItemClick={() => {}}
           onSortingClick={() => {}}

@@ -1,90 +1,56 @@
 import React, {PureComponent} from 'react';
 import propTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Route, Switch, Redirect, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {APPROVED_NAME} from '../../const.js';
+import {AuthorizationStatus, AppRoute} from '../../const.js';
 
+import history from '../../history.js';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
+import Favorite from '../favorite/favorite.jsx';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 class App extends PureComponent {
-  _renderMain() {
-    const {offersByCity, activPlaceCard, activeCity} = this.props;
-
-    if (!activPlaceCard) {
-      return <Main offersByCity={offersByCity} activeCity={activeCity} />;
-    } else {
-      return this._renderProperty(activPlaceCard);
-    }
-  }
-
-  _renderProperty(placeData) {
-    const {offersByCity} = this.props;
-    return (
-      <Property placeData={placeData} offersByCity={offersByCity.slice(0, 3)} />
-    );
-  }
-
   render() {
-    const {offersByCity} = this.props;
+    const {authorizationStatus} = this.props;
+    const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
+
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderMain()}
+          <Route exact path={AppRoute.MAIN}>
+            <Main />
           </Route>
-          <Route exact path="/dev-component">
-            {this._renderProperty(offersByCity[0])}
+          <Route
+            exact
+            path={`${AppRoute.PROPERTY}/:id`}
+            render={(props) => {
+              return <Property {...props} />;
+            }}
+          />
+          <Route exact path={AppRoute.SING_IN}>
+            {isLoggedIn && <Redirect to={AppRoute.MAIN} />}
+            <SignIn />
+          </Route>
+          <Route exact path={AppRoute.FAVORITES}>
+            {!isLoggedIn && <Redirect to={AppRoute.SING_IN} />}
+            <Favorite />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
 App.propTypes = {
-  offersByCity: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
-      type: propTypes.string.isRequired,
-      bedrooms: propTypes.number.isRequired,
-      maxAdults: propTypes.number.isRequired,
-      features: propTypes.arrayOf(propTypes.string.isRequired),
-      hostName: propTypes.string.isRequired,
-      hostAvatar: propTypes.string.isRequired,
-      isHostPro: propTypes.bool,
-      description: propTypes.string.isRequired,
-    })
-  ).isRequired,
-
-  activPlaceCard: propTypes.oneOfType([
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
-      type: propTypes.string.isRequired,
-    }),
-    propTypes.bool,
-  ]).isRequired,
-
-  activeCity: propTypes.string.isRequired,
+  authorizationStatus: propTypes.oneOf(Object.values(AuthorizationStatus))
+    .isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offersByCity: state.offersByCity,
-  activPlaceCard: state.activPlaceCard,
-  activeCity: state.activeCity,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {App};

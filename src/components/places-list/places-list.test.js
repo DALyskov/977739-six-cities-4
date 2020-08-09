@@ -1,54 +1,45 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
 
-import {PlacesClassNames, sotringItems} from '../../const.js';
-import {offers, incompletePlace} from '../../mocks/mocks-test.js';
+import {PlacesClassNames, SORTING_ITEMS} from '../../const.js';
+import {offers} from '../../mocks-test/offers.js';
 
+import history from '../../history.js';
 import {PlaceList} from './places-list.jsx';
 
-const incompleteOffers = [incompletePlace];
-
 describe(`PlaceList_snapchots`, () => {
-  it(`with_data`, () => {
+  it(`PlaceList_with_data`, () => {
     const tree = renderer
       .create(
-        <PlaceList
-          offersByCity={offers}
-          className={PlacesClassNames.MAIN}
-          sotringType={sotringItems[0]}
-          onPlaceCardNameClick={() => {}}
-          onPlaceCardHover={() => {}}
-        />
+        <Router history={history}>
+          <PlaceList
+            offersByCity={offers}
+            className={PlacesClassNames.MAIN}
+            sortingType={SORTING_ITEMS[0]}
+            onPlaceCardNameClick={() => {}}
+            onPlaceCardHover={() => {}}
+            onFavoriteBtnClick={() => {}}
+          />
+        </Router>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`without_data`, () => {
+  it(`PlaceList_without_data`, () => {
     const tree = renderer
       .create(
-        <PlaceList
-          offersByCity={[]}
-          className={PlacesClassNames.MAIN}
-          sotringType={sotringItems[0]}
-          onPlaceCardNameClick={() => {}}
-          onPlaceCardHover={() => {}}
-        />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`incomplete data`, () => {
-    const tree = renderer
-      .create(
-        <PlaceList
-          offersByCity={incompleteOffers}
-          className={PlacesClassNames.MAIN}
-          sotringType={sotringItems[0]}
-          onPlaceCardNameClick={() => {}}
-          onPlaceCardHover={() => {}}
-        />
+        <Router history={history}>
+          <PlaceList
+            offersByCity={[]}
+            className={PlacesClassNames.MAIN}
+            sortingType={SORTING_ITEMS[0]}
+            onPlaceCardNameClick={() => {}}
+            onPlaceCardHover={() => {}}
+            onFavoriteBtnClick={() => {}}
+          />
+        </Router>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

@@ -3,7 +3,12 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 
-import {APPROVED_NAME, MapClassName} from '../../const.js';
+import {MapClassName} from '../../const.js';
+
+import {
+  getHoverCityId,
+  getActivPlaceId,
+} from '../../reducer/state-application/selectors.js';
 
 class CityMap extends PureComponent {
   constructor(props) {
@@ -53,6 +58,9 @@ class CityMap extends PureComponent {
   }
 
   _setMapView() {
+    if (this.props.offersByCity.length === 0) {
+      return;
+    }
     const zoom = this.props.offersByCity[0].city.location.zoom;
     const cityCoordinate = [
       this.props.offersByCity[0].city.location.latitude,
@@ -62,19 +70,33 @@ class CityMap extends PureComponent {
   }
 
   _setMapMarkers() {
+    if (this.props.currentOffer) {
+      const icon = leaflet.icon({
+        iconUrl: `/img/pin-active.svg`,
+        iconSize: [30, 40],
+      });
+
+      const place = this.props.currentOffer;
+      const marker = leaflet
+        .marker([place.location.latitude, place.location.longitude], {
+          icon,
+        })
+        .addTo(this._markersLayerGroup);
+      marker.id = place.id;
+    }
+
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 40],
     });
+
     this.props.offersByCity.forEach((place) => {
-      const marker = leaflet.marker(
-        [place.location.latitude, place.location.longitude],
-        {
+      const marker = leaflet
+        .marker([place.location.latitude, place.location.longitude], {
           icon,
-        }
-      );
+        })
+        .addTo(this._markersLayerGroup);
       marker.id = place.id;
-      marker.addTo(this._markersLayerGroup);
     });
   }
 
@@ -83,7 +105,7 @@ class CityMap extends PureComponent {
     this._markersLayerGroup.getLayers().forEach((marker) => {
       if (marker.id === hoverCityId) {
         const newIcon = leaflet.icon({
-          iconUrl: `img/pin-active.svg`,
+          iconUrl: `/img/pin-active.svg`,
           iconSize: [30, 40],
         });
         marker.setIcon(newIcon);
@@ -102,29 +124,74 @@ class CityMap extends PureComponent {
 CityMap.propTypes = {
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.oneOf(APPROVED_NAME).isRequired,
-      type: propTypes.string.isRequired,
+      bedrooms: propTypes.number.isRequired,
       city: propTypes.shape({
         location: propTypes.shape({
           latitude: propTypes.number.isRequired,
           longitude: propTypes.number.isRequired,
           zoom: propTypes.number.isRequired,
-        }),
+        }).isRequired,
         name: propTypes.string.isRequired,
       }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
+      id: propTypes.number.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
       location: propTypes.shape({
         latitude: propTypes.number.isRequired,
         longitude: propTypes.number.isRequired,
         zoom: propTypes.number.isRequired,
-      }),
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      type: propTypes.string.isRequired,
     })
   ).isRequired,
+
+  currentOffer: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.shape({
+      bedrooms: propTypes.number.isRequired,
+      city: propTypes.shape({
+        location: propTypes.shape({
+          latitude: propTypes.number.isRequired,
+          longitude: propTypes.number.isRequired,
+          zoom: propTypes.number.isRequired,
+        }).isRequired,
+        name: propTypes.string.isRequired,
+      }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
+      id: propTypes.number.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      type: propTypes.string.isRequired,
+    }),
+  ]).isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 
@@ -133,7 +200,8 @@ CityMap.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  hoverCityId: state.hoverCityId,
+  hoverCityId: getHoverCityId(state),
+  activPlaceId: getActivPlaceId(state),
 });
 
 export {CityMap};

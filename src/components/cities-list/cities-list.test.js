@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {cities} from '../../mocks/mocks-test.js';
+import {cities} from '../../mocks-test/cities.js';
 
 import {CitiesList} from './cities-list.jsx';
 
@@ -13,7 +13,6 @@ describe(`CitiesList_snapchots`, () => {
           cities={cities}
           activeCity={cities[0]}
           onCityClick={() => {}}
-          onGetOffersByCity={() => {}}
         />
       )
       .toJSON();
