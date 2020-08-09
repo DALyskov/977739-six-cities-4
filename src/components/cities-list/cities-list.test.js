@@ -13,7 +13,6 @@ describe(`CitiesList_snapchots`, () => {
           cities={cities}
           activeCity={cities[0]}
           onCityClick={() => {}}
-          onGetOffersByCity={() => {}}
         />
       )
       .toJSON();

@@ -18,14 +18,14 @@ exports[`Property_snapchots Property_with_data 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
-            href="main.html"
+            href="/"
             onClick={[Function]}
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -41,7 +41,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/favorites"
                 onClick={[Function]}
               >
                 <div
@@ -89,15 +89,6 @@ exports[`Property_snapchots Property_with_data 1`] = `
               src="img/apartment-02.jpg"
             />
           </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-03.jpg"
-            />
-          </div>
         </div>
       </div>
       <div
@@ -113,15 +104,17 @@ exports[`Property_snapchots Property_with_data 1`] = `
             <h1
               className="property__name"
             >
-              Perfectly located Castro
+              Wood and stone place
             </h1>
             <button
               className="property__bookmark-button button"
+              onClick={[Function]}
               type="button"
             >
               <svg
                 className="property__bookmark-icon"
                 height="33"
+                style={Object {}}
                 width="31"
               >
                 <use
@@ -144,7 +137,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
               <span
                 style={
                   Object {
-                    "width": "80%",
+                    "width": "40%",
                   }
                 }
               />
@@ -157,7 +150,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              3.5
+              2.4
             </span>
           </div>
           <ul
@@ -166,20 +159,20 @@ exports[`Property_snapchots Property_with_data 1`] = `
             <li
               className="property__feature property__feature--entire"
             >
-              room
+              house
             </li>
             <li
               className="property__feature property__feature--bedrooms"
             >
-              1
+              5
                Bedroom
-              
+              s
             </li>
             <li
               className="property__feature property__feature--adults"
             >
               Max 
-              2
+              6
                adult
               s
             </li>
@@ -191,7 +184,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
               className="property__price-value"
             >
               €
-              101
+              813
             </b>
             <span
               className="property__price-text"
@@ -278,9 +271,9 @@ exports[`Property_snapchots Property_with_data 1`] = `
               >
                 <img
                   alt="Host avatar"
-                  className="img/avatar-angelina.jpg"
+                  className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="/img/avatar-angelina.jpg"
                   width="74"
                 />
               </div>
@@ -653,14 +646,14 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -682,6 +675,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -722,11 +716,11 @@ exports[`Property_snapchots Property_with_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={5}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/5"
+                  onClick={[Function]}
                 >
                   Perfectly located Castro
                 </a>
@@ -754,14 +748,14 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -783,6 +777,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -823,11 +818,11 @@ exports[`Property_snapchots Property_with_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={1}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/1"
+                  onClick={[Function]}
                 >
                   Wood and stone place
                 </a>
@@ -861,14 +856,14 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -890,6 +885,7 @@ exports[`Property_snapchots Property_with_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -930,11 +926,11 @@ exports[`Property_snapchots Property_with_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={14}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/14"
+                  onClick={[Function]}
                 >
                   Penthouse, 4-5 rooms + 5 balconies
                 </a>
@@ -971,14 +967,14 @@ exports[`Property_snapchots Property_without_data 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
-            href="main.html"
+            href="/"
             onClick={[Function]}
           >
             <img
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width="81"
             />
           </a>
@@ -994,7 +990,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -1042,15 +1038,6 @@ exports[`Property_snapchots Property_without_data 1`] = `
               src="img/apartment-02.jpg"
             />
           </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="img/apartment-03.jpg"
-            />
-          </div>
         </div>
       </div>
       <div
@@ -1066,15 +1053,17 @@ exports[`Property_snapchots Property_without_data 1`] = `
             <h1
               className="property__name"
             >
-              Perfectly located Castro
+              Wood and stone place
             </h1>
             <button
               className="property__bookmark-button button"
+              onClick={[Function]}
               type="button"
             >
               <svg
                 className="property__bookmark-icon"
                 height="33"
+                style={Object {}}
                 width="31"
               >
                 <use
@@ -1097,7 +1086,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
               <span
                 style={
                   Object {
-                    "width": "80%",
+                    "width": "40%",
                   }
                 }
               />
@@ -1110,7 +1099,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              3.5
+              2.4
             </span>
           </div>
           <ul
@@ -1119,20 +1108,20 @@ exports[`Property_snapchots Property_without_data 1`] = `
             <li
               className="property__feature property__feature--entire"
             >
-              room
+              house
             </li>
             <li
               className="property__feature property__feature--bedrooms"
             >
-              1
+              5
                Bedroom
-              
+              s
             </li>
             <li
               className="property__feature property__feature--adults"
             >
               Max 
-              2
+              6
                adult
               s
             </li>
@@ -1144,7 +1133,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
               className="property__price-value"
             >
               €
-              101
+              813
             </b>
             <span
               className="property__price-text"
@@ -1231,9 +1220,9 @@ exports[`Property_snapchots Property_without_data 1`] = `
               >
                 <img
                   alt="Host avatar"
-                  className="img/avatar-angelina.jpg"
+                  className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="/img/avatar-angelina.jpg"
                   width="74"
                 />
               </div>
@@ -1264,131 +1253,12 @@ exports[`Property_snapchots Property_without_data 1`] = `
               <span
                 className="reviews__amount"
               >
-                2
+                0
               </span>
             </h2>
             <ul
               className="reviews__list"
-            >
-              <li
-                className="reviews__item"
-              >
-                <div
-                  className="reviews__user user"
-                >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
-                  >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                    />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Max
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
-                >
-                  <div
-                    className="reviews__rating rating"
-                  >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
-                  >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2020-07-08"
-                  >
-                    July 2020
-                  </time>
-                </div>
-              </li>
-              <li
-                className="reviews__item"
-              >
-                <div
-                  className="reviews__user user"
-                >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
-                  >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                    />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Lex
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
-                >
-                  <div
-                    className="reviews__rating rating"
-                  >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
-                  >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2020-07-08"
-                  >
-                    July 2020
-                  </time>
-                </div>
-              </li>
-            </ul>
+            />
           </section>
         </div>
       </div>
@@ -1426,14 +1296,14 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -1455,6 +1325,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -1495,11 +1366,11 @@ exports[`Property_snapchots Property_without_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={5}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/5"
+                  onClick={[Function]}
                 >
                   Perfectly located Castro
                 </a>
@@ -1527,14 +1398,14 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -1556,6 +1427,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -1596,11 +1468,11 @@ exports[`Property_snapchots Property_without_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={1}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/1"
+                  onClick={[Function]}
                 >
                   Wood and stone place
                 </a>
@@ -1634,14 +1506,14 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 <img
                   alt="Place image"
                   className="place-card__image"
-                  height="200"
+                  height={210}
                   src="img/apartment-01.jpg"
-                  width="260"
+                  width={260}
                 />
               </a>
             </div>
             <div
-              className="place-card__info"
+              className=" place-card__info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -1663,6 +1535,7 @@ exports[`Property_snapchots Property_without_data 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -1703,11 +1576,11 @@ exports[`Property_snapchots Property_without_data 1`] = `
               </div>
               <h2
                 className="place-card__name"
-                onClick={[Function]}
               >
                 <a
-                  data-id={14}
-                  href="#"
+                  className="place-card__link"
+                  href="/offer/14"
+                  onClick={[Function]}
                 >
                   Penthouse, 4-5 rooms + 5 balconies
                 </a>

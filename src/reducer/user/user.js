@@ -1,7 +1,6 @@
 import {extend} from '../../utils/common.js';
 import {AuthorizationStatus, ErrReason} from '../../const.js';
 
-import history from '../../history.js';
 import {ActionCreator as DataActionCreator} from '../data/data.js';
 
 const initialState = {
@@ -14,12 +13,10 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  requireAuthorization: (authorizationStatus, userEmail = false) => {
-    return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: {authorizationStatus, userEmail},
-    };
-  },
+  requireAuthorization: (authorizationStatus, userEmail = false) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: {authorizationStatus, userEmail},
+  }),
 };
 
 const Operation = {
@@ -46,7 +43,6 @@ const Operation = {
         password: authData.password,
       })
       .then((data) => {
-        history.goBack();
         dispatch(
           ActionCreator.requireAuthorization(
             AuthorizationStatus.AUTH,
@@ -72,4 +68,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, ActionType, AuthorizationStatus, Operation, reducer};
+export {ActionCreator, ActionType, Operation, reducer};

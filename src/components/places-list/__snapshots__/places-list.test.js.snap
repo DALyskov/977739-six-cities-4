@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlaceList_snapchots with_data 1`] = `
+exports[`PlaceList_snapchots PlaceList_with_data 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 >
@@ -20,14 +20,14 @@ exports[`PlaceList_snapchots with_data 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={210}
           src="img/apartment-01.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
     <div
-      className="place-card__info"
+      className=" place-card__info"
     >
       <div
         className="place-card__price-wrapper"
@@ -49,6 +49,7 @@ exports[`PlaceList_snapchots with_data 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -89,11 +90,11 @@ exports[`PlaceList_snapchots with_data 1`] = `
       </div>
       <h2
         className="place-card__name"
-        onClick={[Function]}
       >
         <a
-          data-id={5}
-          href="#"
+          className="place-card__link"
+          href="/offer/5"
+          onClick={[Function]}
         >
           Perfectly located Castro
         </a>
@@ -121,14 +122,14 @@ exports[`PlaceList_snapchots with_data 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={210}
           src="img/apartment-01.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
     <div
-      className="place-card__info"
+      className=" place-card__info"
     >
       <div
         className="place-card__price-wrapper"
@@ -150,6 +151,7 @@ exports[`PlaceList_snapchots with_data 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -190,11 +192,11 @@ exports[`PlaceList_snapchots with_data 1`] = `
       </div>
       <h2
         className="place-card__name"
-        onClick={[Function]}
       >
         <a
-          data-id={1}
-          href="#"
+          className="place-card__link"
+          href="/offer/1"
+          onClick={[Function]}
         >
           Wood and stone place
         </a>
@@ -228,14 +230,14 @@ exports[`PlaceList_snapchots with_data 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={210}
           src="img/apartment-01.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
     <div
-      className="place-card__info"
+      className=" place-card__info"
     >
       <div
         className="place-card__price-wrapper"
@@ -257,6 +259,7 @@ exports[`PlaceList_snapchots with_data 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -297,11 +300,11 @@ exports[`PlaceList_snapchots with_data 1`] = `
       </div>
       <h2
         className="place-card__name"
-        onClick={[Function]}
       >
         <a
-          data-id={14}
-          href="#"
+          className="place-card__link"
+          href="/offer/14"
+          onClick={[Function]}
         >
           Penthouse, 4-5 rooms + 5 balconies
         </a>
@@ -316,7 +319,7 @@ exports[`PlaceList_snapchots with_data 1`] = `
 </div>
 `;
 
-exports[`PlaceList_snapchots without_data 1`] = `
+exports[`PlaceList_snapchots PlaceList_without_data 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 />

@@ -5,7 +5,12 @@ import {AuthorizationStatus} from '../../const.js';
 
 import {reducer, ActionType, ActionCreator, Operation} from './user.js';
 
-const api = createAPI(() => {});
+const resetErr = jest.fn();
+const api = createAPI(
+  () => {},
+  () => {},
+  resetErr
+);
 
 const mockData = {
   'email': 'a@mail.ru',

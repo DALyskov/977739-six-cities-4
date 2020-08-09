@@ -1,5 +1,8 @@
 import React from 'react';
+import propTypes from 'prop-types';
+
 import {ErrReason} from '../../const';
+
 import ErrMessage from '../err-message/err-message.jsx';
 
 const FavoritesEmpty = (props) => {
@@ -22,6 +25,11 @@ const FavoritesEmpty = (props) => {
   );
 };
 
-FavoritesEmpty.propTypes = {};
+FavoritesEmpty.propTypes = {
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
+};
 
 export default FavoritesEmpty;

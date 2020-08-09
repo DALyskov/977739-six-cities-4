@@ -1,8 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {offers} from '../../mocks-test/offers.js';
-
 import {ReviewsForm} from './review-form.jsx';
 
 describe(`ReviewsForm_snapchots`, () => {
@@ -15,7 +13,7 @@ describe(`ReviewsForm_snapchots`, () => {
           isDisabled={false}
           onInputChange={() => {}}
           onSubmit={() => {}}
-          activPlaceCard={offers[0]}
+          activPlaceId={`1`}
           sendReview={() => {}}
         />
       )
@@ -32,7 +30,7 @@ describe(`ReviewsForm_snapchots`, () => {
           isDisabled={true}
           onInputChange={() => {}}
           onSubmit={() => {}}
-          activPlaceCard={offers[0]}
+          activPlaceId={`1`}
           sendReview={() => {}}
         />
       )

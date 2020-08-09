@@ -15,24 +15,19 @@ import PlaceList from '../places-list/places-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import CityMap from '../city-map/city-map.jsx';
 import ErrMessage from '../err-message/err-message.jsx';
-
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import {
   getOffers,
   getNearbyOffers,
   getErrReason,
 } from '../../reducer/data/selectors.js';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
 
 const getActivPlaceCard = (offers, activePlaceId) => {
-  // if (offers.lenght === 0 || !activePlaceId) {
-  //   return [];
-  // }
   return offers.find((place) => place.id === parseInt(activePlaceId, 10));
 };
 
 class Property extends PureComponent {
-  // const Property = (props) => {
   constructor(props) {
     super(props);
   }
@@ -41,20 +36,14 @@ class Property extends PureComponent {
     const {
       match,
       nearbyOffers,
-      loadAdditionalData,
       changeActivPlaceId,
+      loadAdditionalData,
     } = this.props;
     if (nearbyOffers.length === 0) {
       loadAdditionalData(match.params.id);
       changeActivPlaceId(match.params.id);
     }
   }
-
-  // componentDidUpdate() {
-  //   // const {match, loadAdditionalData, changeActivPlaceId} = this.props;
-  //   // loadAdditionalData(match.params.id);
-  //   // changeActivPlaceId(match.params.id);
-  // }
 
   render() {
     const {
@@ -239,6 +228,41 @@ class Property extends PureComponent {
 }
 
 Property.propTypes = {
+  offers: propTypes.arrayOf(
+    propTypes.shape({
+      bedrooms: propTypes.number.isRequired,
+      city: propTypes.shape({
+        location: propTypes.shape({
+          latitude: propTypes.number.isRequired,
+          longitude: propTypes.number.isRequired,
+          zoom: propTypes.number.isRequired,
+        }).isRequired,
+        name: propTypes.string.isRequired,
+      }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
+      id: propTypes.number.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      type: propTypes.string.isRequired,
+    })
+  ).isRequired,
+
   nearbyOffers: propTypes.arrayOf(
     propTypes.shape({
       bedrooms: propTypes.number.isRequired,
@@ -274,44 +298,24 @@ Property.propTypes = {
     })
   ).isRequired,
 
-  placeData: propTypes.oneOfType([
-    propTypes.shape({
-      bedrooms: propTypes.number.isRequired,
-      city: propTypes.shape({
-        location: propTypes.shape({
-          latitude: propTypes.number.isRequired,
-          longitude: propTypes.number.isRequired,
-          zoom: propTypes.number.isRequired,
-        }).isRequired,
-        name: propTypes.string.isRequired,
-      }),
-      description: propTypes.string.isRequired,
-      features: propTypes.arrayOf(propTypes.string.isRequired),
-      hostName: propTypes.string.isRequired,
-      hostAvatar: propTypes.string.isRequired,
-      isHostPro: propTypes.bool,
-      hostId: propTypes.number.isRequired,
-      id: propTypes.number.isRequired,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      isBookmark: propTypes.bool,
-      isPremium: propTypes.bool,
-      location: propTypes.shape({
-        latitude: propTypes.number.isRequired,
-        longitude: propTypes.number.isRequired,
-        zoom: propTypes.number.isRequired,
-      }).isRequired,
-      maxAdults: propTypes.number.isRequired,
-      previewImg: propTypes.string.isRequired,
-      price: propTypes.number.isRequired,
-      rating: propTypes.number.isRequired,
-      name: propTypes.string.isRequired,
-      type: propTypes.string.isRequired,
+  match: propTypes.shape({
+    isExact: propTypes.bool,
+    params: propTypes.shape({
+      id: propTypes.string.isRequired,
     }),
-    propTypes.bool,
-  ]).isRequired,
-};
+    path: propTypes.string,
+    url: propTypes.string,
+  }).isRequired,
 
-// export default Property;
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
+
+  loadAdditionalData: propTypes.func.isRequired,
+  changeActivPlaceId: propTypes.func.isRequired,
+  onFavoriteBtnClick: propTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
@@ -326,7 +330,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadAdditionalData(activePlaceId) {
     dispatch(DataOperation.loadReviews(activePlaceId));
     dispatch(DataOperation.loadNearbyOffers(activePlaceId));
-    // dispatch(AppActionCreator.changeActivPlaceId(activePlaceId));
   },
   onFavoriteBtnClick(placeDataId, placeDataIsBookmark) {
     dispatch(DataOperation.sendFavoriteOffer(placeDataId, placeDataIsBookmark));

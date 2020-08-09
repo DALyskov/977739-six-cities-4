@@ -17,7 +17,6 @@ class SignIn extends PureComponent {
 
     this._loginRef = React.createRef();
     this._passwordRef = React.createRef();
-    // this._login = ``;
 
     this._handleSubmit = this._handleSubmit.bind(this);
   }
@@ -29,22 +28,10 @@ class SignIn extends PureComponent {
       login: this._loginRef.current.value,
       password: this._passwordRef.current.value,
     });
-    // .catch((err) => {
-    //   const userLogin = this._loginRef.current.value;
-    //   const errMessage = `${err.response.status}. ${err.message}`;
-    //   // this.setState({review: errMessage});
-    //   this._login = errMessage;
-
-    //   // setTimeout(() => {
-    //   //   this.setState({review: userReview, isDisabled: false});
-    //   // }, ERR_MESSAGE_TIMEOUT);
-
-    //   throw err;
-    // });
   }
 
   render() {
-    const {activeCity, errReason} = this.props;
+    const {activeCity, errReason, onSignInBtnClick} = this.props;
 
     return (
       <div className="page page--gray page--login">
@@ -57,7 +44,13 @@ class SignIn extends PureComponent {
                 className="login__form form"
                 action="#"
                 method="post"
-                onSubmit={this._handleSubmit}>
+                onSubmit={(evt) => {
+                  evt.preventDefault();
+                  onSignInBtnClick({
+                    login: this._loginRef.current.value,
+                    password: this._passwordRef.current.value,
+                  });
+                }}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input
@@ -67,7 +60,6 @@ class SignIn extends PureComponent {
                     placeholder="Email"
                     required={true}
                     ref={this._loginRef}
-                    // value={this._login}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
@@ -105,6 +97,10 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)).isRequired,
+  ]),
   onSignInBtnClick: propTypes.func.isRequired,
 };
 
@@ -116,7 +112,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSignInBtnClick(authData) {
-    return dispatch(UserOperation.login(authData));
+    dispatch(UserOperation.login(authData));
   },
 });
 

@@ -24,7 +24,7 @@ const ReviewsList = (props) => {
   const {reviews = [], errReason, authorizationStatus} = props;
   const sortedReviews = getSortedReviews(reviews).slice(0, MAX_REVIEW);
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
-  console.log(errReason);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
@@ -55,6 +55,11 @@ ReviewsList.propTypes = {
       userName: propTypes.string.isRequired,
     })
   ),
+
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
 
   authorizationStatus: propTypes.oneOf(Object.values(AuthorizationStatus))
     .isRequired,

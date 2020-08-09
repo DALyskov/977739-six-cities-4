@@ -12,6 +12,7 @@ describe(`CityMap_snapchots`, () => {
       .create(
         <CityMap
           offersByCity={offers}
+          currentOffer={false}
           className={MapClassName.MAIN}
           hoverCityId={1}
         />,

@@ -5,7 +5,6 @@ import configureStore from 'redux-mock-store';
 
 import {AuthorizationStatus} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
-import {offers} from '../../mocks-test/offers.js';
 import {reviews} from '../../mocks-test/reviews.js';
 
 import {ReviewsList} from './reviews-list.jsx';
@@ -16,7 +15,7 @@ describe(`ReviewsList_snapchots`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {},
     [NameSpace.STATE_APPLICATION]: {
-      activPlaceCard: offers[0],
+      activPlaceId: `1`,
     },
     [NameSpace.USER]: {},
   });

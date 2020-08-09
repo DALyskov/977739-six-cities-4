@@ -2,8 +2,6 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {offers} from '../../mocks-test/offers.js';
-
 import {ReviewsForm} from './review-form.jsx';
 
 Enzyme.configure({
@@ -22,7 +20,7 @@ describe(`ReviewsForm_ee`, () => {
         isDisabled={true}
         onInputChange={() => {}}
         onSubmit={onSubmit}
-        activPlaceCard={offers[0]}
+        activPlaceId={`1`}
         sendReview={() => {}}
       />
     );
@@ -44,7 +42,7 @@ describe(`ReviewsForm_ee`, () => {
         isDisabled={true}
         onInputChange={onInputChange}
         onSubmit={onSubmit}
-        activPlaceCard={offers[0]}
+        activPlaceId={`1`}
         sendReview={() => {}}
       />
     );
@@ -69,7 +67,7 @@ describe(`ReviewsForm_ee`, () => {
         isDisabled={true}
         onInputChange={onInputChange}
         onSubmit={onSubmit}
-        activPlaceCard={offers[0]}
+        activPlaceId={`1`}
         sendReview={() => {}}
       />
     );
@@ -93,7 +91,7 @@ describe(`ReviewsForm_ee`, () => {
         isDisabled={true}
         onInputChange={() => {}}
         onSubmit={onSubmit}
-        activPlaceCard={offers[0]}
+        activPlaceId={`1`}
         sendReview={() => {}}
       />
     );

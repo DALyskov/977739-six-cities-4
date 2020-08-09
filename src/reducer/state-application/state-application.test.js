@@ -1,4 +1,4 @@
-import {SORTING_ITEMS, PageType} from '../../const.js';
+import {SORTING_ITEMS} from '../../const.js';
 import {offers} from '../../mocks-test/offers.js';
 import {cities} from '../../mocks-test/cities.js';
 
@@ -8,8 +8,7 @@ const initialState = {
   sortingType: SORTING_ITEMS[0],
   hoverCityId: false,
   activeCity: false,
-  activPlaceCard: false,
-  activePage: PageType.MAIN,
+  activPlaceId: ``,
 };
 
 describe(`AppReducer_test`, () => {
@@ -26,13 +25,13 @@ describe(`AppReducer_test`, () => {
     ).toEqual(Object.assign({}, initialState, {activeCity: cities[0]}));
   });
 
-  it(`AppReducer_should_change_activPlaceCard`, () => {
+  it(`AppReducer_should_change_changeActivPlaceId`, () => {
     expect(
       reducer(initialState, {
-        type: ActionType.CHANGE_PLACE,
-        payload: offers[0],
+        type: ActionType.CHANGE_ACTIV_PLACE_ID,
+        payload: 1,
       })
-    ).toEqual(Object.assign({}, initialState, {activPlaceCard: offers[0]}));
+    ).toEqual(Object.assign({}, initialState, {activPlaceId: 1}));
   });
 
   it(`AppReducer_should_change_sortingType`, () => {
@@ -52,15 +51,6 @@ describe(`AppReducer_test`, () => {
       })
     ).toEqual(Object.assign({}, initialState, {hoverCityId: 1}));
   });
-
-  it(`AppReducer_should_change_activePage`, () => {
-    expect(
-      reducer(initialState, {
-        type: ActionType.CHANGE_ACTIVE_PAGE,
-        payload: PageType.PROPERTY,
-      })
-    ).toEqual(Object.assign({}, initialState, {activePage: PageType.PROPERTY}));
-  });
 });
 
 describe(`AppActionCreators_work_correctly`, () => {
@@ -71,15 +61,15 @@ describe(`AppActionCreators_work_correctly`, () => {
     });
   });
 
-  it(`AppActionCreator_for_changePlace`, function () {
-    expect(ActionCreator.changePlace(offers[0])).toEqual({
-      type: ActionType.CHANGE_PLACE,
-      payload: offers[0],
+  it(`AppActionCreator_for_changeActivPlaceId`, function () {
+    expect(ActionCreator.changeActivPlaceId(1)).toEqual({
+      type: ActionType.CHANGE_ACTIV_PLACE_ID,
+      payload: 1,
     });
   });
 
   it(`AppActionCreator_for_changesortingType`, function () {
-    expect(ActionCreator.changesortingType(SORTING_ITEMS[0])).toEqual({
+    expect(ActionCreator.changeSortingType(SORTING_ITEMS[0])).toEqual({
       type: ActionType.CHANGE_SOTRING_TYPE,
       payload: SORTING_ITEMS[0],
     });
@@ -89,13 +79,6 @@ describe(`AppActionCreators_work_correctly`, () => {
     expect(ActionCreator.changeHoverCityId(1)).toEqual({
       type: ActionType.CHANGE_HOVER_CITY_ID,
       payload: 1,
-    });
-  });
-
-  it(`AppActionCreator_for_changeActivePage`, function () {
-    expect(ActionCreator.changeActivePage(PageType.PROPERTY)).toEqual({
-      type: ActionType.CHANGE_ACTIVE_PAGE,
-      payload: PageType.PROPERTY,
     });
   });
 });

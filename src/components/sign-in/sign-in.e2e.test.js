@@ -1,14 +1,16 @@
 import React from 'react';
 import {Provider} from 'react-redux';
+import {Router} from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {PageType, AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus} from '../../const.js';
 import {cities} from '../../mocks-test/cities.js';
 import NameSpace from '../../reducer/name-space.js';
 
-import SignIn from './sign-in.jsx';
+import history from '../../history.js';
+import {SignIn} from './sign-in.jsx';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -18,9 +20,10 @@ const mockStore = configureStore([]);
 
 describe(`SignIn_ee`, () => {
   const store = mockStore({
-    [NameSpace.STATE_APPLICATION]: {
-      activePage: PageType.MAIN,
+    [NameSpace.DATA]: {
+      errReason: false,
     },
+    [NameSpace.STATE_APPLICATION]: {},
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
       userEmail: false,
@@ -31,7 +34,13 @@ describe(`SignIn_ee`, () => {
     const preventSubmit = jest.fn();
     const signIn = mount(
       <Provider store={store}>
-        <SignIn activeCity={cities[0]} onSignInBtnClick={onSignInBtnClick} />
+        <Router history={history}>
+          <SignIn
+            activeCity={cities[0]}
+            errReason={false}
+            onSignInBtnClick={onSignInBtnClick}
+          />
+        </Router>
       </Provider>
     );
 

@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react';
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {HeaderClassNames, AppRoute} from '../../const.js';
+import {HeaderClassNames, AppRoute, ErrReason} from '../../const.js';
 
 import Header from '../header/header.jsx';
 import FavoriteItem from '../favorite-item/favorite-item.jsx';
@@ -12,25 +12,13 @@ import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {getErrReason} from '../../reducer/data/selectors.js';
 import {getFavoriteCities} from '../../reducer/state-application/selectors.js';
 
-// const PlacesSortingWrapped = withPlacesSorting(PlacesSorting);
-
 class Favorite extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    // const {} = this.props;
     this.props.loadAdditionalData();
   }
 
   render() {
-    // const Favorite = (props) => {
     const {favoriteCities, errReason} = this.props;
-    // const isOffers = offersByCity.length > 0;
-    // const placesCount = offersByCity.length;
-    // console.log(favoriteCities);
-    console.log(favoriteCities);
     const isSavedOffer = favoriteCities.length > 0;
 
     return (
@@ -71,37 +59,14 @@ class Favorite extends PureComponent {
   }
 }
 
-// Main.propTypes = {
-//   offersByCity: propTypes.arrayOf(
-//     propTypes.shape({
-//       id: propTypes.number.isRequired,
-//       isPremium: propTypes.bool,
-//       images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-//       price: propTypes.number.isRequired,
-//       isBookmark: propTypes.bool,
-//       rating: propTypes.number.isRequired,
-//       name: propTypes.string.isRequired,
-//       type: propTypes.string.isRequired,
-//       city: propTypes.shape({
-//         location: propTypes.shape({
-//           latitude: propTypes.number.isRequired,
-//           longitude: propTypes.number.isRequired,
-//           zoom: propTypes.number.isRequired,
-//         }),
-//         name: propTypes.string.isRequired,
-//       }),
-//       location: propTypes.shape({
-//         latitude: propTypes.number.isRequired,
-//         longitude: propTypes.number.isRequired,
-//         zoom: propTypes.number.isRequired,
-//       }),
-//     })
-//   ).isRequired,
-
-//   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
-// };
-
-// export default Favorite;
+Favorite.propTypes = {
+  favoriteCities: propTypes.arrayOf(propTypes.string).isRequired,
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
+  loadAdditionalData: propTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   favoriteCities: getFavoriteCities(state),

@@ -1,10 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 
 import {SORTING_ITEMS} from '../../const.js';
 
+import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import {getSortingType} from '../../reducer/state-application/selectors.js';
 
 const PlacesSorting = (props) => {
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSortingItemClick(sortingType) {
-    dispatch(AppActionCreator.changesortingType(sortingType));
+    dispatch(AppActionCreator.changeSortingType(sortingType));
   },
 });
 

@@ -2,7 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {MapClassName, PlacesClassNames, HeaderClassNames} from '../../const.js';
+import {
+  MapClassName,
+  PlacesClassNames,
+  HeaderClassNames,
+  ErrReason,
+} from '../../const.js';
 
 import Header from '../header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
@@ -70,34 +75,45 @@ const Main = (props) => {
 Main.propTypes = {
   offersByCity: propTypes.arrayOf(
     propTypes.shape({
-      id: propTypes.number.isRequired,
-      isPremium: propTypes.bool,
-      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-      price: propTypes.number.isRequired,
-      isBookmark: propTypes.bool,
-      rating: propTypes.number.isRequired,
-      name: propTypes.string.isRequired,
-      type: propTypes.string.isRequired,
+      bedrooms: propTypes.number.isRequired,
       city: propTypes.shape({
         location: propTypes.shape({
           latitude: propTypes.number.isRequired,
           longitude: propTypes.number.isRequired,
           zoom: propTypes.number.isRequired,
-        }),
+        }).isRequired,
         name: propTypes.string.isRequired,
       }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
+      id: propTypes.number.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
       location: propTypes.shape({
         latitude: propTypes.number.isRequired,
         longitude: propTypes.number.isRequired,
         zoom: propTypes.number.isRequired,
-      }),
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      type: propTypes.string.isRequired,
     })
   ).isRequired,
 
   activeCity: propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
 };
-
-// export default Main;
 
 const mapStateToProps = (state) => ({
   activeCity: getActiveCity(state),

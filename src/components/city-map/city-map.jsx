@@ -25,7 +25,6 @@ class CityMap extends PureComponent {
     this._setMap();
     this._setMapView();
     this._setMapMarkers();
-    // if (activPlaceId)
   }
 
   componentWillUnmount() {
@@ -71,21 +70,6 @@ class CityMap extends PureComponent {
   }
 
   _setMapMarkers() {
-    const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 40],
-    });
-
-    this.props.offersByCity.forEach((place) => {
-      const marker = leaflet
-        .marker([place.location.latitude, place.location.longitude], {
-          icon,
-        })
-        .addTo(this._markersLayerGroup);
-      marker.id = place.id;
-      // marker.addTo(this._markersLayerGroup);
-    });
-
     if (this.props.currentOffer) {
       const icon = leaflet.icon({
         iconUrl: `/img/pin-active.svg`,
@@ -99,8 +83,21 @@ class CityMap extends PureComponent {
         })
         .addTo(this._markersLayerGroup);
       marker.id = place.id;
-      // marker.addTo(this._markersLayerGroup);
     }
+
+    const icon = leaflet.icon({
+      iconUrl: `/img/pin.svg`,
+      iconSize: [30, 40],
+    });
+
+    this.props.offersByCity.forEach((place) => {
+      const marker = leaflet
+        .marker([place.location.latitude, place.location.longitude], {
+          icon,
+        })
+        .addTo(this._markersLayerGroup);
+      marker.id = place.id;
+    });
   }
 
   _changeMarkerIcon() {
@@ -114,7 +111,6 @@ class CityMap extends PureComponent {
         marker.setIcon(newIcon);
       }
     });
-    // console.log(this._markersLayerGroup);
   }
 
   render() {
@@ -160,6 +156,42 @@ CityMap.propTypes = {
       type: propTypes.string.isRequired,
     })
   ).isRequired,
+
+  currentOffer: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.shape({
+      bedrooms: propTypes.number.isRequired,
+      city: propTypes.shape({
+        location: propTypes.shape({
+          latitude: propTypes.number.isRequired,
+          longitude: propTypes.number.isRequired,
+          zoom: propTypes.number.isRequired,
+        }).isRequired,
+        name: propTypes.string.isRequired,
+      }),
+      description: propTypes.string.isRequired,
+      features: propTypes.arrayOf(propTypes.string.isRequired),
+      hostName: propTypes.string.isRequired,
+      hostAvatar: propTypes.string.isRequired,
+      isHostPro: propTypes.bool,
+      hostId: propTypes.number.isRequired,
+      id: propTypes.number.isRequired,
+      images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+      isBookmark: propTypes.bool,
+      isPremium: propTypes.bool,
+      location: propTypes.shape({
+        latitude: propTypes.number.isRequired,
+        longitude: propTypes.number.isRequired,
+        zoom: propTypes.number.isRequired,
+      }).isRequired,
+      maxAdults: propTypes.number.isRequired,
+      previewImg: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      rating: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      type: propTypes.string.isRequired,
+    }),
+  ]).isRequired,
 
   className: propTypes.oneOf(Object.values(MapClassName)).isRequired,
 

@@ -17,14 +17,14 @@ exports[`PlaceCard_snapchots PlaceCard_with_data 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
+        height={210}
         src="img/apartment-01.jpg"
-        width="260"
+        width={260}
       />
     </a>
   </div>
   <div
-    className="place-card__info"
+    className=" place-card__info"
   >
     <div
       className="place-card__price-wrapper"
@@ -46,6 +46,7 @@ exports[`PlaceCard_snapchots PlaceCard_with_data 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -86,11 +87,11 @@ exports[`PlaceCard_snapchots PlaceCard_with_data 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[Function]}
     >
       <a
-        data-id={5}
-        href="#"
+        className="place-card__link"
+        href="/offer/5"
+        onClick={[Function]}
       >
         Perfectly located Castro
       </a>

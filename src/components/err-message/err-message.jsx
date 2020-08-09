@@ -1,10 +1,10 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getErrMessage} from '../../reducer/data/selectors.js';
 
 const ErrMessage = (props) => {
   const {errMessage} = props;
-  console.log(errMessage);
   return (
     <div
       className="err-message"
@@ -14,7 +14,9 @@ const ErrMessage = (props) => {
   );
 };
 
-// ErrMessage.propTypes = {};
+ErrMessage.propTypes = {
+  errMessage: propTypes.string.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   errMessage: getErrMessage(state),

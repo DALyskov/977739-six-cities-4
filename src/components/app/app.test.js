@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import {AuthorizationStatus, PageType, SORTING_ITEMS} from '../../const.js';
+import {AuthorizationStatus, SORTING_ITEMS} from '../../const.js';
 import NameSpace from '../../reducer/name-space.js';
 import {offers} from '../../mocks-test/offers.js';
 import {reviews} from '../../mocks-test/reviews.js';
@@ -20,6 +20,7 @@ describe(`App_snapchots`, () => {
         offers,
         nearbyOffers: offers.slice(0, 3),
         reviews,
+        errReason: false,
       },
       [NameSpace.STATE_APPLICATION]: {
         cities,
@@ -27,7 +28,6 @@ describe(`App_snapchots`, () => {
         sortingType: SORTING_ITEMS[0],
         hoverCityId: false,
         activPlaceCard: false,
-        activePage: PageType.MAIN,
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -55,6 +55,7 @@ describe(`App_snapchots`, () => {
         offers: [],
         nearbyOffers: [],
         reviews,
+        errReason: false,
       },
       [NameSpace.STATE_APPLICATION]: {
         cities,
@@ -62,46 +63,10 @@ describe(`App_snapchots`, () => {
         sortingType: SORTING_ITEMS[0],
         hoverCityId: false,
         activPlaceCard: false,
-        activePage: PageType.MAIN,
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
         userEmail: false,
-      },
-    });
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <App />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          },
-        }
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`App_whith_property`, () => {
-    const store = mockStore({
-      [NameSpace.DATA]: {
-        offers,
-        nearbyOffers: offers.slice(0, 3),
-        reviews,
-      },
-      [NameSpace.STATE_APPLICATION]: {
-        cities,
-        activeCity: cities[0],
-        sortingType: SORTING_ITEMS[0],
-        hoverCityId: false,
-        activPlaceCard: offers[0],
-        activePage: PageType.PROPERTY,
-      },
-      [NameSpace.USER]: {
-        authorizationStatus: AuthorizationStatus.AUTH,
-        userEmail: `A@mail.ru`,
       },
     });
     const tree = renderer

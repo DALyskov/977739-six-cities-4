@@ -5,34 +5,28 @@ import configureStore from 'redux-mock-store';
 
 import {ErrReason} from '../../const.js';
 
-import NoPlaces from './no-places.jsx';
+import FavoritesEmpty from './favorite-empty.jsx';
 import NameSpace from '../../reducer/name-space.js';
 
 const mockStore = configureStore([]);
 
-describe(`NoPlaces_snapchots`, () => {
+describe(`FavoritesEmpty_snapchots`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      errMessage: `Error`,
+      errMessage: `abcd`,
     },
     [NameSpace.STATE_APPLICATION]: {},
     [NameSpace.USER]: {},
   });
-  it(`NoPlaces_with_Err`, () => {
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <NoPlaces errReason={ErrReason.LOAD_OFFERS} />
-        </Provider>
-      )
-      .toJSON();
+  it(`FavoritesEmpty_without_err`, () => {
+    const tree = renderer.create(<FavoritesEmpty errReason={false} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
-  it(`NoPlaces_without_Err`, () => {
+  it(`FavoritesEmpty_with_err`, () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <NoPlaces errReason={false} />
+          <FavoritesEmpty errReason={ErrReason.LOAD_FAVORITE_OFFERS} />
         </Provider>
       )
       .toJSON();

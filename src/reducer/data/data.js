@@ -154,11 +154,11 @@ const Operation = {
   sendFavoriteOffer: (id, isBookmark) => (dispatch, getState, api) => {
     const status = Number(!isBookmark);
     return api
-      .post(`/favorite1/${id}/${status}`)
+      .post(`/favorite/${id}/${status}`)
       .then((response) => {
         dispatch(ActionCreator.updateOffers(createOffers([response.data])[0]));
 
-        if (getState()[NameSpace.DATA].favoriteOffers.langth !== 0) {
+        if (getState()[NameSpace.DATA].favoriteOffers.length !== 0) {
           dispatch(
             ActionCreator.updateFavoriteOffers(createOffers([response.data])[0])
           );
@@ -200,7 +200,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ERR_REASON:
       return extend(state, {errReason: action.payload});
     case ActionType.CHANGE_ERR_MESSAGE:
-      console.log(action.payload);
       return extend(state, {errMessage: action.payload});
   }
   return state;

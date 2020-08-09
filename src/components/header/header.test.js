@@ -1,21 +1,36 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-import {AuthorizationStatus, PageType} from '../../const.js';
+import {AuthorizationStatus, HeaderClassNames, ErrReason} from '../../const.js';
+import NameSpace from '../../reducer/name-space.js';
 
+import history from '../../history.js';
 import {Header} from './header.jsx';
 
+const mockStore = configureStore([]);
+
 describe(`Header_snapchots`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      errMessage: `abcd`,
+    },
+    [NameSpace.STATE_APPLICATION]: {},
+    [NameSpace.USER]: {},
+  });
   it(`is_logged_in_for_main`, () => {
     const tree = renderer
       .create(
-        <Header
-          authorizationStatus={AuthorizationStatus.AUTH}
-          userEmail={`A@mail.com`}
-          activePage={PageType.MAIN}
-          onLoginClick={() => {}}
-          onLogoClick={() => {}}
-        />
+        <Router history={history}>
+          <Header
+            authorizationStatus={AuthorizationStatus.AUTH}
+            userEmail={`A@mail.com`}
+            className={HeaderClassNames.MAIN}
+            errReason={false}
+          />
+        </Router>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -24,13 +39,14 @@ describe(`Header_snapchots`, () => {
   it(`is_not_logged_in_for_main`, () => {
     const tree = renderer
       .create(
-        <Header
-          authorizationStatus={AuthorizationStatus.NO_AUTH}
-          userEmail={false}
-          activePage={PageType.MAIN}
-          onLoginClick={() => {}}
-          onLogoClick={() => {}}
-        />
+        <Router history={history}>
+          <Header
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            userEmail={false}
+            className={HeaderClassNames.MAIN}
+            errReason={false}
+          />
+        </Router>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -39,13 +55,14 @@ describe(`Header_snapchots`, () => {
   it(`is_logged_in_for_other_page`, () => {
     const tree = renderer
       .create(
-        <Header
-          authorizationStatus={AuthorizationStatus.AUTH}
-          userEmail={`A@mail.com`}
-          activePage={PageType.PROPERTY}
-          onLoginClick={() => {}}
-          onLogoClick={() => {}}
-        />
+        <Router history={history}>
+          <Header
+            authorizationStatus={AuthorizationStatus.AUTH}
+            userEmail={`A@mail.com`}
+            className={HeaderClassNames.OTHER_PAGE}
+            errReason={false}
+          />
+        </Router>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -54,13 +71,16 @@ describe(`Header_snapchots`, () => {
   it(`is_not_logged_in_for_other_page`, () => {
     const tree = renderer
       .create(
-        <Header
-          authorizationStatus={AuthorizationStatus.NO_AUTH}
-          userEmail={false}
-          activePage={PageType.PROPERTY}
-          onLoginClick={() => {}}
-          onLogoClick={() => {}}
-        />
+        <Provider store={store}>
+          <Router history={history}>
+            <Header
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
+              userEmail={false}
+              className={HeaderClassNames.OTHER_PAGE}
+              errReason={ErrReason.SEND_FAVORITE_OFFER}
+            />
+          </Router>
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

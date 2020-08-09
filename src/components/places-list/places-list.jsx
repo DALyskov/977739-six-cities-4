@@ -1,72 +1,65 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {
-  PlacesClassNames,
-  SORTING_ITEMS,
-  SortingTypeDict,
-  // PageType,
-} from '../../const.js';
+import {PlacesClassNames, SORTING_ITEMS, SortingTypeDict} from '../../const.js';
 
 import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {ActionCreator as AppActionCreator} from '../../reducer/state-application/state-application.js';
 import {getSortingType} from '../../reducer/state-application/selectors.js';
 import PlaceCard from '../place-card/place-card.jsx';
 
-class PlaceList extends PureComponent {
-  _sortOffersBytype(offers, sortingType) {
-    let sortedOffers = offers.slice();
-    switch (sortingType) {
-      case SORTING_ITEMS[1]:
-        return sortedOffers.sort(
-          (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
-        );
-      case SORTING_ITEMS[2]:
-        return sortedOffers.sort(
-          (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
-        );
-      case SORTING_ITEMS[3]:
-        return sortedOffers.sort(
-          (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
-        );
-      default:
-        return offers;
-    }
+const sortOffersByType = (offers, sortingType) => {
+  let sortedOffers = offers.slice();
+  switch (sortingType) {
+    case SORTING_ITEMS[1]:
+      return sortedOffers.sort(
+        (a, b) => a[SortingTypeDict.PRICE] - b[SortingTypeDict.PRICE]
+      );
+    case SORTING_ITEMS[2]:
+      return sortedOffers.sort(
+        (a, b) => b[SortingTypeDict.PRICE] - a[SortingTypeDict.PRICE]
+      );
+    case SORTING_ITEMS[3]:
+      return sortedOffers.sort(
+        (a, b) => b[SortingTypeDict.RATING] - a[SortingTypeDict.RATING]
+      );
+    default:
+      return offers;
+  }
+};
+
+const PlaceList = (props) => {
+  const {
+    offersByCity,
+    className,
+    sortingType,
+    onPlaceCardNameClick,
+    onPlaceCardHover,
+    onFavoriteBtnClick,
+  } = props;
+
+  let sortedOffers = offersByCity;
+
+  if (className === PlacesClassNames.MAIN) {
+    sortedOffers = sortOffersByType(offersByCity, sortingType);
   }
 
-  render() {
-    const {
-      offersByCity,
-      className,
-      sortingType,
-      onPlaceCardNameClick,
-      onPlaceCardHover,
-      onFavoriteBtnClick,
-    } = this.props;
-
-    let sortedOffers = offersByCity;
-
-    if (className === PlacesClassNames.MAIN) {
-      sortedOffers = this._sortOffersBytype(offersByCity, sortingType);
-    }
-
-    return (
-      <div className={className[0]}>
-        {sortedOffers.map((placeData) => (
-          <PlaceCard
-            key={placeData.id}
-            placeData={placeData}
-            className={className[1]}
-            onPlaceCardNameClick={onPlaceCardNameClick}
-            onPlaceCardHover={onPlaceCardHover}
-            onFavoriteBtnClick={onFavoriteBtnClick}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={className[0]}>
+      {sortedOffers.map((placeData) => (
+        <PlaceCard
+          key={placeData.id}
+          placeData={placeData}
+          className={className[1]}
+          onPlaceCardNameClick={onPlaceCardNameClick}
+          onPlaceCardHover={onPlaceCardHover}
+          onFavoriteBtnClick={onFavoriteBtnClick}
+        />
+      ))}
+    </div>
+  );
+};
 
 PlaceList.propTypes = {
   offersByCity: propTypes.arrayOf(
@@ -119,8 +112,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onPlaceCardNameClick(placeData) {
-    // dispatch(AppActionCreator.changePlace(placeData));
-    // dispatch(AppActionCreator.changeActivePage(PageType.PROPERTY));
     dispatch(DataOperation.loadReviews(placeData.id));
     dispatch(DataOperation.loadNearbyOffers(placeData.id));
   },

@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 import {ErrReason} from '../../const';
 import ErrMessage from '../err-message/err-message.jsx';
@@ -24,6 +25,11 @@ const NoPlaces = (props) => {
   );
 };
 
-NoPlaces.propTypes = {};
+NoPlaces.propTypes = {
+  errReason: propTypes.oneOfType([
+    propTypes.bool,
+    propTypes.oneOf(Object.values(ErrReason)),
+  ]),
+};
 
 export default NoPlaces;

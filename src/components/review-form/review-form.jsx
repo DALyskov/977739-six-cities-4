@@ -12,9 +12,9 @@ const ReviewsForm = (props) => {
     review,
     rating,
     isDisabled,
+    activPlaceId,
     onInputChange,
     onSubmit,
-    activPlaceId,
     sendReview,
   } = props;
 
@@ -92,31 +92,7 @@ ReviewsForm.propTypes = {
   review: propTypes.string.isRequired,
   rating: propTypes.string.isRequired,
   isDisabled: propTypes.bool.isRequired,
-
-  activPlaceCard: propTypes.shape({
-    id: propTypes.number.isRequired,
-    isPremium: propTypes.bool,
-    images: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
-    price: propTypes.number.isRequired,
-    isBookmark: propTypes.bool,
-    rating: propTypes.number.isRequired,
-    name: propTypes.string.isRequired,
-    type: propTypes.string.isRequired,
-    city: propTypes.shape({
-      location: propTypes.shape({
-        latitude: propTypes.number.isRequired,
-        longitude: propTypes.number.isRequired,
-        zoom: propTypes.number.isRequired,
-      }),
-      name: propTypes.string.isRequired,
-    }),
-    location: propTypes.shape({
-      latitude: propTypes.number.isRequired,
-      longitude: propTypes.number.isRequired,
-      zoom: propTypes.number.isRequired,
-    }),
-  }),
-
+  activPlaceId: propTypes.string.isRequired,
   onInputChange: propTypes.func.isRequired,
   onSubmit: propTypes.func.isRequired,
   sendReview: propTypes.func.isRequired,

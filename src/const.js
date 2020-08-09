@@ -37,12 +37,6 @@ export const HeaderClassNames = {
   OTHER_PAGE: `header__logo-link header__logo-link--active`,
 };
 
-export const PageType = {
-  MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`,
-  SING_IN: `SING_IN`,
-};
-
 export const AppRoute = {
   MAIN: `/`,
   PROPERTY: `/offer`,

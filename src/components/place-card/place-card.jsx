@@ -130,8 +130,8 @@ const PlaceCard = (props) => {
         </div>
         <h2 className="place-card__name">
           <Link
+            className="place-card__link"
             to={`${AppRoute.PROPERTY}/${id}`}
-            data-id={id}
             onClick={() => {
               onPlaceCardNameClick(placeData);
             }}>
