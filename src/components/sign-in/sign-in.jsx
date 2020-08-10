@@ -78,7 +78,8 @@ class SignIn extends PureComponent {
                   type="submit">
                   Sign in
                 </button>
-                {errReason === ErrReason.LOGIN && <ErrMessage />}
+                {(errReason === ErrReason.LOAD_OFFERS ||
+                  errReason === ErrReason.CHECK_AUTH) && <ErrMessage />}
               </form>
             </section>
             <section className="locations locations--login locations--current">

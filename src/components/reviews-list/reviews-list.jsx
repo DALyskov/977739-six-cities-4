@@ -24,7 +24,6 @@ const ReviewsList = (props) => {
   const {reviews = [], errReason, authorizationStatus} = props;
   const sortedReviews = getSortedReviews(reviews).slice(0, MAX_REVIEW);
   const isLoggedIn = authorizationStatus === AuthorizationStatus.AUTH;
-
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">

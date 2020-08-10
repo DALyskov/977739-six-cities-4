@@ -10,7 +10,11 @@ const NoPlaces = (props) => {
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">
         <section className="cities__no-places">
-          {errReason === ErrReason.LOAD_OFFERS && <ErrMessage />}
+          {(errReason === ErrReason.LOAD_OFFERS ||
+            errReason === ErrReason.LOAD_REVIEWS ||
+            errReason === ErrReason.CHECK_AUTH ||
+            errReason === ErrReason.LOAD_FAVORITE_OFFERS ||
+            errReason === ErrReason.LOAD_NEARBY_OFFERS) && <ErrMessage />}
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">

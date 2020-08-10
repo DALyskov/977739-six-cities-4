@@ -34,14 +34,17 @@ const withReviewsForm = (Component) => {
         })
         .catch((err) => {
           const userReview = review;
-          const errMessage = `${err.response.status}. ${err.message}`;
+          // const errStatus = err.hasOwnPropert(`response`)
+          //   ? err.response.status
+          //   : ``;
+          // ${errStatus}
+          const errStatus = err.response ? err.response.data.error : ``;
+          const errMessage = `${errStatus} ${err.message}`;
           this.setState({review: errMessage});
 
           setTimeout(() => {
             this.setState({review: userReview, isDisabled: false});
           }, ERR_MESSAGE_TIMEOUT);
-
-          throw err;
         });
     }
 

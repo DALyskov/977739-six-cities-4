@@ -3,6 +3,8 @@ import {createSelector} from 'reselect';
 import NameSpace from '../name-space.js';
 import {getOffers, getFavoriteOffers} from '../data/selectors.js';
 
+const MAX_CITIES_COUNT = 6;
+
 export const getActiveCity = (state) => {
   return state[NameSpace.STATE_APPLICATION].activeCity;
 };
@@ -24,7 +26,7 @@ export const getCities = createSelector(getOffers, (offers) => {
     return [];
   }
   const cities = [...new Set(offers.map((place) => place.city.name))];
-  const citiesList = cities.slice(0, 6);
+  const citiesList = cities.slice(0, MAX_CITIES_COUNT);
   return citiesList;
 });
 

@@ -26,17 +26,15 @@ const onUnauthorized = () => {
     UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)
   );
 };
+
 const onLoadDataErr = (errMessage) => {
   store.dispatch(DataActionCreator.changeErrMessage(errMessage));
   setTimeout(() => {
     store.dispatch(DataActionCreator.changeErrReason(false));
   }, ERR_TIMEOUT);
 };
-const resetErr = () => {
-  store.dispatch(DataActionCreator.changeErrReason(false));
-};
 
-const api = createAPI(onUnauthorized, onLoadDataErr, resetErr);
+const api = createAPI(onUnauthorized, onLoadDataErr);
 
 const store = createStore(
   reducer,

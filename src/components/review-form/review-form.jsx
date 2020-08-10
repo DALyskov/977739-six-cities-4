@@ -7,6 +7,11 @@ import {getActivPlaceId} from '../../reducer/state-application/selectors.js';
 
 const RATING_NAMES = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
+const Review = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 300,
+};
+
 const ReviewsForm = (props) => {
   const {
     review,
@@ -20,8 +25,8 @@ const ReviewsForm = (props) => {
 
   const isSubmitDisabled = !(
     rating &&
-    review.length >= 50 &&
-    review.length <= 300
+    review.length >= Review.MIN_LENGTH &&
+    review.length <= Review.MAX_LENGTH
   );
 
   return (

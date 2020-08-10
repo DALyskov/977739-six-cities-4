@@ -1,13 +1,10 @@
 import axios from 'axios';
-
-const Error = {
-  UNAUTHORIZED: 401,
-};
+import {ErrorCode} from '../const';
 
 const SERVER = `https://4.react.pages.academy/six-cities`;
 const TIMEOUT = 5000;
 
-export const createAPI = (onUnauthorized, onLoadDataErr, resetErr) => {
+export const createAPI = (onUnauthorized, onLoadDataErr) => {
   const api = axios.create({
     baseURL: SERVER,
     timeout: TIMEOUT,
@@ -15,16 +12,16 @@ export const createAPI = (onUnauthorized, onLoadDataErr, resetErr) => {
   });
 
   const onSuccess = (response) => {
-    resetErr();
     return response;
   };
 
   const onFail = (err) => {
-    if (err.response.status === Error.UNAUTHORIZED) {
+    if (err.response && err.response.status === ErrorCode.UNAUTHORIZED) {
       onUnauthorized();
       throw err;
     }
-    onLoadDataErr(`${err.response.data.error} ${err.message}`);
+    const errStatus = err.response ? err.response.data.error : ``;
+    onLoadDataErr(`${errStatus} ${err.message}`);
     throw err;
   };
 

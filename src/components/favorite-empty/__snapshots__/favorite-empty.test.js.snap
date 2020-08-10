@@ -21,6 +21,7 @@ exports[`FavoritesEmpty_snapchots FavoritesEmpty_with_err 1`] = `
           Object {
             "color": "red",
             "margin": "10px auto",
+            "padding": "0 60px",
             "textAlign": "center",
           }
         }

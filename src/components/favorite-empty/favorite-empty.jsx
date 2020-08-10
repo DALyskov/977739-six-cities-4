@@ -12,7 +12,9 @@ const FavoritesEmpty = (props) => {
       <div className="page__favorites-container container">
         <section className="favorites favorites--empty">
           <h1 className="visually-hidden">Favorites (empty)</h1>
-          {errReason === ErrReason.LOAD_FAVORITE_OFFERS && <ErrMessage />}
+          {(errReason === ErrReason.LOAD_OFFERS ||
+            errReason === ErrReason.LOAD_FAVORITE_OFFERS ||
+            errReason === ErrReason.CHECK_AUTH) && <ErrMessage />}
           <div className="favorites__status-wrapper">
             <b className="favorites__status">Nothing yet saved.</b>
             <p className="favorites__status-description">

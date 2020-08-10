@@ -97,9 +97,8 @@ const Operation = {
           AppActionCreator.changeActiveCity(getDefaultActiveCity(offersData))
         );
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_OFFERS));
-        throw err;
       });
   },
 
@@ -109,9 +108,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadReviews(createReviews(response.data)));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_REVIEWS));
-        throw err;
       });
   },
 
@@ -121,9 +119,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadNearbyOffers(createOffers(response.data)));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_NEARBY_OFFERS));
-        throw err;
       });
   },
 
@@ -145,9 +142,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadFavoriteOffers(createOffers(response.data)));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(ActionCreator.changeErrReason(ErrReason.LOAD_FAVORITE_OFFERS));
-        throw err;
       });
   },
 
@@ -166,14 +162,13 @@ const Operation = {
         return response;
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.response && err.response.status === 401) {
           history.push(AppRoute.SING_IN);
         } else {
           dispatch(
             ActionCreator.changeErrReason(ErrReason.SEND_FAVORITE_OFFER)
           );
         }
-        throw err;
       });
   },
 };

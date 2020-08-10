@@ -8,7 +8,12 @@ const ErrMessage = (props) => {
   return (
     <div
       className="err-message"
-      style={{margin: `10px auto`, color: `red`, textAlign: `center`}}>
+      style={{
+        margin: `10px auto`,
+        padding: `0 60px`,
+        color: `red`,
+        textAlign: `center`,
+      }}>
       {errMessage}
     </div>
   );

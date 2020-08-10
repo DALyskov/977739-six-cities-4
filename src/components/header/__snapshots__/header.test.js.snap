@@ -230,6 +230,7 @@ exports[`Header_snapchots is_not_logged_in_for_other_page 1`] = `
         Object {
           "color": "red",
           "margin": "10px auto",
+          "padding": "0 60px",
           "textAlign": "center",
         }
       }

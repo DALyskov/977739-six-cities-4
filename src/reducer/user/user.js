@@ -1,5 +1,12 @@
+import history from '../../history.js';
+
 import {extend} from '../../utils/common.js';
-import {AuthorizationStatus, ErrReason} from '../../const.js';
+import {
+  AuthorizationStatus,
+  ErrReason,
+  AppRoute,
+  ErrorCode,
+} from '../../const.js';
 
 import {ActionCreator as DataActionCreator} from '../data/data.js';
 
@@ -30,9 +37,16 @@ const Operation = {
             data.data.email
           )
         );
+        return;
       })
       .catch((err) => {
-        throw err;
+        dispatch(DataActionCreator.changeErrReason(ErrReason.CHECK_AUTH));
+        if (
+          err.response.status !== ErrorCode.NO_DATA &&
+          history.location.pathname === AppRoute.FAVORITES
+        ) {
+          history.push(AppRoute.SING_IN);
+        }
       });
   },
 
@@ -50,9 +64,8 @@ const Operation = {
           )
         );
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(DataActionCreator.changeErrReason(ErrReason.LOGIN));
-        throw err;
       });
   },
 };
